@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">GistHub</string>
+    <string name="welcome_text">Hello User!</string>
+</resources>
