@@ -1,2 +1,2 @@
 rootProject.name = "GistHub"
-include ':app'
+include(":app")
