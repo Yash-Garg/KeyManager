@@ -46,7 +46,7 @@ dependencies {
     implementation("androidx.appcompat:appcompat:${Constants.Dependencies.appcompat_version}")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
 
-    // Material Design and Layouts
+    // Design
     implementation("com.google.android.material:material:${Constants.Dependencies.material_version}")
     implementation("androidx.constraintlayout:constraintlayout:${Constants.Dependencies.constraint_layout_version}")
 
@@ -55,11 +55,9 @@ dependencies {
     annotationProcessor("androidx.room:room-compiler:${Constants.Dependencies.room_version}")
     kapt("androidx.room:room-compiler:${Constants.Dependencies.room_version}")
 
-    // Retrofit
+    // Networking
     implementation("com.squareup.retrofit2:retrofit:${Constants.Dependencies.retrofit_version}")
     implementation("com.squareup.retrofit2:converter-gson:${Constants.Dependencies.retrofit_version}")
-
-    // OkHTTP3
     implementation("com.squareup.okhttp3:okhttp:${Constants.Dependencies.okhttp_version}")
     implementation("com.squareup.okhttp3:logging-interceptor:${Constants.Dependencies.okhttp_version}")
 
@@ -67,10 +65,8 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:${Constants.Dependencies.nav_version}")
     implementation("androidx.navigation:navigation-ui-ktx:${Constants.Dependencies.nav_version}")
 
-    // LiveData
+    // Lifecycle
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:${Constants.Dependencies.lifecycle_version}")
-
-    // ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${Constants.Dependencies.lifecycle_version}")
 
     testImplementation("junit:junit:4.13.2")
