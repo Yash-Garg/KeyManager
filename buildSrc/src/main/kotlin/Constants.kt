@@ -1,7 +1,7 @@
 object Constants {
     object Sdk {
         const val targetSdkVersion = 30
-        const val minSdkVersion = 23
+        const val minSdkVersion = 24
     }
 
     object Dependencies {
@@ -17,5 +17,7 @@ object Constants {
         const val retrofit_version = "2.9.0"
         const val gradle_version = "7.1.0-alpha08"
         const val appauth_version = "0.10.0"
+        const val crypto_version = "1.0.0"
+        const val identity_version = "1.0.0-alpha02"
     }
 }

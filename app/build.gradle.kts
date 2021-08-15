@@ -68,6 +68,10 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:${Constants.Dependencies.nav_version}")
     implementation("androidx.navigation:navigation-ui-ktx:${Constants.Dependencies.nav_version}")
 
+    // Security
+    implementation("androidx.security:security-crypto:${Constants.Dependencies.crypto_version}")
+    implementation("androidx.security:security-identity-credential:${Constants.Dependencies.identity_version}")
+
     // Lifecycle
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:${Constants.Dependencies.lifecycle_version}")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${Constants.Dependencies.lifecycle_version}")
