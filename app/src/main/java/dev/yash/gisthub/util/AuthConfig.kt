@@ -18,5 +18,5 @@ object AuthConfig {
         Uri.parse(Secrets.REDIRECT_URI),
     )
 
-    val authRequest = authRequestBuilder.setScope("gist").build()
+    val authRequest = authRequestBuilder.setScope("user").build()
 }

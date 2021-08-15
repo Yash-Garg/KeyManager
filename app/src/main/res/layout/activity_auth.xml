@@ -1,49 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
-    android:padding="30dp"
     tools:context="dev.yash.gisthub.ui.AuthActivity">
-
-    <TextView
-        android:id="@+id/app_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/app_name"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textColor="#D7FFFFFF"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@id/logo_image"
-        app:layout_constraintStart_toStartOf="@id/logo_image"
-        app:layout_constraintTop_toBottomOf="@id/logo_image" />
-
-    <Button
-        android:id="@+id/signin_button"
-        android:layout_width="0dp"
-        android:layout_height="55dp"
-        android:letterSpacing="0.1"
-        android:text="@string/signin_button_text"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/logo_image"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:contentDescription="@string/github_logo_desc"
-        app:layout_constraintBottom_toTopOf="@id/signin_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_github" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
