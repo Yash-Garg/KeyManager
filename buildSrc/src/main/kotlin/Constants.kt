@@ -16,5 +16,6 @@ object Constants {
         const val okhttp_version = "4.9.1"
         const val retrofit_version = "2.9.0"
         const val gradle_version = "7.1.0-alpha08"
+        const val appauth_version = "0.10.0"
     }
 }

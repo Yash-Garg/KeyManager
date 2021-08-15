@@ -46,6 +46,9 @@ dependencies {
     implementation("androidx.appcompat:appcompat:${Constants.Dependencies.appcompat_version}")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
 
+    // AppAuth
+    implementation("net.openid:appauth:${Constants.Dependencies.appauth_version}")
+
     // Design
     implementation("com.google.android.material:material:${Constants.Dependencies.material_version}")
     implementation("androidx.constraintlayout:constraintlayout:${Constants.Dependencies.constraint_layout_version}")
