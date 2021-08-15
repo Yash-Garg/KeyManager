@@ -1,4 +1,4 @@
-package app.yash.gisthub
+package dev.yash.gisthub
 
 import android.os.Bundle
 import android.widget.Toast

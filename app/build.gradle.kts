@@ -10,7 +10,7 @@ android {
     buildToolsVersion = "30.0.3"
 
     defaultConfig {
-        applicationId = "app.yash.gisthub"
+        applicationId = "dev.yash.gisthub"
         minSdk = Constants.Sdk.minSdkVersion
         targetSdk = Constants.Sdk.targetSdkVersion
         versionCode = 1
@@ -68,8 +68,4 @@ dependencies {
     // Lifecycle
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:${Constants.Dependencies.lifecycle_version}")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${Constants.Dependencies.lifecycle_version}")
-
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
 }
