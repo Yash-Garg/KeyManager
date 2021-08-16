@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:padding="30dp"
-    tools:context="dev.yash.keymanager.MainActivity">
+    tools:context="dev.yash.keymanager.ui.AuthActivity">
 
     <TextView
         android:id="@+id/app_title"
@@ -15,7 +15,6 @@
         android:layout_marginTop="20dp"
         android:text="@string/app_name"
         android:textAlignment="center"
-        android:textAllCaps="true"
         android:textColor="#D7FFFFFF"
         android:textSize="20sp"
         android:textStyle="bold"
