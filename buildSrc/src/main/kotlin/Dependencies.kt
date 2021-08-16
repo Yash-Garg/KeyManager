@@ -1,0 +1,15 @@
+object Dependencies {
+    const val kotlin_version = "1.5.21"
+    const val appcompat_version = "1.3.1"
+    const val constraint_layout_version = "2.0.4"
+    const val core_ktx_version = "1.6.0"
+    const val material_version = "1.4.0"
+    const val lifecycle_version = "2.3.1"
+    const val retrofit_version = "2.9.0"
+    const val gradle_version = "7.1.0-alpha08"
+    const val appauth_version = "0.10.0"
+    const val crypto_version = "1.0.0"
+    const val identity_version = "1.0.0-alpha02"
+    const val reflect_version = "0.12.0"
+    const val moshi_version = "1.12.0"
+}

@@ -8,20 +8,6 @@
     android:padding="30dp"
     tools:context="dev.yash.keymanager.ui.AuthActivity">
 
-    <TextView
-        android:id="@+id/app_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/app_name"
-        android:textAlignment="center"
-        android:textColor="#D7FFFFFF"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@id/logo_image"
-        app:layout_constraintStart_toStartOf="@id/logo_image"
-        app:layout_constraintTop_toBottomOf="@id/logo_image" />
-
     <Button
         android:id="@+id/signin_button"
         android:layout_width="0dp"

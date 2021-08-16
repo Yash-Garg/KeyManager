@@ -1,18 +1,17 @@
 plugins {
     id("com.android.application")
-    id("kotlin-android")
-    id("kotlin-kapt")
-    id("androidx.navigation.safeargs.kotlin")
+    kotlin("android")
+    kotlin("kapt")
 }
 
 android {
-    compileSdk = Constants.Sdk.targetSdkVersion
+    compileSdk = 30
     buildToolsVersion = "30.0.3"
 
     defaultConfig {
         applicationId = "dev.yash.keymanager"
-        minSdk = Constants.Sdk.minSdkVersion
-        targetSdk = Constants.Sdk.targetSdkVersion
+        minSdk = 24
+        targetSdk = 30
         versionCode = 1
         versionName = "1.0"
 
@@ -41,38 +40,32 @@ android {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:${Constants.Dependencies.kotlin_version}")
-    implementation("androidx.core:core-ktx:${Constants.Dependencies.core_ktx_version}")
-    implementation("androidx.appcompat:appcompat:${Constants.Dependencies.appcompat_version}")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:${Dependencies.kotlin_version}")
+    implementation("androidx.core:core-ktx:${Dependencies.core_ktx_version}")
+    implementation("androidx.appcompat:appcompat:${Dependencies.appcompat_version}")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
 
     // AppAuth
-    implementation("net.openid:appauth:${Constants.Dependencies.appauth_version}")
+    implementation("net.openid:appauth:${Dependencies.appauth_version}")
 
     // Design
-    implementation("com.google.android.material:material:${Constants.Dependencies.material_version}")
-    implementation("androidx.constraintlayout:constraintlayout:${Constants.Dependencies.constraint_layout_version}")
-
-    // Room
-    implementation("androidx.room:room-runtime:${Constants.Dependencies.room_version}")
-    annotationProcessor("androidx.room:room-compiler:${Constants.Dependencies.room_version}")
-    kapt("androidx.room:room-compiler:${Constants.Dependencies.room_version}")
+    implementation("com.google.android.material:material:${Dependencies.material_version}")
+    implementation("androidx.constraintlayout:constraintlayout:${Dependencies.constraint_layout_version}")
 
     // Networking
-    implementation("com.squareup.retrofit2:retrofit:${Constants.Dependencies.retrofit_version}")
-    implementation("com.squareup.retrofit2:converter-gson:${Constants.Dependencies.retrofit_version}")
-    implementation("com.squareup.okhttp3:okhttp:${Constants.Dependencies.okhttp_version}")
-    implementation("com.squareup.okhttp3:logging-interceptor:${Constants.Dependencies.okhttp_version}")
+    implementation("com.squareup.retrofit2:retrofit:${Dependencies.retrofit_version}")
+    implementation("com.squareup.retrofit2:converter-gson:${Dependencies.retrofit_version}")
 
-    // Navigation
-    implementation("androidx.navigation:navigation-fragment-ktx:${Constants.Dependencies.nav_version}")
-    implementation("androidx.navigation:navigation-ui-ktx:${Constants.Dependencies.nav_version}")
+    // Retrofit with Moshi
+    implementation("com.squareup.moshi:moshi-kotlin:${Dependencies.moshi_version}")
+    implementation("com.squareup.retrofit2:converter-moshi:${Dependencies.retrofit_version}")
+    implementation("dev.zacsweers.moshix:moshi-metadata-reflect:${Dependencies.reflect_version}")
 
     // Security
-    implementation("androidx.security:security-crypto:${Constants.Dependencies.crypto_version}")
-    implementation("androidx.security:security-identity-credential:${Constants.Dependencies.identity_version}")
+    implementation("androidx.security:security-crypto:${Dependencies.crypto_version}")
+    implementation("androidx.security:security-identity-credential:${Dependencies.identity_version}")
 
     // Lifecycle
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:${Constants.Dependencies.lifecycle_version}")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${Constants.Dependencies.lifecycle_version}")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:${Dependencies.lifecycle_version}")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${Dependencies.lifecycle_version}")
 }

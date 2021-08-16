@@ -17,5 +17,6 @@ class HomeActivity : AppCompatActivity() {
 
         prefs = SharedPrefs.getEncryptedSharedPreferences(this)
         val token = prefs.getString("ACCESS_TOKEN", null)
+        println(token)
     }
 }
