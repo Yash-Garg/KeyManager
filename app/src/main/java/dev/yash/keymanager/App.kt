@@ -1,4 +1,4 @@
-package dev.yash.gisthub
+package dev.yash.keymanager
 
 import android.app.Application
 

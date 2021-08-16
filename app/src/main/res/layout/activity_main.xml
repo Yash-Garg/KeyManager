@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:padding="30dp"
-    tools:context="dev.yash.gisthub.MainActivity">
+    tools:context="dev.yash.keymanager.MainActivity">
 
     <TextView
         android:id="@+id/app_title"

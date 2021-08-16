@@ -1,4 +1,4 @@
-package dev.yash.gisthub.util
+package dev.yash.keymanager.util
 
 import android.net.Uri
 import net.openid.appauth.AuthorizationRequest
@@ -18,5 +18,5 @@ object AuthConfig {
         Uri.parse(Secrets.REDIRECT_URI),
     )
 
-    val authRequest = authRequestBuilder.setScope("user").build()
+    val authRequest = authRequestBuilder.setScope(Secrets.OAUTH_SCOPES).build()
 }

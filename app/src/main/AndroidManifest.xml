@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="dev.yash.gisthub.App"
+        android:name="dev.yash.keymanager.App"
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GistHub">
         <activity
-            android:name="dev.yash.gisthub.MainActivity"
+            android:name="dev.yash.keymanager.MainActivity"
             tools:ignore="IntentFilterExportedReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="dev.yash.gisthub.ui.AuthActivity"
+            android:name="dev.yash.keymanager.ui.AuthActivity"
             tools:ignore="IntentFilterExportedReceiver">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />

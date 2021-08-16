@@ -1,4 +1,4 @@
-package dev.yash.gisthub.util
+package dev.yash.keymanager.util
 
 import android.content.Context
 import android.content.SharedPreferences

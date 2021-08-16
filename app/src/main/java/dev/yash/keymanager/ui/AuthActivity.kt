@@ -1,4 +1,4 @@
-package dev.yash.gisthub.ui
+package dev.yash.keymanager.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
