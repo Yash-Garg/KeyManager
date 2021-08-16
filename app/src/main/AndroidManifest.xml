@@ -1,17 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" package="app.yash.keymanager">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="app.yash.keymanager">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <application android:name="dev.yash.keymanager.App" android:allowBackup="true" android:fullBackupContent="true" android:icon="@mipmap/ic_launcher" android:label="@string/app_name" android:roundIcon="@mipmap/ic_launcher_round" android:supportsRtl="true" android:theme="@style/Theme.keymanager">
-        <activity android:name="dev.yash.keymanager.MainActivity" tools:ignore="IntentFilterExportedReceiver">
+    <application
+        android:name="dev.yash.keymanager.App"
+        android:allowBackup="true"
+        android:fullBackupContent="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.keymanager">
+        <activity
+            android:name="dev.yash.keymanager.MainActivity"
+            tools:ignore="IntentFilterExportedReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="dev.yash.keymanager.ui.AuthActivity" tools:ignore="IntentFilterExportedReceiver">
+        <activity
+            android:name="dev.yash.keymanager.ui.AuthActivity"
+            tools:ignore="IntentFilterExportedReceiver">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="dev.yash.keymanager.ui.HomeActivity"
+            tools:ignore="IntentFilterExportedReceiver">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />

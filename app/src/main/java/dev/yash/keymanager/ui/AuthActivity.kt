@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import app.yash.keymanager.databinding.AuthActivityBinding
+import dev.yash.keymanager.MainActivity
 import dev.yash.keymanager.utils.AuthConfig
 import dev.yash.keymanager.utils.Secrets
 import dev.yash.keymanager.utils.SharedPrefs
@@ -53,7 +54,8 @@ class AuthActivity : AppCompatActivity() {
                 response.accessToken?.let {
                     val prefs = SharedPrefs.getEncryptedSharedPreferences(this)
                     prefs.edit().putString("ACCESS_TOKEN", it).apply()
-                    Toast.makeText(this, response.accessToken, Toast.LENGTH_LONG).show()
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finish()
                 }
             } else {
                 Log.e("Error", exception.toString())

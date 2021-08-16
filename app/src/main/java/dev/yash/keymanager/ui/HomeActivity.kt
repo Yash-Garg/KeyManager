@@ -1,27 +1,21 @@
-package dev.yash.keymanager
+package dev.yash.keymanager.ui
 
-import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import dev.yash.keymanager.ui.AuthActivity
-import dev.yash.keymanager.ui.HomeActivity
+import app.yash.keymanager.databinding.HomeActivityBinding
 import dev.yash.keymanager.utils.SharedPrefs
 
-class MainActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity() {
     private lateinit var prefs: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val binding = HomeActivityBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         prefs = SharedPrefs.getEncryptedSharedPreferences(this)
         val token = prefs.getString("ACCESS_TOKEN", null)
-        if (token == null) {
-            startActivity(Intent(this, AuthActivity::class.java))
-            finish()
-        } else {
-            startActivity(Intent(this, HomeActivity::class.java))
-            finish()
-        }
     }
 }
