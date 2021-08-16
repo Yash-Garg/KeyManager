@@ -7,9 +7,9 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import app.yash.keymanager.databinding.AuthActivityBinding
-import dev.yash.keymanager.util.AuthConfig
-import dev.yash.keymanager.util.Secrets
-import dev.yash.keymanager.util.SharedPrefs
+import dev.yash.keymanager.utils.AuthConfig
+import dev.yash.keymanager.utils.Secrets
+import dev.yash.keymanager.utils.SharedPrefs
 import net.openid.appauth.AuthorizationResponse
 import net.openid.appauth.AuthorizationService
 import net.openid.appauth.ClientSecretBasic

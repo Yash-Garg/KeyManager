@@ -1,4 +1,4 @@
-package dev.yash.keymanager.util
+package dev.yash.keymanager.utils
 
 import android.net.Uri
 import net.openid.appauth.AuthorizationRequest
