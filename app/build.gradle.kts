@@ -1,5 +1,6 @@
 plugins {
     id("com.android.application")
+    id("dagger.hilt.android.plugin")
     kotlin("android")
     kotlin("kapt")
 }
@@ -37,6 +38,10 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
+    kapt {
+        correctErrorTypes = true
+    }
 }
 
 dependencies {
@@ -51,6 +56,10 @@ dependencies {
     // Design
     implementation("com.google.android.material:material:${Dependencies.material_version}")
     implementation("androidx.constraintlayout:constraintlayout:${Dependencies.constraint_layout_version}")
+
+    // Hilt
+    implementation("com.google.dagger:hilt-android:${Dependencies.hilt_version}")
+    kapt("com.google.dagger:hilt-compiler:${Dependencies.hilt_version}")
 
     // Networking
     implementation("com.squareup.retrofit2:retrofit:${Dependencies.retrofit_version}")

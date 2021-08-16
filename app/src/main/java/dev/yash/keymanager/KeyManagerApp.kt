@@ -1,8 +1,10 @@
 package dev.yash.keymanager
 
 import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
 
-class App : Application() {
+@HiltAndroidApp
+class KeyManagerApp : Application() {
     override fun onCreate() {
         super.onCreate()
     }

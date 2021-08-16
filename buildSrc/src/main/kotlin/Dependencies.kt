@@ -12,4 +12,5 @@ object Dependencies {
     const val identity_version = "1.0.0-alpha02"
     const val reflect_version = "0.12.0"
     const val moshi_version = "1.12.0"
+    const val hilt_version = "2.38.1"
 }

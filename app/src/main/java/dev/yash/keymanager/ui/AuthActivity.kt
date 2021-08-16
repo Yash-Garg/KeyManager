@@ -14,9 +14,11 @@ import dev.yash.keymanager.utils.SharedPrefs
 import net.openid.appauth.AuthorizationResponse
 import net.openid.appauth.AuthorizationService
 import net.openid.appauth.ClientSecretBasic
+import javax.inject.Inject
 
 class AuthActivity : AppCompatActivity() {
-    private lateinit var authService: AuthorizationService
+    @Inject
+    lateinit var authService: AuthorizationService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
