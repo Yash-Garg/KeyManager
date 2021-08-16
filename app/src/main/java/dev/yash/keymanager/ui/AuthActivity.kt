@@ -2,7 +2,7 @@ package dev.yash.keymanager.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import app.yash.gisthub.databinding.ActivityAuthBinding
+import app.yash.keymanager.databinding.ActivityAuthBinding
 
 class AuthActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

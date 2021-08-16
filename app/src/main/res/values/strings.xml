@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GistHub</string>
+    <string name="app_name">KeyManager</string>
     <string name="signin_button_text">SIGN IN WITH GITHUB</string>
     <string name="github_logo_desc">GitHub Logo</string>
 </resources>

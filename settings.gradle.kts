@@ -1,2 +1,2 @@
-rootProject.name = "GistHub"
+rootProject.name = "KeyManager"
 include(":app")

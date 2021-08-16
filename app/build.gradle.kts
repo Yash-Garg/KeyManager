@@ -10,13 +10,13 @@ android {
     buildToolsVersion = "30.0.3"
 
     defaultConfig {
-        applicationId = "dev.yash.gisthub"
+        applicationId = "dev.yash.keymanager"
         minSdk = Constants.Sdk.minSdkVersion
         targetSdk = Constants.Sdk.targetSdkVersion
         versionCode = 1
         versionName = "1.0"
 
-        manifestPlaceholders["appAuthRedirectScheme"] = "dev.yash.gisthub"
+        manifestPlaceholders["appAuthRedirectScheme"] = "dev.yash.keymanager"
     }
 
     buildTypes {
