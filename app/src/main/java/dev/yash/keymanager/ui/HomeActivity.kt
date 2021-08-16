@@ -1,13 +1,23 @@
 package dev.yash.keymanager.ui
 
-import android.content.SharedPreferences
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import app.yash.keymanager.databinding.HomeActivityBinding
+import dagger.hilt.android.AndroidEntryPoint
+import dev.yash.keymanager.adapters.SshAdapter
 import dev.yash.keymanager.utils.SharedPrefs
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
-    private lateinit var prefs: SharedPreferences
+    private val homeViewModel: HomeViewModel by viewModels()
+
+    @Inject
+    lateinit var sshAdapter: SshAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -15,10 +25,14 @@ class HomeActivity : AppCompatActivity() {
         val binding = HomeActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        prefs = SharedPrefs.getEncryptedSharedPreferences(this)
-        val token = prefs.getString("ACCESS_TOKEN", null)
+        val accessToken = SharedPrefs.getAccessToken(this)
+        val recyclerView = binding.sshList
 
-        val tokenView = binding.tokenTextView
-        "Access Token - $token".also { tokenView.text = it }
+        lifecycleScope.launch {
+            homeViewModel.getKeysSSH(accessToken!!).collectLatest { pagingData ->
+                recyclerView.adapter = sshAdapter
+                sshAdapter.submitData(pagingData)
+            }
+        }
     }
 }

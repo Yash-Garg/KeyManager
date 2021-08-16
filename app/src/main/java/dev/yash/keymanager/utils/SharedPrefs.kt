@@ -16,4 +16,9 @@ object SharedPrefs {
             EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
         )
     }
+
+    fun getAccessToken(ctx: Context): String? {
+        val prefs = getEncryptedSharedPreferences(ctx)
+        return prefs.getString("ACCESS_TOKEN", null)
+    }
 }

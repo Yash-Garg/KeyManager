@@ -48,6 +48,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:${Dependencies.kotlin_version}")
     implementation("androidx.core:core-ktx:${Dependencies.core_ktx_version}")
     implementation("androidx.appcompat:appcompat:${Dependencies.appcompat_version}")
+    implementation("androidx.activity:activity-ktx:${Dependencies.activity_version}")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
 
     // AppAuth
@@ -61,13 +62,14 @@ dependencies {
     implementation("com.google.dagger:hilt-android:${Dependencies.hilt_version}")
     kapt("com.google.dagger:hilt-compiler:${Dependencies.hilt_version}")
 
-    // Networking
-    implementation("com.squareup.retrofit2:retrofit:${Dependencies.retrofit_version}")
-    implementation("com.squareup.retrofit2:converter-gson:${Dependencies.retrofit_version}")
+
+    // Paging
+    implementation("androidx.paging:paging-runtime:${Dependencies.paging_version}")
 
     // Retrofit with Moshi
     implementation("com.squareup.moshi:moshi-kotlin:${Dependencies.moshi_version}")
     implementation("com.squareup.retrofit2:converter-moshi:${Dependencies.retrofit_version}")
+    implementation("com.squareup.okhttp3:logging-interceptor:${Dependencies.logging_version}")
     implementation("dev.zacsweers.moshix:moshi-metadata-reflect:${Dependencies.reflect_version}")
 
     // Security
