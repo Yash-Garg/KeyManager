@@ -3,4 +3,6 @@
     <string name="signin_button_text">SIGN IN WITH GITHUB</string>
     <string name="github_logo_desc">GitHub Logo</string>
     <string name="fab_text">Add Key</string>
+    <string name="gpg_item">GPG Keys</string>
+    <string name="ssh_item">SSH Keys</string>
 </resources>
