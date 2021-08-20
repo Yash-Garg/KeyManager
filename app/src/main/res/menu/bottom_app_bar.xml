@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/ssh"
+        android:icon="@drawable/ic_github"
+        app:showAsAction="always"
+        android:title="Page 1" />
+
+    <item
+        android:id="@+id/gpg"
+        android:icon="@drawable/ic_github"
+        app:showAsAction="always"
+        android:title="Page 2" />
+
+</menu>
