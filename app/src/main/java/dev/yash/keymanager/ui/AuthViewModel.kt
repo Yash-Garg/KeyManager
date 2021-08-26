@@ -13,9 +13,10 @@ import net.openid.appauth.ClientSecretBasic
 import javax.inject.Inject
 
 @HiltViewModel
-class AuthViewModel @Inject constructor() :
+class AuthViewModel @Inject constructor(private val authService: AuthorizationService) :
     ViewModel() {
-    fun getAccessToken(authService: AuthorizationService, authIntent: Intent, ctx: Context) {
+
+    fun getAccessToken(authIntent: Intent, ctx: Context) {
         val resp = AuthorizationResponse.fromIntent(authIntent)
         val clientAuth = ClientSecretBasic(Secrets.CLIENT_SECRET)
 

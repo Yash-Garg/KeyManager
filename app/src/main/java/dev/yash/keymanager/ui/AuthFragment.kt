@@ -13,12 +13,15 @@ import app.yash.keymanager.databinding.AuthFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dev.yash.keymanager.utils.AuthConfig
 import net.openid.appauth.AuthorizationService
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class AuthFragment : Fragment(R.layout.auth_fragment) {
     private val authViewModel: AuthViewModel by viewModels()
     private lateinit var binding: AuthFragmentBinding
-    private lateinit var authService: AuthorizationService
+
+    @Inject
+    lateinit var authService: AuthorizationService
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,11 +41,7 @@ class AuthFragment : Fragment(R.layout.auth_fragment) {
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == RESULT_OK) {
                     result.data?.let {
-                        authViewModel.getAccessToken(
-                            authService,
-                            it,
-                            requireContext(),
-                        )
+                        authViewModel.getAccessToken(it, requireContext())
                     }
                 }
             }
