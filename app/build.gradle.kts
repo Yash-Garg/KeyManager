@@ -3,6 +3,7 @@ plugins {
     id("dagger.hilt.android.plugin")
     kotlin("android")
     kotlin("kapt")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -62,9 +63,9 @@ dependencies {
     implementation("com.google.dagger:hilt-android:${Dependencies.hilt_version}")
     kapt("com.google.dagger:hilt-compiler:${Dependencies.hilt_version}")
 
-
-    // Paging
-    implementation("androidx.paging:paging-runtime:${Dependencies.paging_version}")
+    // Navigation
+    implementation("androidx.navigation:navigation-fragment-ktx:${Dependencies.nav_version}")
+    implementation("androidx.navigation:navigation-ui-ktx:${Dependencies.nav_version}")
 
     // Retrofit with Moshi
     implementation("com.squareup.moshi:moshi-kotlin:${Dependencies.moshi_version}")
