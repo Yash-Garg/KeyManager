@@ -1,5 +1,5 @@
 object Dependencies {
-    const val kotlin_version = "1.5.21"
+    const val kotlin_version = "1.5.30"
     const val appcompat_version = "1.3.1"
     const val constraint_layout_version = "2.0.4"
     const val core_ktx_version = "1.6.0"
