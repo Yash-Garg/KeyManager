@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         if (token == null) {
             navController.navigate(R.id.authFragment)
         } else {
+            navController.navigate(R.id.sshFragment)
             Log.d("Access Token", token)
         }
     }
