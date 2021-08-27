@@ -21,6 +21,7 @@
         android:layout_gravity="end|bottom"
         android:layout_margin="20dp"
         android:contentDescription="@string/fab_text"
+        app:backgroundTint="@color/accentColor"
         app:srcCompat="@drawable/ic_add" />
 
     <ProgressBar
@@ -29,6 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_gravity="center"
+        android:indeterminateTint="@color/accentColor"
         android:visibility="gone" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
