@@ -1,4 +1,4 @@
-package dev.yash.keymanager.ui
+package dev.yash.keymanager.ui.fragments
 
 import android.app.Activity.RESULT_OK
 import android.os.Bundle
@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import app.yash.keymanager.R
 import app.yash.keymanager.databinding.AuthFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
+import dev.yash.keymanager.ui.viewmodels.AuthViewModel
 import dev.yash.keymanager.utils.AuthConfig
 import net.openid.appauth.AuthorizationService
 import javax.inject.Inject
@@ -35,7 +36,6 @@ class AuthFragment : Fragment(R.layout.auth_fragment) {
         super.onViewCreated(view, savedInstanceState)
 
         val loginButton = binding.signinButton
-        authService = AuthorizationService(requireContext())
 
         val getAuthCodeFromResult =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->

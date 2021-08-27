@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:padding="30dp"
-    tools:context="dev.yash.keymanager.ui.AuthFragment">
+    tools:context="dev.yash.keymanager.ui.fragments.AuthFragment">
 
     <Button
         android:id="@+id/signin_button"

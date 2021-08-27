@@ -1,4 +1,4 @@
-package dev.yash.keymanager.ui
+package dev.yash.keymanager.ui.fragments
 
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import app.yash.keymanager.databinding.SshFragmentBinding
+import dev.yash.keymanager.ui.viewmodels.SshViewModel
 import javax.inject.Inject
 
 class SshFragment : Fragment() {

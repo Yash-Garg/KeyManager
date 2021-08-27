@@ -2,7 +2,6 @@ package dev.yash.keymanager.api
 
 import dev.yash.keymanager.models.GpgKey
 import dev.yash.keymanager.models.SshKey
-import dev.yash.keymanager.models.User
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Headers
@@ -24,12 +23,6 @@ interface GitHubService {
         @Query("per_page") perPage: Int,
         @Query("page") page: Int,
     ): List<GpgKey>
-
-    @Headers("Accept: application/vnd.github.v3+json")
-    @GET("/user")
-    suspend fun getUser(
-        @Header("Authorization") token: String,
-    ): User
 
     companion object {
         const val BASE_URL = "https://api.github.com"
