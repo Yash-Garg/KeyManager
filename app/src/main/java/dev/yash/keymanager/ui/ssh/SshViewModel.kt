@@ -1,4 +1,4 @@
-package dev.yash.keymanager.ui.viewmodels
+package dev.yash.keymanager.ui.ssh
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

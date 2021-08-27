@@ -1,4 +1,4 @@
-package dev.yash.keymanager.ui.fragments
+package dev.yash.keymanager.ui.ssh
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,10 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import app.yash.keymanager.databinding.SshFragmentBinding
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import dev.yash.keymanager.adapters.SshAdapter
-import dev.yash.keymanager.ui.viewmodels.SshViewModel
+import dev.yash.keymanager.ui.dialogs.NewKeyDialogFragment
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -39,9 +38,7 @@ class SshFragment : Fragment() {
         progressBar.isVisible = true
 
         addFab.setOnClickListener {
-            Snackbar.make(it, "Add SSH Key", Snackbar.LENGTH_LONG)
-                .setAction("OK", null)
-                .show()
+            NewKeyDialogFragment.newInstance().show(childFragmentManager, null)
         }
 
         lifecycleScope.launch {

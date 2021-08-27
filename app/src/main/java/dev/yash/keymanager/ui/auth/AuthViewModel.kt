@@ -1,4 +1,4 @@
-package dev.yash.keymanager.ui.viewmodels
+package dev.yash.keymanager.ui.auth
 
 import android.content.Intent
 import android.content.SharedPreferences

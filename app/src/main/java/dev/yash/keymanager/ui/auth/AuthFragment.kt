@@ -1,4 +1,4 @@
-package dev.yash.keymanager.ui.fragments
+package dev.yash.keymanager.ui.auth
 
 import android.app.Activity.RESULT_OK
 import android.content.SharedPreferences
@@ -13,7 +13,6 @@ import androidx.navigation.Navigation
 import app.yash.keymanager.R
 import app.yash.keymanager.databinding.AuthFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
-import dev.yash.keymanager.ui.viewmodels.AuthViewModel
 import dev.yash.keymanager.utils.AuthConfig
 import net.openid.appauth.AuthorizationService
 import javax.inject.Inject

@@ -5,4 +5,8 @@
     <string name="fab_text">Add Key</string>
     <string name="gpg_item">GPG Keys</string>
     <string name="ssh_item">SSH Keys</string>
+    <string name="create_button">Create</string>
+    <string name="create_ssh">Enter SSH key below</string>
+    <string name="cancel">Cancel</string>
+    <string name="key_hint">Key</string>
 </resources>
