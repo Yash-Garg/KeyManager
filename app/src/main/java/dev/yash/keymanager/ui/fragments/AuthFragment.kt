@@ -1,6 +1,7 @@
 package dev.yash.keymanager.ui.fragments
 
 import android.app.Activity.RESULT_OK
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,8 +20,12 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class AuthFragment : Fragment(R.layout.auth_fragment) {
+    private var _binding: AuthFragmentBinding? = null
+    private val binding get() = _binding!!
     private val authViewModel: AuthViewModel by viewModels()
-    private lateinit var binding: AuthFragmentBinding
+
+    @Inject
+    lateinit var preferences: SharedPreferences
 
     @Inject
     lateinit var authService: AuthorizationService
@@ -29,12 +34,18 @@ class AuthFragment : Fragment(R.layout.auth_fragment) {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = AuthFragmentBinding.inflate(inflater, container, false)
+        _binding = AuthFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val token = preferences.getString("ACCESS_TOKEN", null)
+        if (!token.isNullOrEmpty()) {
+            Navigation.findNavController(view).navigate(R.id.sshFragment)
+            return
+        }
 
         val loginButton = binding.signinButton
 
@@ -55,5 +66,10 @@ class AuthFragment : Fragment(R.layout.auth_fragment) {
                 Navigation.findNavController(view).navigate(R.id.sshFragment)
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
