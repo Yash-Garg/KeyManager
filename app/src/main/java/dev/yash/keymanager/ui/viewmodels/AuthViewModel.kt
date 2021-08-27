@@ -3,6 +3,7 @@ package dev.yash.keymanager.ui.viewmodels
 import android.content.Intent
 import android.content.SharedPreferences
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.yash.keymanager.utils.Secrets
@@ -16,6 +17,7 @@ class AuthViewModel @Inject constructor(
     private val preferences: SharedPreferences,
     private val authService: AuthorizationService
 ) : ViewModel() {
+    var accessToken: MutableLiveData<String> = MutableLiveData()
 
     fun getAccessToken(authIntent: Intent) {
         val resp = AuthorizationResponse.fromIntent(authIntent)
@@ -27,11 +29,10 @@ class AuthViewModel @Inject constructor(
         ) { response, exception ->
             if (response != null) {
                 response.accessToken?.let {
+                    accessToken.value = it
                     preferences.edit().putString("ACCESS_TOKEN", it).apply()
                 }
-            } else {
-                Log.e("Error", exception.toString())
-            }
+            } else Log.e("Error", exception.toString())
         }
     }
 }

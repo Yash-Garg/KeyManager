@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import app.yash.keymanager.R
 import app.yash.keymanager.databinding.AuthFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,15 +41,19 @@ class AuthFragment : Fragment(R.layout.auth_fragment) {
         val getAuthCodeFromResult =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == RESULT_OK) {
-                    result.data?.let {
-                        authViewModel.getAccessToken(it)
-                    }
+                    result.data?.let { authViewModel.getAccessToken(it) }
                 }
             }
 
         loginButton.setOnClickListener {
             val authIntent = authService.getAuthorizationRequestIntent(AuthConfig.authRequest)
             getAuthCodeFromResult.launch(authIntent)
+        }
+
+        authViewModel.accessToken.observe(viewLifecycleOwner) {
+            if (!it.isNullOrEmpty()) {
+                Navigation.findNavController(view).navigate(R.id.sshFragment)
+            }
         }
     }
 }

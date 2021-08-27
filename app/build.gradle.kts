@@ -80,4 +80,7 @@ dependencies {
     // Lifecycle
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:${Dependencies.lifecycle_version}")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${Dependencies.lifecycle_version}")
+
+    // LeakCanary
+    debugImplementation("com.squareup.leakcanary:leakcanary-android:${Dependencies.leakcanary_version}")
 }
