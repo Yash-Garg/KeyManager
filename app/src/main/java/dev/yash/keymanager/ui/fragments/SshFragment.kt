@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -13,7 +14,6 @@ import dev.yash.keymanager.adapters.SshAdapter
 import dev.yash.keymanager.ui.viewmodels.SshViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import retrofit2.awaitResponse
 
 @AndroidEntryPoint
 class SshFragment : Fragment() {
@@ -31,15 +31,14 @@ class SshFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // val progressBar = binding.loadingIndicator
+        val progressBar = binding.loadingIndicator
         val recyclerView = binding.sshList
+        progressBar.isVisible = true
 
         lifecycleScope.launch {
-            viewModel.sshKeys.collectLatest {
-                val response = it.awaitResponse()
-                if (response.isSuccessful) {
-                    recyclerView.adapter = response.body()?.let { data -> SshAdapter(data) }
-                }
+            viewModel.sshKeys.collectLatest { keys ->
+                progressBar.isVisible = false
+                recyclerView.adapter = SshAdapter(keys)
             }
         }
     }

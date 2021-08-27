@@ -13,6 +13,6 @@ class GithubRepository @Inject constructor(
     private val service: GitHubService
 ) {
     private val token = preferences.getString("ACCESS_TOKEN", null)
-    fun getSshKeys() = service.getSshKeys("token $token")
-    fun getGpgKeys() = service.getGpgKeys("token $token")
+    suspend fun getSshKeys() = service.getSshKeys("token $token")
+    suspend fun getGpgKeys() = service.getGpgKeys("token $token")
 }
