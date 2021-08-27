@@ -1,22 +1,23 @@
 package dev.yash.keymanager.ui
 
-import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.yash.keymanager.utils.Secrets
-import dev.yash.keymanager.utils.SharedPrefs
 import net.openid.appauth.AuthorizationResponse
 import net.openid.appauth.AuthorizationService
 import net.openid.appauth.ClientSecretBasic
 import javax.inject.Inject
 
 @HiltViewModel
-class AuthViewModel @Inject constructor(private val authService: AuthorizationService) :
-    ViewModel() {
+class AuthViewModel @Inject constructor(
+    private val preferences: SharedPreferences,
+    private val authService: AuthorizationService
+) : ViewModel() {
 
-    fun getAccessToken(authIntent: Intent, ctx: Context) {
+    fun getAccessToken(authIntent: Intent) {
         val resp = AuthorizationResponse.fromIntent(authIntent)
         val clientAuth = ClientSecretBasic(Secrets.CLIENT_SECRET)
 
@@ -26,8 +27,7 @@ class AuthViewModel @Inject constructor(private val authService: AuthorizationSe
         ) { response, exception ->
             if (response != null) {
                 response.accessToken?.let {
-                    val prefs = SharedPrefs.getEncryptedSharedPreferences(ctx)
-                    prefs.edit().putString("ACCESS_TOKEN", it).apply()
+                    preferences.edit().putString("ACCESS_TOKEN", it).apply()
                 }
             } else {
                 Log.e("Error", exception.toString())

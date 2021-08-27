@@ -1,6 +1,9 @@
 package dev.yash.keymanager.di
 
 import android.content.Context
+import android.content.SharedPreferences
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKeys
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
@@ -43,6 +46,19 @@ object ApiModule {
     @Singleton
     @Provides
     fun provideApi(retrofit: Retrofit): GitHubService = retrofit.create(GitHubService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideEncryptedSharedPrefs(@ApplicationContext context: Context): SharedPreferences {
+        val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
+        return EncryptedSharedPreferences.create(
+            "token_encrypted_prefs",
+            masterKeyAlias,
+            context,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
+    }
 
     @Provides
     fun provideAuthService(@ApplicationContext context: Context) = AuthorizationService(context)

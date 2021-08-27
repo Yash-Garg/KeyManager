@@ -41,7 +41,7 @@ class AuthFragment : Fragment(R.layout.auth_fragment) {
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == RESULT_OK) {
                     result.data?.let {
-                        authViewModel.getAccessToken(it, requireContext())
+                        authViewModel.getAccessToken(it)
                     }
                 }
             }
