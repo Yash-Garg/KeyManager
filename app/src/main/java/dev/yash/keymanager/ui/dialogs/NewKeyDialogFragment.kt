@@ -3,6 +3,7 @@ package dev.yash.keymanager.ui.dialogs
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import app.yash.keymanager.R
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -15,6 +16,7 @@ class NewKeyDialogFragment : DialogFragment() {
         alertDialogBuilder.setPositiveButton(getString(R.string.create_button), null)
         alertDialogBuilder.setNegativeButton(getString(R.string.cancel)) { _, _ -> dismiss() }
         val dialog = alertDialogBuilder.create()
+        dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         dialog.setOnShowListener {
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
                 // TODO

@@ -21,5 +21,6 @@
             android:hint="@string/key_hint"
             android:inputType="textMultiLine" />
 
+        <requestFocus />
     </com.google.android.material.textfield.TextInputLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
