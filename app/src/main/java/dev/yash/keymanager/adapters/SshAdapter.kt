@@ -4,15 +4,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import app.yash.keymanager.R
 import dev.yash.keymanager.models.SshKey
+import javax.inject.Inject
 
-class SshAdapter(private val keys: List<SshKey>) :
-    RecyclerView.Adapter<SshAdapter.SshViewHolder>() {
+class SshAdapter @Inject constructor() :
+    PagingDataAdapter<SshKey, SshAdapter.SshViewHolder>(SshKeyComparator) {
 
     class SshViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val keyName: TextView = view.findViewById(R.id.key_public)
+        val publicKey: TextView = view.findViewById(R.id.key_public)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SshViewHolder {
@@ -22,9 +25,18 @@ class SshAdapter(private val keys: List<SshKey>) :
     }
 
     override fun onBindViewHolder(holder: SshViewHolder, position: Int) {
-        val key = keys[position]
-        holder.keyName.text = key.key
+        getItem(position)?.let { key ->
+            holder.publicKey.text = key.key
+        }
     }
 
-    override fun getItemCount(): Int = keys.size
+    object SshKeyComparator : DiffUtil.ItemCallback<SshKey>() {
+        override fun areItemsTheSame(oldItem: SshKey, newItem: SshKey): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: SshKey, newItem: SshKey): Boolean {
+            return oldItem == newItem
+        }
+    }
 }

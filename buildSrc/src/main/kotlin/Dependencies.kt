@@ -15,6 +15,7 @@ object Dependencies {
     const val hilt_version = "2.38.1"
     const val activity_version = "1.3.1"
     const val nav_version = "2.3.5"
+    const val paging_version = "3.0.1"
     const val logging_version = "4.9.1"
     const val leakcanary_version = "2.7"
     const val fragment_version = "1.3.6"

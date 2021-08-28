@@ -9,7 +9,9 @@ interface GitHubService {
     @Headers("Accept: application/vnd.github.v3+json")
     @GET("/user/keys")
     suspend fun getSshKeys(
-        @Header("Authorization") token: String
+        @Header("Authorization") token: String,
+        @Query("per_page") perPage: Int,
+        @Query("page") page: Int
     ): List<SshKey>
 
     @Headers("Accept: application/vnd.github.v3+json")

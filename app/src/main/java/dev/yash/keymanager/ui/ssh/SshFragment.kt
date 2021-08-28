@@ -9,6 +9,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import app.yash.keymanager.databinding.SshFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dev.yash.keymanager.adapters.SshAdapter
@@ -16,12 +17,16 @@ import dev.yash.keymanager.models.SshModel
 import dev.yash.keymanager.ui.dialogs.NewKeyDialogFragment
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SshFragment : Fragment() {
     private var _binding: SshFragmentBinding? = null
     private val binding get() = _binding!!
     private val viewModel: SshViewModel by viewModels()
+
+    @Inject
+    lateinit var sshAdapter: SshAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,7 +42,12 @@ class SshFragment : Fragment() {
         val progressBar = binding.loadingIndicator
         val recyclerView = binding.sshList
         val addFab = binding.addSsh
-        progressBar.isVisible = true
+        val swipeRefreshLayout = binding.sshSwiperefresh
+
+        swipeRefreshLayout.setOnRefreshListener {
+            sshAdapter.refresh()
+            swipeRefreshLayout.isRefreshing = false
+        }
 
         addFab.setOnClickListener {
             NewKeyDialogFragment.newInstance().show(childFragmentManager, null)
@@ -57,6 +67,7 @@ class SshFragment : Fragment() {
                             "Key added successfully",
                             Toast.LENGTH_LONG
                         ).show()
+                        sshAdapter.refresh()
                     } else {
                         Toast.makeText(
                             requireContext(),
@@ -69,9 +80,16 @@ class SshFragment : Fragment() {
         }
 
         lifecycleScope.launch {
-            viewModel.sshKeys.collectLatest { keys ->
-                progressBar.isVisible = false
-                recyclerView.adapter = SshAdapter(keys)
+            viewModel.getSshKeys().collectLatest { pagingData ->
+                recyclerView.adapter = sshAdapter
+                sshAdapter.submitData(pagingData)
+            }
+        }
+
+        lifecycleScope.launch {
+            sshAdapter.loadStateFlow.collectLatest { loadStates ->
+                progressBar.isVisible = loadStates.refresh is LoadState.Loading
+                recyclerView.isVisible = loadStates.refresh is LoadState.NotLoading
             }
         }
     }
