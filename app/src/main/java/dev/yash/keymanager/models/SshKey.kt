@@ -13,3 +13,8 @@ data class SshKey(
     @Json(name = "created_at") val createdAt: String,
     @Json(name = "read_only") val readOnly: Boolean
 )
+
+@Keep
+data class SshModel(
+    val key: String
+)

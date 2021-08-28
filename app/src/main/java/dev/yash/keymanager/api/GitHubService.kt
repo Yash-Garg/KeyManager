@@ -2,9 +2,8 @@ package dev.yash.keymanager.api
 
 import dev.yash.keymanager.models.GpgKey
 import dev.yash.keymanager.models.SshKey
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Headers
+import dev.yash.keymanager.models.SshModel
+import retrofit2.http.*
 
 interface GitHubService {
     @Headers("Accept: application/vnd.github.v3+json")
@@ -18,6 +17,13 @@ interface GitHubService {
     suspend fun getGpgKeys(
         @Header("Authorization") token: String
     ): List<GpgKey>
+
+    @Headers("Accept: application/vnd.github.v3+json")
+    @POST("/user/keys")
+    suspend fun postSshKey(
+        @Header("Authorization") token: String,
+        @Body key: SshModel
+    )
 
     companion object {
         const val BASE_URL = "https://api.github.com"

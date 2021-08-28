@@ -17,4 +17,6 @@ object Dependencies {
     const val nav_version = "2.3.5"
     const val logging_version = "4.9.1"
     const val leakcanary_version = "2.7"
+    const val fragment_version = "1.3.6"
+    const val legacy_version = "1.0.0"
 }

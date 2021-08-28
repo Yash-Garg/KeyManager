@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
+import dev.yash.keymanager.models.SshModel
 import javax.inject.Inject
 
 @Module
@@ -12,7 +13,8 @@ class GithubRepository @Inject constructor(
     preferences: SharedPreferences,
     private val service: GitHubService
 ) {
-    private val token = preferences.getString("ACCESS_TOKEN", null)
-    suspend fun getSshKeys() = service.getSshKeys("token $token")
-    suspend fun getGpgKeys() = service.getGpgKeys("token $token")
+    private val token = "token ${preferences.getString("ACCESS_TOKEN", null)}"
+    suspend fun getSshKeys() = service.getSshKeys(token)
+    suspend fun getGpgKeys() = service.getGpgKeys(token)
+    suspend fun postSshKey(key: SshModel) = service.postSshKey(token, key)
 }
