@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
@@ -29,9 +28,7 @@ class NewKeyDialogFragment : DialogFragment() {
                         "new_ssh_key",
                         bundleOf("ssh_key" to editTextView?.text.toString())
                     )
-                    dialog.cancel()
-                    Toast.makeText(requireContext(), "Adding key...Please wait", Toast.LENGTH_LONG)
-                        .show()
+                    dialog.dismiss()
                 } else {
                     editTextView?.error = "This field is required"
                 }

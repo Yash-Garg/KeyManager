@@ -4,17 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import app.yash.keymanager.databinding.SshFragmentBinding
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import dev.yash.keymanager.adapters.SshAdapter
 import dev.yash.keymanager.models.SshModel
 import dev.yash.keymanager.ui.dialogs.NewKeyDialogFragment
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -62,18 +63,13 @@ class SshFragment : Fragment() {
                 viewModel.postKey(SshModel(newSshKey))
                 viewModel.keyPosted.observe(viewLifecycleOwner) { result ->
                     if (result == true) {
-                        Toast.makeText(
-                            requireContext(),
-                            "Key added successfully",
-                            Toast.LENGTH_LONG
-                        ).show()
-                        sshAdapter.refresh()
+                        Snackbar.make(view, "Key Added Successfully", Snackbar.LENGTH_LONG).show()
+                        lifecycleScope.launch {
+                            delay(1000)
+                            sshAdapter.refresh()
+                        }
                     } else {
-                        Toast.makeText(
-                            requireContext(),
-                            "Error adding key",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Snackbar.make(view, "Some error occured", Snackbar.LENGTH_LONG).show()
                     }
                 }
             }

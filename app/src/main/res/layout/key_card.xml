@@ -16,6 +16,7 @@
             android:id="@+id/key_public"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:maxLines="3"
             android:textAppearance="?attr/textAppearanceHeadline6"
             android:textColor="@color/white" />
 
