@@ -27,6 +27,12 @@ class SshAdapter @Inject constructor() :
     override fun onBindViewHolder(holder: SshViewHolder, position: Int) {
         getItem(position)?.let { key ->
             holder.publicKey.text = key.key
+
+            holder.itemView.setOnLongClickListener {
+                // TODO: Do stuff
+                println("Key ID - ${key.id}")
+                true
+            }
         }
     }
 

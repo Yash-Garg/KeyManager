@@ -1,10 +1,11 @@
 <resources>
 
-    <style name="Theme.keymanager" parent="Theme.MaterialComponents.NoActionBar">
+    <style name="Theme.keymanager" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <item name="colorPrimary">@color/accentColor</item>
         <item name="colorPrimaryVariant">@color/accentColor</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="android:statusBarColor">@color/colorPrimary</item>
+        <item name="android:windowBackground">@color/colorPrimary</item>
     </style>
 
     <style name="AlertDialogCustom" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
