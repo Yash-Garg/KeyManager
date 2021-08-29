@@ -12,12 +12,12 @@
         tools:layout="@layout/auth_fragment">
         <action
             android:id="@+id/action_authFragment_to_sshFragment"
-            app:destination="@id/sshFragment" />
+            app:destination="@id/homeFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/sshFragment"
-        android:name="dev.yash.keymanager.ui.ssh.SshFragment"
+        android:id="@+id/homeFragment"
+        android:name="dev.yash.keymanager.ui.home.HomeFragment"
         android:label="@string/app_name"
-        tools:layout="@layout/ssh_fragment" />
+        tools:layout="@layout/home_fragment" />
 </navigation>

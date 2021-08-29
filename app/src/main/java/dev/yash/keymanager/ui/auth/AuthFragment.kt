@@ -41,7 +41,7 @@ class AuthFragment : Fragment(R.layout.auth_fragment) {
 
         val token = preferences.getString("ACCESS_TOKEN", null)
         if (!token.isNullOrEmpty()) {
-            Navigation.findNavController(view).navigate(R.id.sshFragment)
+            Navigation.findNavController(view).navigate(R.id.homeFragment)
             return
         }
 
@@ -63,7 +63,7 @@ class AuthFragment : Fragment(R.layout.auth_fragment) {
 
         authViewModel.accessToken.observe(viewLifecycleOwner) {
             if (!it.isNullOrEmpty()) {
-                Navigation.findNavController(view).navigate(R.id.sshFragment)
+                Navigation.findNavController(view).navigate(R.id.homeFragment)
             }
         }
     }
