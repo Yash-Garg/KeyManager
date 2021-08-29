@@ -38,13 +38,14 @@ class AuthFragment : Fragment(R.layout.auth_fragment) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
         val token = preferences.getString("ACCESS_TOKEN", null)
         if (!token.isNullOrEmpty()) {
             Navigation.findNavController(view).navigate(R.id.sshFragment)
             return
         }
+
+        super.onViewCreated(view, savedInstanceState)
 
         val loginButton = binding.signinButton
 
