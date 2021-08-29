@@ -3,24 +3,24 @@ package dev.yash.keymanager.paging
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import dev.yash.keymanager.api.GithubRepository
-import dev.yash.keymanager.models.SshKey
+import dev.yash.keymanager.models.GpgKey
 
-class SshKeysPagingSource(
+class GpgKeysPagingSource(
     private val repository: GithubRepository
-) : PagingSource<Int, SshKey>() {
+) : PagingSource<Int, GpgKey>() {
 
-    override fun getRefreshKey(state: PagingState<Int, SshKey>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, GpgKey>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
             state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
                 ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
         }
     }
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, SshKey> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, GpgKey> {
         return try {
             val page = params.key ?: 1
             val articles =
-                repository.getSshKeys(
+                repository.getGpgKeys(
                     page = page,
                     perPage = params.loadSize
                 )

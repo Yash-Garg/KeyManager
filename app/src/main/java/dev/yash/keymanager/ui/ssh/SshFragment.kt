@@ -14,7 +14,7 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import dev.yash.keymanager.adapters.SshAdapter
 import dev.yash.keymanager.models.SshModel
-import dev.yash.keymanager.ui.dialogs.NewKeyDialogFragment
+import dev.yash.keymanager.ui.dialogs.SshNewKeyDialogFragment
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -51,7 +51,7 @@ class SshFragment : Fragment() {
         }
 
         addFab.setOnClickListener {
-            NewKeyDialogFragment.newInstance().show(childFragmentManager, null)
+            SshNewKeyDialogFragment.newInstance().show(childFragmentManager, null)
         }
 
         childFragmentManager.setFragmentResultListener(
@@ -60,16 +60,16 @@ class SshFragment : Fragment() {
         ) { _, bundle ->
             val newSshKey = bundle.getString("ssh_key")
             if (!newSshKey.isNullOrEmpty()) {
-                viewModel.postKey(SshModel(newSshKey))
+                viewModel.postSshKey(SshModel(newSshKey))
                 viewModel.keyPosted.observe(viewLifecycleOwner) { result ->
                     if (result == true) {
-                        Snackbar.make(view, "Key Added Successfully", Snackbar.LENGTH_LONG).show()
+                        Snackbar.make(view, "Key Added Successfully", Snackbar.LENGTH_SHORT).show()
                         lifecycleScope.launch {
                             delay(1000)
                             sshAdapter.refresh()
                         }
                     } else {
-                        Snackbar.make(view, "Some error occured", Snackbar.LENGTH_LONG).show()
+                        Snackbar.make(view, "Some error occured", Snackbar.LENGTH_SHORT).show()
                     }
                 }
             }

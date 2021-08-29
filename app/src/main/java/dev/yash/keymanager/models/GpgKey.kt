@@ -25,3 +25,8 @@ data class Email(
     val email: String,
     val verified: Boolean
 )
+
+@Keep
+data class GpgModel(
+    @Json(name = "armored_public_key") val armoredPublicKey: String
+)
