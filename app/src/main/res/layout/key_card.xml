@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginVertical="5dp"
     android:clickable="true"
     android:focusable="true"
     app:cardElevation="5dp">
@@ -18,7 +19,8 @@
             android:id="@+id/key_public"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxLines="3"
+            android:ellipsize="end"
+            android:maxLines="2"
             android:textAppearance="?attr/textAppearanceHeadline6"
             android:textColor="@color/white" />
 
