@@ -23,11 +23,6 @@ class SshDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val heading = binding.text1
-        val name = binding.text2
-
-        // TODO
     }
 
     override fun onDestroyView() {
