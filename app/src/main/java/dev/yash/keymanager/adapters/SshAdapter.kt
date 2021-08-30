@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -28,10 +29,8 @@ class SshAdapter @Inject constructor() :
         getItem(position)?.let { key ->
             holder.publicKey.text = key.key
 
-            holder.itemView.setOnLongClickListener {
-                // TODO: Do stuff
-                println("Key ID - ${key.id}")
-                true
+            holder.itemView.setOnClickListener {
+                it.findNavController().navigate(R.id.action_homeFragment_to_sshDetailsFragment)
             }
         }
     }

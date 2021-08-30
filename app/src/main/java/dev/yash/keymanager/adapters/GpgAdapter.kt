@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -27,6 +28,10 @@ class GpgAdapter @Inject constructor() :
     override fun onBindViewHolder(holder: GpgViewHolder, position: Int) {
         getItem(position)?.let { key ->
             holder.publicKey.text = key.publicKey
+
+            holder.itemView.setOnClickListener {
+                it.findNavController().navigate(R.id.action_homeFragment_to_gpgDetailsFragment)
+            }
         }
     }
 
