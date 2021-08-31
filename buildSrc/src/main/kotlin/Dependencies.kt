@@ -20,4 +20,5 @@ object Dependencies {
     const val leakcanary_version = "2.7"
     const val fragment_version = "1.3.6"
     const val legacy_version = "1.0.0"
+    const val chucker_version = "3.5.2"
 }

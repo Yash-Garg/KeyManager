@@ -88,4 +88,8 @@ dependencies {
 
     // LeakCanary
     debugImplementation("com.squareup.leakcanary:leakcanary-android:${Dependencies.leakcanary_version}")
+
+    // Chucker
+    debugImplementation("com.github.chuckerteam.chucker:library:${Dependencies.chucker_version}")
+    releaseImplementation("com.github.chuckerteam.chucker:library-no-op:${Dependencies.chucker_version}")
 }
