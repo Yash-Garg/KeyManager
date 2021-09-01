@@ -1,26 +1,26 @@
 package dev.yash.keymanager.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import app.yash.keymanager.R
+import app.yash.keymanager.databinding.KeyCardBinding
 import dev.yash.keymanager.models.SshKey
 import javax.inject.Inject
 
 class SshAdapter @Inject constructor() :
     PagingDataAdapter<SshKey, SshAdapter.SshViewHolder>(SshKeyComparator) {
 
-    class SshViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val publicKey: TextView = view.findViewById(R.id.key_public)
+    class SshViewHolder(binding: KeyCardBinding) : RecyclerView.ViewHolder(binding.root) {
+        val publicKey: TextView = binding.keyPublic
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SshViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
         val adapterLayout =
-            LayoutInflater.from(parent.context).inflate(R.layout.key_card, parent, false)
+            KeyCardBinding.inflate(inflater, parent, false)
         return SshViewHolder(adapterLayout)
     }
 

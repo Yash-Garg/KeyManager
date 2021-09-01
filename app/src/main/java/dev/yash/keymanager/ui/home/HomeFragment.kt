@@ -15,7 +15,7 @@ class HomeFragment : Fragment() {
     private var _binding: HomeFragmentBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewPagerAdapter: ViewPagerAdapter
+    private var viewPagerAdapter: ViewPagerAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,6 +40,7 @@ class HomeFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        viewPagerAdapter = null
         _binding = null
     }
 }

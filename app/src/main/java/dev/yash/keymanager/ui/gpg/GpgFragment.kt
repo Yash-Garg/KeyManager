@@ -27,8 +27,8 @@ class GpgFragment : Fragment() {
 
     private val viewModel: GpgViewModel by viewModels()
 
-    @Inject
-    lateinit var gpgAdapter: GpgAdapter
+    @set:Inject
+    var gpgAdapter: GpgAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,11 +46,8 @@ class GpgFragment : Fragment() {
         val addFab = binding.addGpg
         val swipeRefreshLayout = binding.gpgSwiperefresh
 
-        val itemOnClick: (View, Int) -> Unit = { _, _ -> println("Item Clicked") }
-        gpgAdapter.setItemClickCallback(itemOnClick)
-
         swipeRefreshLayout.setOnRefreshListener {
-            gpgAdapter.refresh()
+            gpgAdapter?.refresh()
             swipeRefreshLayout.isRefreshing = false
         }
 
@@ -70,7 +67,7 @@ class GpgFragment : Fragment() {
                         Snackbar.make(view, "Key Added Successfully", Snackbar.LENGTH_SHORT).show()
                         lifecycleScope.launch {
                             delay(1000)
-                            gpgAdapter.refresh()
+                            gpgAdapter?.refresh()
                         }
                     } else {
                         Snackbar.make(view, "Some error occured", Snackbar.LENGTH_SHORT).show()
@@ -82,12 +79,12 @@ class GpgFragment : Fragment() {
         lifecycleScope.launch {
             viewModel.getGpgKeys().collectLatest { pagingData ->
                 recyclerView.adapter = gpgAdapter
-                gpgAdapter.submitData(pagingData)
+                gpgAdapter?.submitData(pagingData)
             }
         }
 
         lifecycleScope.launch {
-            gpgAdapter.loadStateFlow.collectLatest { loadStates ->
+            gpgAdapter?.loadStateFlow?.collectLatest { loadStates ->
                 progressBar.isVisible = loadStates.refresh is LoadState.Loading
                 recyclerView.isVisible = loadStates.refresh is LoadState.NotLoading
             }
@@ -96,6 +93,7 @@ class GpgFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        gpgAdapter = null
         _binding = null
     }
 }
