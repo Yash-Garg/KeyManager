@@ -46,6 +46,9 @@ class GpgFragment : Fragment() {
         val addFab = binding.addGpg
         val swipeRefreshLayout = binding.gpgSwiperefresh
 
+        val itemOnClick: (View, Int) -> Unit = { _, _ -> println("Item Clicked") }
+        gpgAdapter.setItemClickCallback(itemOnClick)
+
         swipeRefreshLayout.setOnRefreshListener {
             gpgAdapter.refresh()
             swipeRefreshLayout.isRefreshing = false

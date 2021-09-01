@@ -14,6 +14,8 @@ import javax.inject.Inject
 class GpgAdapter @Inject constructor() :
     PagingDataAdapter<GpgKey, GpgAdapter.GpgViewHolder>(GpgKeyComparator) {
 
+    private lateinit var itemClickListener: (View, Int) -> Unit
+
     class GpgViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val publicKey: TextView = view.findViewById(R.id.key_public)
     }
@@ -28,6 +30,9 @@ class GpgAdapter @Inject constructor() :
         getItem(position)?.let { key ->
             holder.publicKey.text = key.publicKey
         }
+        holder.itemView.setOnClickListener {
+            itemClickListener.invoke(it, position)
+        }
     }
 
     object GpgKeyComparator : DiffUtil.ItemCallback<GpgKey>() {
@@ -38,5 +43,9 @@ class GpgAdapter @Inject constructor() :
         override fun areContentsTheSame(oldItem: GpgKey, newItem: GpgKey): Boolean {
             return oldItem == newItem
         }
+    }
+
+    fun setItemClickCallback(itemClick: (View, Int) -> Unit) {
+        itemClickListener = itemClick
     }
 }
