@@ -24,6 +24,7 @@ import javax.inject.Inject
 class SshFragment : Fragment() {
     private var _binding: SshFragmentBinding? = null
     private val binding get() = _binding!!
+    
     private val viewModel: SshViewModel by viewModels()
 
     @set:Inject

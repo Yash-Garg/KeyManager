@@ -30,7 +30,7 @@ class GpgAdapter @Inject constructor() :
         getItem(position)?.let { key ->
             holder.publicKey.text = key.publicKey
             holder.itemView.setOnClickListener {
-                it.findNavController().navigate(R.id.gpgDetailsFragment)
+                it.findNavController().navigate(R.id.action_homeFragment_to_gpgDetailsFragment)
             }
         }
     }

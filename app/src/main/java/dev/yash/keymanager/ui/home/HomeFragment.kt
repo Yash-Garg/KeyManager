@@ -16,6 +16,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var viewPagerAdapter: ViewPagerAdapter? = null
+    private var mediator: TabLayoutMediator? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,15 +32,19 @@ class HomeFragment : Fragment() {
         viewPagerAdapter = ViewPagerAdapter(this)
         binding.pager.adapter = viewPagerAdapter
 
-        TabLayoutMediator(binding.tabs, binding.pager) { tab, position ->
+        mediator = TabLayoutMediator(binding.tabs, binding.pager) { tab, position ->
             if (position == 0) {
                 tab.text = "SSH KEYS"
             } else tab.text = "GPG KEYS"
-        }.attach()
+        }
+        mediator?.attach()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        mediator?.detach()
+        mediator = null
+        binding.pager.adapter = null
         viewPagerAdapter = null
         _binding = null
     }
