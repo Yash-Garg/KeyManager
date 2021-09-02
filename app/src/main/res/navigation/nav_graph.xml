@@ -23,12 +23,10 @@
         <action
             android:id="@+id/action_homeFragment_to_sshDetailsFragment"
             app:destination="@id/sshDetailsFragment"
-            app:popEnterAnim="@android:anim/slide_in_left"
             app:popUpTo="@id/homeFragment" />
         <action
             android:id="@+id/action_homeFragment_to_gpgDetailsFragment"
             app:destination="@id/gpgDetailsFragment"
-            app:popEnterAnim="@android:anim/slide_in_left"
             app:popUpTo="@id/homeFragment" />
     </fragment>
     <fragment
