@@ -27,8 +27,8 @@ class GpgFragment : Fragment() {
 
     private val viewModel: GpgViewModel by viewModels()
 
-    @set:Inject
-    var gpgAdapter: GpgAdapter? = null
+    @Inject
+    lateinit var gpgAdapter: GpgAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,7 +47,7 @@ class GpgFragment : Fragment() {
         val swipeRefreshLayout = binding.gpgSwiperefresh
 
         swipeRefreshLayout.setOnRefreshListener {
-            gpgAdapter?.refresh()
+            gpgAdapter.refresh()
             swipeRefreshLayout.isRefreshing = false
         }
 
@@ -67,7 +67,7 @@ class GpgFragment : Fragment() {
                         Snackbar.make(view, "Key Added Successfully", Snackbar.LENGTH_SHORT).show()
                         lifecycleScope.launch {
                             delay(1000)
-                            gpgAdapter?.refresh()
+                            gpgAdapter.refresh()
                         }
                     } else {
                         Snackbar.make(view, "Some error occured", Snackbar.LENGTH_SHORT).show()
@@ -79,12 +79,12 @@ class GpgFragment : Fragment() {
         lifecycleScope.launch {
             viewModel.getGpgKeys().collectLatest { pagingData ->
                 recyclerView.adapter = gpgAdapter
-                gpgAdapter?.submitData(pagingData)
+                gpgAdapter.submitData(pagingData)
             }
         }
 
         lifecycleScope.launch {
-            gpgAdapter?.loadStateFlow?.collectLatest { loadStates ->
+            gpgAdapter.loadStateFlow.collectLatest { loadStates ->
                 progressBar.isVisible = loadStates.refresh is LoadState.Loading
                 recyclerView.isVisible = loadStates.refresh is LoadState.NotLoading
             }
@@ -93,7 +93,6 @@ class GpgFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        gpgAdapter = null
         _binding = null
     }
 }

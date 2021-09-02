@@ -39,7 +39,7 @@ object AppModule {
     @Provides
     fun provideOkHttpClient(interceptor: ChuckerInterceptor): OkHttpClient {
         val logging = HttpLoggingInterceptor()
-        logging.setLevel(HttpLoggingInterceptor.Level.BODY)
+        logging.setLevel(HttpLoggingInterceptor.Level.BASIC)
         return OkHttpClient.Builder()
             .addInterceptor(logging)
             .addInterceptor(interceptor)

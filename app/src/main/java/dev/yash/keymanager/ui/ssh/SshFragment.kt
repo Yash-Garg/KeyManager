@@ -24,11 +24,10 @@ import javax.inject.Inject
 class SshFragment : Fragment() {
     private var _binding: SshFragmentBinding? = null
     private val binding get() = _binding!!
-    
     private val viewModel: SshViewModel by viewModels()
 
-    @set:Inject
-    var sshAdapter: SshAdapter? = null
+    @Inject
+    lateinit var sshAdapter: SshAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,7 +46,7 @@ class SshFragment : Fragment() {
         val swipeRefreshLayout = binding.sshSwiperefresh
 
         swipeRefreshLayout.setOnRefreshListener {
-            sshAdapter?.refresh()
+            sshAdapter.refresh()
             swipeRefreshLayout.isRefreshing = false
         }
 
@@ -67,7 +66,7 @@ class SshFragment : Fragment() {
                         Snackbar.make(view, "Key Added Successfully", Snackbar.LENGTH_SHORT).show()
                         lifecycleScope.launch {
                             delay(1000)
-                            sshAdapter?.refresh()
+                            sshAdapter.refresh()
                         }
                     } else {
                         Snackbar.make(view, "Some error occured", Snackbar.LENGTH_SHORT).show()
@@ -79,12 +78,12 @@ class SshFragment : Fragment() {
         lifecycleScope.launch {
             viewModel.getSshKeys().collectLatest { pagingData ->
                 recyclerView.adapter = sshAdapter
-                sshAdapter?.submitData(pagingData)
+                sshAdapter.submitData(pagingData)
             }
         }
 
         lifecycleScope.launch {
-            sshAdapter?.loadStateFlow?.collectLatest { loadStates ->
+            sshAdapter.loadStateFlow.collectLatest { loadStates ->
                 progressBar.isVisible = loadStates.refresh is LoadState.Loading
                 recyclerView.isVisible = loadStates.refresh is LoadState.NotLoading
             }
@@ -93,7 +92,6 @@ class SshFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        sshAdapter = null
         _binding = null
     }
 }
