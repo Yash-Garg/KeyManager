@@ -7,9 +7,9 @@ import androidx.navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import app.yash.keymanager.R
 import app.yash.keymanager.databinding.KeyCardBinding
 import dev.yash.keymanager.models.GpgKey
+import dev.yash.keymanager.ui.home.HomeFragmentDirections
 import javax.inject.Inject
 
 class GpgAdapter @Inject constructor() :
@@ -29,8 +29,9 @@ class GpgAdapter @Inject constructor() :
     override fun onBindViewHolder(holder: GpgViewHolder, position: Int) {
         getItem(position)?.let { key ->
             holder.publicKey.text = key.publicKey
-            holder.itemView.setOnClickListener {
-                it.findNavController().navigate(R.id.action_homeFragment_to_gpgDetailsFragment)
+            holder.itemView.setOnClickListener { view ->
+                val action = HomeFragmentDirections.actionHomeFragmentToGpgDetailsFragment(key)
+                view.findNavController().navigate(action)
             }
         }
     }

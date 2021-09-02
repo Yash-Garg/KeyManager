@@ -23,13 +23,11 @@
         <action
             android:id="@+id/action_homeFragment_to_sshDetailsFragment"
             app:destination="@id/sshDetailsFragment"
-            app:enterAnim="@android:anim/slide_in_left"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popUpTo="@id/homeFragment" />
         <action
             android:id="@+id/action_homeFragment_to_gpgDetailsFragment"
             app:destination="@id/gpgDetailsFragment"
-            app:enterAnim="@android:anim/slide_in_left"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popUpTo="@id/homeFragment" />
     </fragment>
@@ -37,10 +35,18 @@
         android:id="@+id/gpgDetailsFragment"
         android:name="dev.yash.keymanager.ui.details.GpgDetailsFragment"
         android:label="gpg_details_fragment"
-        tools:layout="@layout/gpg_details_fragment" />
+        tools:layout="@layout/gpg_details_fragment">
+        <argument
+            android:name="selectedGpgKey"
+            app:argType="dev.yash.keymanager.models.GpgKey" />
+    </fragment>
     <fragment
         android:id="@+id/sshDetailsFragment"
         android:name="dev.yash.keymanager.ui.details.SshDetailsFragment"
         android:label="ssh_details_fragment"
-        tools:layout="@layout/ssh_details_fragment" />
+        tools:layout="@layout/ssh_details_fragment">
+        <argument
+            android:name="selectedSshKey"
+            app:argType="dev.yash.keymanager.models.SshKey" />
+    </fragment>
 </navigation>

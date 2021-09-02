@@ -7,9 +7,9 @@ import androidx.navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import app.yash.keymanager.R
 import app.yash.keymanager.databinding.KeyCardBinding
 import dev.yash.keymanager.models.SshKey
+import dev.yash.keymanager.ui.home.HomeFragmentDirections
 import javax.inject.Inject
 
 class SshAdapter @Inject constructor() :
@@ -29,8 +29,9 @@ class SshAdapter @Inject constructor() :
     override fun onBindViewHolder(holder: SshViewHolder, position: Int) {
         getItem(position)?.let { key ->
             holder.publicKey.text = key.key
-            holder.itemView.setOnClickListener {
-                it.findNavController().navigate(R.id.action_homeFragment_to_sshDetailsFragment)
+            holder.itemView.setOnClickListener { view ->
+                val action = HomeFragmentDirections.actionHomeFragmentToSshDetailsFragment(key)
+                view.findNavController().navigate(action)
             }
         }
     }
