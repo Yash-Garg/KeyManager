@@ -65,7 +65,7 @@ class GpgFragment : Fragment() {
                 viewModel.keyPosted.observe(viewLifecycleOwner) { result ->
                     if (result == true) {
                         Snackbar.make(view, "Key Added Successfully", Snackbar.LENGTH_SHORT).show()
-                        lifecycleScope.launch {
+                        viewLifecycleOwner.lifecycleScope.launch {
                             delay(1000)
                             gpgAdapter.refresh()
                         }
@@ -76,23 +76,26 @@ class GpgFragment : Fragment() {
             }
         }
 
-        lifecycleScope.launch {
-            viewModel.getGpgKeys().collectLatest { pagingData ->
-                recyclerView.adapter = gpgAdapter
-                gpgAdapter.submitData(pagingData)
+        viewLifecycleOwner.lifecycleScope.launch {
+            launch {
+                viewModel.getGpgKeys().collectLatest { pagingData ->
+                    recyclerView.adapter = gpgAdapter
+                    gpgAdapter.submitData(pagingData)
+                }
             }
-        }
 
-        lifecycleScope.launch {
-            gpgAdapter.loadStateFlow.collectLatest { loadStates ->
-                progressBar.isVisible = loadStates.refresh is LoadState.Loading
-                recyclerView.isVisible = loadStates.refresh is LoadState.NotLoading
+            launch {
+                gpgAdapter.loadStateFlow.collectLatest { loadStates ->
+                    progressBar.isVisible = loadStates.refresh is LoadState.Loading
+                    recyclerView.isVisible = loadStates.refresh is LoadState.NotLoading
+                }
             }
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        binding.gpgList.adapter = null
         _binding = null
     }
 }

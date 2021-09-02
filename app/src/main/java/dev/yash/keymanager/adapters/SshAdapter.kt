@@ -30,7 +30,7 @@ class SshAdapter @Inject constructor() :
         getItem(position)?.let { key ->
             holder.publicKey.text = key.key
             holder.itemView.setOnClickListener {
-                it.findNavController().navigate(R.id.sshDetailsFragment)
+                it.findNavController().navigate(R.id.action_homeFragment_to_sshDetailsFragment)
             }
         }
     }

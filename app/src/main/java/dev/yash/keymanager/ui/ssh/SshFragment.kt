@@ -75,23 +75,26 @@ class SshFragment : Fragment() {
             }
         }
 
-        lifecycleScope.launch {
-            viewModel.getSshKeys().collectLatest { pagingData ->
-                recyclerView.adapter = sshAdapter
-                sshAdapter.submitData(pagingData)
+        viewLifecycleOwner.lifecycleScope.launch {
+            launch {
+                viewModel.getSshKeys().collectLatest { pagingData ->
+                    recyclerView.adapter = sshAdapter
+                    sshAdapter.submitData(pagingData)
+                }
             }
-        }
 
-        lifecycleScope.launch {
-            sshAdapter.loadStateFlow.collectLatest { loadStates ->
-                progressBar.isVisible = loadStates.refresh is LoadState.Loading
-                recyclerView.isVisible = loadStates.refresh is LoadState.NotLoading
+            launch {
+                sshAdapter.loadStateFlow.collectLatest { loadStates ->
+                    progressBar.isVisible = loadStates.refresh is LoadState.Loading
+                    recyclerView.isVisible = loadStates.refresh is LoadState.NotLoading
+                }
             }
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        binding.sshList.adapter = null
         _binding = null
     }
 }
