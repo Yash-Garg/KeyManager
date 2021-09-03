@@ -1,3 +1,5 @@
+import java.util.*
+
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -21,13 +23,6 @@ android {
         manifestPlaceholders["appAuthRedirectScheme"] = "dev.yash.keymanager"
     }
 
-    buildTypes {
-        release {
-            isMinifyEnabled = true
-            setProguardFiles(listOf("proguard-android-optimize.txt", "proguard-rules.pro"))
-        }
-    }
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -43,6 +38,28 @@ android {
 
     kapt {
         correctErrorTypes = true
+    }
+
+    val keystoreConfigFile = rootProject.layout.projectDirectory.file("key.properties")
+    if (keystoreConfigFile.asFile.exists()) {
+        val contents = providers.fileContents(keystoreConfigFile).asText.forUseAtConfigurationTime()
+        val keystoreProperties = Properties()
+        keystoreProperties.load(contents.get().byteInputStream())
+        signingConfigs {
+            register("release") {
+                keyAlias = keystoreProperties["keyAlias"] as String
+                keyPassword = keystoreProperties["keyPassword"] as String
+                storeFile = rootProject.file(keystoreProperties["storeFile"] as String)
+                storePassword = keystoreProperties["storePassword"] as String
+            }
+        }
+        buildTypes.all { signingConfig = signingConfigs.getByName("release") }
+    }
+    buildTypes {
+        getByName("release") {
+            isMinifyEnabled = true
+            proguardFiles("proguard-android-optimize.txt", "proguard-rules.pro")
+        }
     }
 }
 

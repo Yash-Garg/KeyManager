@@ -2,8 +2,12 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        maven(url = "https://storage.googleapis.com/r8-releases/raw")
     }
+
     dependencies {
+        // Refer https://issuetracker.google.com/issues/194915678#comment14
+        classpath("com.android.tools:r8:${Dependencies.r8_version}")
         classpath("com.android.tools.build:gradle:${Dependencies.gradle_version}")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.30")
         classpath("com.google.dagger:hilt-android-gradle-plugin:${Dependencies.hilt_version}")
