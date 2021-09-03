@@ -24,10 +24,12 @@
         tools:layout="@layout/home_fragment">
         <action
             android:id="@+id/action_homeFragment_to_sshDetailsFragment"
-            app:destination="@id/sshDetailsFragment" />
+            app:destination="@id/sshDetailsFragment"
+            app:popUpTo="@id/homeFragment" />
         <action
             android:id="@+id/action_homeFragment_to_gpgDetailsFragment"
-            app:destination="@id/gpgDetailsFragment" />
+            app:destination="@id/gpgDetailsFragment"
+            app:popUpTo="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/gpgDetailsFragment"
