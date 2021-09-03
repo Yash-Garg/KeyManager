@@ -42,7 +42,7 @@ class AuthFragment : Fragment(R.layout.auth_fragment) {
 
         val token = preferences.getString("ACCESS_TOKEN", null)
         if (!token.isNullOrEmpty()) {
-            Navigation.findNavController(view).navigate(R.id.homeFragment)
+            Navigation.findNavController(view).navigate(R.id.action_authFragment_to_homeFragment)
             return
         }
 

@@ -11,8 +11,10 @@
         android:label="@string/app_name"
         tools:layout="@layout/auth_fragment">
         <action
-            android:id="@+id/action_authFragment_to_sshFragment"
-            app:destination="@id/homeFragment" />
+            android:id="@+id/action_authFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/authFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -22,12 +24,10 @@
         tools:layout="@layout/home_fragment">
         <action
             android:id="@+id/action_homeFragment_to_sshDetailsFragment"
-            app:destination="@id/sshDetailsFragment"
-            app:popUpTo="@id/homeFragment" />
+            app:destination="@id/sshDetailsFragment" />
         <action
             android:id="@+id/action_homeFragment_to_gpgDetailsFragment"
-            app:destination="@id/gpgDetailsFragment"
-            app:popUpTo="@id/homeFragment" />
+            app:destination="@id/gpgDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/gpgDetailsFragment"
