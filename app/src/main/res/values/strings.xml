@@ -8,6 +8,7 @@
     <string name="create_button">Create</string>
     <string name="create_ssh">Enter SSH key below</string>
     <string name="create_gpg">Enter GPG key below</string>
+    <string name="delete_confirmation">Are you sure you want to delete this key?</string>
     <string name="cancel">Cancel</string>
     <string name="delete">Delete</string>
     <string name="key_hint">Key</string>

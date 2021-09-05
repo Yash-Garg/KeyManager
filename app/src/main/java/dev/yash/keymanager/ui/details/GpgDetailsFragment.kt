@@ -3,7 +3,6 @@ package dev.yash.keymanager.ui.details
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
@@ -11,6 +10,7 @@ import androidx.navigation.fragment.navArgs
 import app.yash.keymanager.R
 import app.yash.keymanager.databinding.GpgDetailsFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
+import dev.yash.keymanager.ui.dialogs.DeleteDialogFragment
 import dev.yash.keymanager.utils.Helpers
 
 @AndroidEntryPoint
@@ -48,7 +48,7 @@ class GpgDetailsFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.delete_key -> {
-            Toast.makeText(requireContext(), "Delete Gpg Key", Toast.LENGTH_SHORT).show()
+            DeleteDialogFragment.newInstance().show(childFragmentManager, null)
             true
         }
         android.R.id.home -> {
