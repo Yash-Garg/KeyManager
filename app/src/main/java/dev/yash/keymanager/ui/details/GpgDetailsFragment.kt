@@ -34,7 +34,7 @@ class GpgDetailsFragment : Fragment() {
         val actionBar = (requireActivity() as AppCompatActivity).supportActionBar
         val keyData = args.selectedGpgKey
 
-        actionBar?.setHomeButtonEnabled(true);
+        actionBar?.setHomeButtonEnabled(true)
         actionBar?.setDisplayHomeAsUpEnabled(true)
         actionBar?.title = keyData.keyID
 

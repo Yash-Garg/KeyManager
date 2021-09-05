@@ -36,7 +36,7 @@ class SshDetailsFragment : Fragment() {
         val actionBar = (requireActivity() as AppCompatActivity).supportActionBar
         val keyData = args.selectedSshKey
 
-        actionBar?.setHomeButtonEnabled(true);
+        actionBar?.setHomeButtonEnabled(true)
         actionBar?.setDisplayHomeAsUpEnabled(true)
         actionBar?.title = keyData.title
 
