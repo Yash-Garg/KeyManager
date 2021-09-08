@@ -75,6 +75,9 @@ dependencies {
     // AppAuth
     implementation("net.openid:appauth:${Dependencies.appauth_version}")
 
+    // Custom Tabs
+    implementation("androidx.browser:browser:${Dependencies.browser_version}")
+
     // Design
     implementation("com.google.android.material:material:${Dependencies.material_version}")
     implementation("androidx.constraintlayout:constraintlayout:${Dependencies.constraint_layout_version}")

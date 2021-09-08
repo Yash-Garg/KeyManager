@@ -1,7 +1,7 @@
 package dev.yash.keymanager.ui.details
 
 import android.os.Bundle
-import android.util.Log
+import android.text.InputType
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -35,22 +35,41 @@ class SshDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
+
         val actionBar = (requireActivity() as AppCompatActivity).supportActionBar
         val keyData = args.selectedSshKey
 
         actionBar?.setHomeButtonEnabled(true)
         actionBar?.setDisplayHomeAsUpEnabled(true)
-        actionBar?.title = keyData.title
+        actionBar?.title = ""
 
         SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH).parse(keyData.createdAt)
             .also {
-                ("Created on " + SimpleDateFormat("dd/mm/yyyy 'at' hh:mm a", Locale.ENGLISH)
-                    .format(it!!).toString()).also { formattedDate ->
-                    binding.createdAt.text = formattedDate
-                }
+                SimpleDateFormat("dd/mm/yyyy 'at' hh:mm a", Locale.ENGLISH)
+                    .format(it!!).toString().also { formattedDate ->
+                        binding.createdAt.setText(formattedDate)
+                    }
             }
 
-        Log.d("SELECTED KEY DATA", keyData.toString())
+        // Disable inputs in TextInputEditText fields
+        binding.createdAt.inputType = InputType.TYPE_NULL
+        binding.keyId.inputType = InputType.TYPE_NULL
+        binding.keyUrl.inputType = InputType.TYPE_NULL
+        binding.sshKey.inputType = InputType.TYPE_NULL
+
+        binding.keyId.setText(keyData.id.toString())
+        binding.idLayout.setEndIconOnClickListener {
+            Helpers.copyToClipboard(requireContext(), "Key ID", keyData.id.toString())
+        }
+
+
+        binding.heading.text = keyData.title
+        binding.keyUrl.setText(keyData.url)
+
+        binding.sshKey.setText(keyData.key)
+        binding.keyLayout.setEndIconOnClickListener {
+            Helpers.copyToClipboard(requireContext(), "SSH Key", keyData.key)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
