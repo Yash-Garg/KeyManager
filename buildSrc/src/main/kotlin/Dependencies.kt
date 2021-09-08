@@ -6,7 +6,7 @@ object Dependencies {
     const val material_version = "1.4.0"
     const val lifecycle_version = "2.3.1"
     const val retrofit_version = "2.9.0"
-    const val gradle_version = "7.0.1"
+    const val gradle_version = "7.0.2"
     const val appauth_version = "0.10.0"
     const val crypto_version = "1.0.0"
     const val identity_version = "1.0.0-alpha02"
