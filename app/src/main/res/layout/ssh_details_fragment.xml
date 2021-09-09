@@ -15,7 +15,7 @@
             android:id="@+id/heading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingVertical="45dp"
+            android:paddingVertical="50dp"
             android:paddingStart="10dp"
             android:textSize="50sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -63,6 +63,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:editable="false"
+                android:maxLines="5"
+                android:scrollbarStyle="outsideOverlay"
+                android:scrollbars="vertical"
                 android:textIsSelectable="true"
                 tools:ignore="Deprecated" />
         </com.google.android.material.textfield.TextInputLayout>

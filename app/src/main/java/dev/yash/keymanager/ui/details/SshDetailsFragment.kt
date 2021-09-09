@@ -11,8 +11,6 @@ import app.yash.keymanager.databinding.SshDetailsFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dev.yash.keymanager.ui.dialogs.DeleteDialogFragment
 import dev.yash.keymanager.utils.Helpers
-import java.text.SimpleDateFormat
-import java.util.*
 
 @AndroidEntryPoint
 class SshDetailsFragment : Fragment() {
@@ -42,13 +40,13 @@ class SshDetailsFragment : Fragment() {
         actionBar?.setDisplayHomeAsUpEnabled(true)
         actionBar?.title = ""
 
-        SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH).parse(keyData.createdAt)
-            .also {
-                SimpleDateFormat("dd/mm/yyyy 'at' hh:mm a", Locale.ENGLISH)
-                    .format(it!!).toString().also { formattedDate ->
-                        binding.createdAt.setText(formattedDate)
-                    }
-            }
+//        SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault()).parse(keyData.createdAt)
+//            .also {
+//                SimpleDateFormat("dd/mm/yyyy 'at' hh:mm a", Locale.ENGLISH)
+//                    .format(it!!).toString().also { formattedDate ->
+//                        binding.createdAt.setText(formattedDate)
+//                    }
+//            }
 
         binding.keyId.setText(keyData.id.toString())
         binding.idLayout.setEndIconOnClickListener {

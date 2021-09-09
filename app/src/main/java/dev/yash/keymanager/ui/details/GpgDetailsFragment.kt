@@ -1,7 +1,6 @@
 package dev.yash.keymanager.ui.details
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -36,9 +35,44 @@ class GpgDetailsFragment : Fragment() {
 
         actionBar?.setHomeButtonEnabled(true)
         actionBar?.setDisplayHomeAsUpEnabled(true)
-        actionBar?.title = keyData.keyID
+        actionBar?.title = ""
 
-        Log.d("SELECTED KEY DATA", keyData.toString())
+//        SimpleDateFormat(
+//            "yyyy-MM-dd'T'HH:mm:ss.SSSZ",
+//            Locale.US
+//        ).parse(keyData.createdAt)
+//            .also {
+//                SimpleDateFormat("dd/mm/yyyy 'at' hh:mm a", Locale.ENGLISH)
+//                    .format(it!!).toString().also { formattedDate ->
+//                        binding.createdAt.setText(formattedDate)
+//                    }
+//            }
+//
+//        if (!keyData.expiresAt.isNullOrEmpty()) {
+//            SimpleDateFormat(
+//                "yyyy-MM-dd'T'HH:mm:ss.SSSZ",
+//                Locale.ENGLISH
+//            ).parse(keyData.expiresAt)
+//                .also {
+//                    SimpleDateFormat("dd/mm/yyyy 'at' hh:mm a", Locale.ENGLISH)
+//                        .format(it!!).toString().also { formattedDate ->
+//                            binding.expiresAt.setText(formattedDate)
+//                        }
+//                }
+//        } else binding.expiresAt.setText(R.string.not_expires)
+
+        binding.keyId.setText(keyData.keyID)
+        binding.idLayout.setEndIconOnClickListener {
+            Helpers.copyToClipboard(requireContext(), "Key ID", keyData.keyID)
+        }
+
+        binding.gpgKey.setText(keyData.rawKey)
+        binding.gpgPublicKey.setText(keyData.publicKey)
+
+        if (keyData.canSign) binding.signCertify.visibility = View.VISIBLE
+        if (keyData.canCertify) binding.encryptCertify.visibility = View.VISIBLE
+        if (keyData.canEncryptComms) binding.commsCertify.visibility = View.VISIBLE
+        if (keyData.canEncryptStorage) binding.storageCertify.visibility = View.VISIBLE
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

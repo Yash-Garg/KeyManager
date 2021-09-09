@@ -1,9 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
-    tools:context="dev.yash.keymanager.ui.details.GpgDetailsFragment">
+    tools:context="dev.yash.keymanager.ui.details.SshDetailsFragment">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="25dp">
+
+        <TextView
+            android:id="@+id/heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="50dp"
+            android:paddingStart="10dp"
+            android:text="@string/gpg_key"
+            android:textSize="50sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RtlSymmetry" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/id_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:hint="@string/key_id"
+            app:endIconDrawable="@drawable/ic_copy"
+            app:endIconMode="custom"
+            app:layout_constraintEnd_toEndOf="@id/heading"
+            app:layout_constraintStart_toStartOf="@id/heading"
+            app:layout_constraintTop_toBottomOf="@id/heading">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/key_id"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:editable="false"
+                android:textIsSelectable="true"
+                tools:ignore="Deprecated" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/key_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="@string/gpg_raw_key"
+            app:layout_constraintEnd_toEndOf="@id/id_layout"
+            app:layout_constraintStart_toStartOf="@id/id_layout"
+            app:layout_constraintTop_toBottomOf="@id/id_layout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/gpg_key"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:editable="false"
+                android:maxLines="5"
+                android:scrollbarStyle="outsideOverlay"
+                android:scrollbars="vertical"
+                android:textIsSelectable="true"
+                tools:ignore="Deprecated" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/public_key_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="@string/gpg_public_key"
+            app:layout_constraintEnd_toEndOf="@id/key_layout"
+            app:layout_constraintStart_toStartOf="@id/key_layout"
+            app:layout_constraintTop_toBottomOf="@id/key_layout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/gpg_public_key"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:editable="false"
+                android:maxLines="5"
+                android:scrollbarStyle="outsideOverlay"
+                android:scrollbars="vertical"
+                android:textIsSelectable="true"
+                tools:ignore="Deprecated" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/created_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="@string/created_on"
+            app:endIconCheckable="true"
+            app:layout_constraintEnd_toEndOf="@id/public_key_layout"
+            app:layout_constraintStart_toStartOf="@id/public_key_layout"
+            app:layout_constraintTop_toBottomOf="@id/public_key_layout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/created_at"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:editable="false"
+                android:textIsSelectable="true"
+                tools:ignore="Deprecated" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/expires_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="@string/expires"
+            app:endIconCheckable="true"
+            app:layout_constraintEnd_toEndOf="@id/created_layout"
+            app:layout_constraintStart_toStartOf="@id/created_layout"
+            app:layout_constraintTop_toBottomOf="@id/created_layout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/expires_at"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:editable="false"
+                android:textIsSelectable="true"
+                tools:ignore="Deprecated" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="@id/heading"
+            app:layout_constraintStart_toStartOf="@id/heading">
+
+            <com.google.android.material.chip.ChipGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                app:singleLine="true"
+                tools:ignore="RtlSymmetry">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/encrypt_certify"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/can_encrypt"
+                    android:visibility="gone" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/comms_certify"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/certify_comms"
+                    android:visibility="gone" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/storage_certify"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/certify_storage"
+                    android:visibility="gone" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/sign_certify"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/can_sign"
+                    android:visibility="gone" />
+            </com.google.android.material.chip.ChipGroup>
+        </HorizontalScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -18,4 +18,13 @@
     <string name="key_id">KEY ID</string>
     <string name="verified">VERIFIED</string>
     <string name="read_only">READ ONLY</string>
+    <string name="gpg_key">GPG Key</string>
+    <string name="gpg_raw_key">GPG RAW KEY</string>
+    <string name="can_encrypt">CAN ENCRYPT</string>
+    <string name="certify_comms">CAN CERTIFY COMMS</string>
+    <string name="certify_storage">CAN CERTIFY STORAGE</string>
+    <string name="can_sign">CAN SIGN</string>
+    <string name="gpg_public_key">GPG PUBLIC KEY</string>
+    <string name="expires">EXPIRES ON</string>
+    <string name="not_expires">Does not expire</string>
 </resources>
