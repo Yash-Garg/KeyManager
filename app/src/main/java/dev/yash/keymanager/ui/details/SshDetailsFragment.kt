@@ -1,7 +1,6 @@
 package dev.yash.keymanager.ui.details
 
 import android.os.Bundle
-import android.text.InputType
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -51,17 +50,10 @@ class SshDetailsFragment : Fragment() {
                     }
             }
 
-        // Disable inputs in TextInputEditText fields
-        binding.createdAt.inputType = InputType.TYPE_NULL
-        binding.keyId.inputType = InputType.TYPE_NULL
-        binding.keyUrl.inputType = InputType.TYPE_NULL
-        binding.sshKey.inputType = InputType.TYPE_NULL
-
         binding.keyId.setText(keyData.id.toString())
         binding.idLayout.setEndIconOnClickListener {
             Helpers.copyToClipboard(requireContext(), "Key ID", keyData.id.toString())
         }
-
 
         binding.heading.text = keyData.title
         binding.keyUrl.setText(keyData.url)
@@ -70,6 +62,9 @@ class SshDetailsFragment : Fragment() {
         binding.keyLayout.setEndIconOnClickListener {
             Helpers.copyToClipboard(requireContext(), "SSH Key", keyData.key)
         }
+
+        if (keyData.readOnly) binding.readOnlyChip.visibility = View.VISIBLE
+        if (keyData.verified) binding.verifiedChip.visibility = View.VISIBLE
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
