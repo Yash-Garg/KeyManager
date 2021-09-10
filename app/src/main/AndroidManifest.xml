@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.keymanager">
         <activity
-            android:name="dev.yash.keymanager.MainActivity"
+            android:name="dev.yash.keymanager.ui.MainActivity"
             tools:ignore="IntentFilterExportedReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

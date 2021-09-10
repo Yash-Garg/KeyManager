@@ -1,4 +1,4 @@
-package dev.yash.keymanager
+package dev.yash.keymanager.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
