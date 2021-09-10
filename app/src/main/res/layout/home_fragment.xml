@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context="dev.yash.keymanager.ui.home.HomeFragment">
 
@@ -17,4 +18,13 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_key"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="20dp"
+        android:contentDescription="@string/fab_text"
+        app:backgroundTint="@color/accentColor"
+        app:srcCompat="@drawable/ic_add" />
 </LinearLayout>

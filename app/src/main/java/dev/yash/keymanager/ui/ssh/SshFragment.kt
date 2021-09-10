@@ -14,7 +14,6 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import dev.yash.keymanager.adapters.SshAdapter
 import dev.yash.keymanager.models.SshModel
-import dev.yash.keymanager.ui.dialogs.SshNewKeyDialogFragment
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -42,7 +41,6 @@ class SshFragment : Fragment() {
 
         val progressBar = binding.loadingIndicator
         val recyclerView = binding.sshList
-        val addFab = binding.addSsh
         val swipeRefreshLayout = binding.sshSwiperefresh
 
         swipeRefreshLayout.setOnRefreshListener {
@@ -50,11 +48,7 @@ class SshFragment : Fragment() {
             swipeRefreshLayout.isRefreshing = false
         }
 
-        addFab.setOnClickListener {
-            SshNewKeyDialogFragment.newInstance().show(childFragmentManager, null)
-        }
-
-        childFragmentManager.setFragmentResultListener(
+        parentFragmentManager.setFragmentResultListener(
             "new_ssh_key",
             viewLifecycleOwner
         ) { _, bundle ->

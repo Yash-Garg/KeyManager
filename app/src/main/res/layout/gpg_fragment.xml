@@ -20,16 +20,6 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_gpg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="20dp"
-        android:contentDescription="@string/fab_text"
-        app:backgroundTint="@color/accentColor"
-        app:srcCompat="@drawable/ic_add" />
-
     <ProgressBar
         android:id="@+id/loading_indicator"
         android:layout_width="wrap_content"

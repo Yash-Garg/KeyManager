@@ -14,7 +14,6 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import dev.yash.keymanager.adapters.GpgAdapter
 import dev.yash.keymanager.models.GpgModel
-import dev.yash.keymanager.ui.dialogs.GpgNewKeyDialogFragment
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -43,7 +42,6 @@ class GpgFragment : Fragment() {
 
         val progressBar = binding.loadingIndicator
         val recyclerView = binding.gpgList
-        val addFab = binding.addGpg
         val swipeRefreshLayout = binding.gpgSwiperefresh
 
         swipeRefreshLayout.setOnRefreshListener {
@@ -51,11 +49,7 @@ class GpgFragment : Fragment() {
             swipeRefreshLayout.isRefreshing = false
         }
 
-        addFab.setOnClickListener {
-            GpgNewKeyDialogFragment.newInstance().show(childFragmentManager, null)
-        }
-
-        childFragmentManager.setFragmentResultListener(
+        parentFragmentManager.setFragmentResultListener(
             "new_gpg_key",
             viewLifecycleOwner
         ) { _, bundle ->
