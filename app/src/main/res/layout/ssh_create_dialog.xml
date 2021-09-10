@@ -19,8 +19,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableEnd="@drawable/ic_title"
+            android:drawablePadding="10dp"
             android:hint="@string/key_name_hint"
-            android:inputType="textMultiLine" />
+            android:inputType="text" />
 
         <requestFocus />
     </com.google.android.material.textfield.TextInputLayout>
@@ -40,7 +41,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableEnd="@drawable/ic_key"
+            android:drawablePadding="10dp"
             android:hint="@string/key_hint"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:maxLines="15"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbars="vertical" />
     </com.google.android.material.textfield.TextInputLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
