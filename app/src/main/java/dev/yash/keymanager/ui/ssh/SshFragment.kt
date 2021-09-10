@@ -55,14 +55,14 @@ class SshFragment : Fragment() {
             if (!data.isNullOrEmpty()) {
                 viewModel.postSshKey(data[0], data[1])
                 viewModel.keyPosted.observe(viewLifecycleOwner) { result ->
-                    if (result == true) {
-                        Snackbar.make(view, "Key Added Successfully", Snackbar.LENGTH_SHORT).show()
+                    if (result == "true") {
+                        Snackbar.make(view, "Key Added Successfully", Snackbar.LENGTH_LONG).show()
                         lifecycleScope.launch {
                             delay(1000)
                             sshAdapter.refresh()
                         }
                     } else {
-                        Snackbar.make(view, "Some error occured", Snackbar.LENGTH_SHORT).show()
+                        Snackbar.make(view, result, Snackbar.LENGTH_LONG).show()
                     }
                 }
             }

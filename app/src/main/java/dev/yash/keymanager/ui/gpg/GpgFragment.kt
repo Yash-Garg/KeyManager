@@ -56,14 +56,14 @@ class GpgFragment : Fragment() {
             if (!newGpgKey.isNullOrEmpty()) {
                 viewModel.postGpgKey(newGpgKey)
                 viewModel.keyPosted.observe(viewLifecycleOwner) { result ->
-                    if (result == true) {
-                        Snackbar.make(view, "Key Added Successfully", Snackbar.LENGTH_SHORT).show()
-                        viewLifecycleOwner.lifecycleScope.launch {
+                    if (result == "true") {
+                        Snackbar.make(view, "Key Added Successfully", Snackbar.LENGTH_LONG).show()
+                        lifecycleScope.launch {
                             delay(1000)
                             gpgAdapter.refresh()
                         }
                     } else {
-                        Snackbar.make(view, "Some error occured", Snackbar.LENGTH_SHORT).show()
+                        Snackbar.make(view, result, Snackbar.LENGTH_LONG).show()
                     }
                 }
             }

@@ -22,4 +22,15 @@ object Helpers {
         clipboard.setPrimaryClip(clip)
         Toast.makeText(context, "Copied key to clipboard", Toast.LENGTH_SHORT).show()
     }
+
+    fun exceptionHandler(code: Int): String {
+        return when (code) {
+            422 -> "Validation failed! Please check entered key."
+            304 -> "Not Modified"
+            401 -> "Unauthorized to process this request."
+            403 -> "Forbidden"
+            404 -> "Resource Not Found"
+            else -> "Something went wrong!"
+        }
+    }
 }
