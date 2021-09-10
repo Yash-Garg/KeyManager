@@ -13,6 +13,7 @@ import androidx.navigation.fragment.navArgs
 import app.yash.keymanager.R
 import app.yash.keymanager.databinding.GpgDetailsFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
+import dev.yash.keymanager.models.GpgKey
 import dev.yash.keymanager.ui.dialogs.DeleteDialogFragment
 import dev.yash.keymanager.utils.Helpers
 import kotlinx.coroutines.launch
@@ -35,77 +36,17 @@ class GpgDetailsFragment : Fragment() {
         return binding.root
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        val actionBar = (requireActivity() as AppCompatActivity).supportActionBar
-        val keyData = args.selectedGpgKey
 
+        val actionBar = (requireActivity() as AppCompatActivity).supportActionBar
         actionBar?.setHomeButtonEnabled(true)
         actionBar?.setDisplayHomeAsUpEnabled(true)
         actionBar?.title = ""
 
-        SimpleDateFormat(
-            "yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.ENGLISH
-        ).parse(keyData.createdAt).also {
-            SimpleDateFormat("dd-MM-yyyy 'at' HH:mm 'UTC'", Locale.ENGLISH)
-                .format(it!!).toString().also { formattedDate ->
-                    binding.createdAt.setText(formattedDate)
-                }
-        }
-
-        if (!keyData.expiresAt.isNullOrEmpty()) {
-            SimpleDateFormat(
-                "yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.ENGLISH
-            ).parse(keyData.expiresAt).also {
-                SimpleDateFormat("dd-MM-yyyy 'at' HH:mm 'UTC'", Locale.ENGLISH)
-                    .format(it!!).toString().also { formattedDate ->
-                        binding.expiresAt.setText(formattedDate)
-                    }
-            }
-        } else binding.expiresAt.setText(R.string.not_expires)
-
-        "ID - ${keyData.id}".also { binding.heading.text = it }
-        binding.keyId.setText(keyData.keyID)
-        binding.idLayout.setEndIconOnClickListener {
-            Helpers.copyToClipboard(requireContext(), "Key ID", keyData.keyID)
-        }
-
-        binding.gpgKey.setText(keyData.rawKey)
-        binding.gpgKey.setOnTouchListener { v, event ->
-            v.parent.requestDisallowInterceptTouchEvent(true)
-            if ((event.action and MotionEvent.ACTION_MASK) == MotionEvent.ACTION_UP) {
-                v.parent.requestDisallowInterceptTouchEvent(false)
-            }
-            return@setOnTouchListener false
-        }
-
-        binding.gpgPublicKey.setText(keyData.publicKey)
-        binding.gpgPublicKey.setOnTouchListener { v, event ->
-            v.parent.requestDisallowInterceptTouchEvent(true)
-            if ((event.action and MotionEvent.ACTION_MASK) == MotionEvent.ACTION_UP) {
-                v.parent.requestDisallowInterceptTouchEvent(false)
-            }
-            return@setOnTouchListener false
-        }
-
-        if (!keyData.emails.isNullOrEmpty()) {
-            binding.emailLayout.visibility = View.VISIBLE
-            binding.emailId.setText(keyData.emails[0].email)
-            if (keyData.emails[0].verified) {
-                binding.emailLayout.setEndIconDrawable(R.drawable.ic_verified)
-                binding.emailLayout.isEndIconVisible = true
-                binding.emailLayout.setEndIconOnClickListener {
-                    Toast.makeText(requireContext(), "Email is verified", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-
-        if (keyData.canSign) binding.signCertify.visibility = View.VISIBLE
-        if (keyData.canCertify) binding.encryptCertify.visibility = View.VISIBLE
-        if (keyData.canEncryptComms) binding.commsCertify.visibility = View.VISIBLE
-        if (keyData.canEncryptStorage) binding.storageCertify.visibility = View.VISIBLE
+        val keyData = args.selectedGpgKey
+        setDataInLayout(keyData)
 
         childFragmentManager.setFragmentResultListener(
             "result",
@@ -132,6 +73,70 @@ class GpgDetailsFragment : Fragment() {
                 }
             }
         }
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun setDataInLayout(data: GpgKey) {
+        SimpleDateFormat(
+            "yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.ENGLISH
+        ).parse(data.createdAt).also {
+            SimpleDateFormat("dd-MM-yyyy 'at' HH:mm 'UTC'", Locale.ENGLISH)
+                .format(it!!).toString().also { formattedDate ->
+                    binding.createdAt.setText(formattedDate)
+                }
+        }
+
+        if (!data.expiresAt.isNullOrEmpty()) {
+            SimpleDateFormat(
+                "yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.ENGLISH
+            ).parse(data.expiresAt).also {
+                SimpleDateFormat("dd-MM-yyyy 'at' HH:mm 'UTC'", Locale.ENGLISH)
+                    .format(it!!).toString().also { formattedDate ->
+                        binding.expiresAt.setText(formattedDate)
+                    }
+            }
+        } else binding.expiresAt.setText(R.string.not_expires)
+
+        "ID - ${data.id}".also { binding.heading.text = it }
+        binding.keyId.setText(data.keyID)
+        binding.idLayout.setEndIconOnClickListener {
+            Helpers.copyToClipboard(requireContext(), "Key ID", data.keyID)
+        }
+
+        binding.gpgKey.setText(data.rawKey)
+        binding.gpgKey.setOnTouchListener { v, event ->
+            v.parent.requestDisallowInterceptTouchEvent(true)
+            if ((event.action and MotionEvent.ACTION_MASK) == MotionEvent.ACTION_UP) {
+                v.parent.requestDisallowInterceptTouchEvent(false)
+            }
+            return@setOnTouchListener false
+        }
+
+        binding.gpgPublicKey.setText(data.publicKey)
+        binding.gpgPublicKey.setOnTouchListener { v, event ->
+            v.parent.requestDisallowInterceptTouchEvent(true)
+            if ((event.action and MotionEvent.ACTION_MASK) == MotionEvent.ACTION_UP) {
+                v.parent.requestDisallowInterceptTouchEvent(false)
+            }
+            return@setOnTouchListener false
+        }
+
+        if (!data.emails.isNullOrEmpty()) {
+            binding.emailLayout.visibility = View.VISIBLE
+            binding.emailId.setText(data.emails[0].email)
+            if (data.emails[0].verified) {
+                binding.emailLayout.setEndIconDrawable(R.drawable.ic_verified)
+                binding.emailLayout.isEndIconVisible = true
+                binding.emailLayout.setEndIconOnClickListener {
+                    Toast.makeText(requireContext(), "Email is verified", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        if (data.canSign) binding.signCertify.visibility = View.VISIBLE
+        if (data.canCertify) binding.encryptCertify.visibility = View.VISIBLE
+        if (data.canEncryptComms) binding.commsCertify.visibility = View.VISIBLE
+        if (data.canEncryptStorage) binding.storageCertify.visibility = View.VISIBLE
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

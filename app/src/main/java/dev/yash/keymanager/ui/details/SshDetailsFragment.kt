@@ -13,6 +13,7 @@ import androidx.navigation.fragment.navArgs
 import app.yash.keymanager.R
 import app.yash.keymanager.databinding.SshDetailsFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
+import dev.yash.keymanager.models.SshKey
 import dev.yash.keymanager.ui.dialogs.DeleteDialogFragment
 import dev.yash.keymanager.utils.Helpers
 import kotlinx.coroutines.launch
@@ -37,48 +38,17 @@ class SshDetailsFragment : Fragment() {
         return binding.root
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
 
-        val keyData = args.selectedSshKey
         val actionBar = (requireActivity() as AppCompatActivity).supportActionBar
         actionBar?.setHomeButtonEnabled(true)
         actionBar?.setDisplayHomeAsUpEnabled(true)
         actionBar?.title = ""
 
-        SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH).parse(keyData.createdAt)
-            .also {
-                SimpleDateFormat("dd-MM-yyyy 'at' HH:mm 'UTC'", Locale.ENGLISH)
-                    .format(it!!).toString().also { formattedDate ->
-                        binding.createdAt.setText(formattedDate)
-                    }
-            }
-
-        binding.keyId.setText(keyData.id.toString())
-        binding.idLayout.setEndIconOnClickListener {
-            Helpers.copyToClipboard(requireContext(), "Key ID", keyData.id.toString())
-        }
-
-        binding.heading.text = keyData.title
-        binding.keyUrl.setText(keyData.url)
-
-        binding.sshKey.setText(keyData.key)
-        binding.sshKey.setOnTouchListener { v, event ->
-            v.parent.requestDisallowInterceptTouchEvent(true)
-            if ((event.action and MotionEvent.ACTION_MASK) == MotionEvent.ACTION_UP) {
-                v.parent.requestDisallowInterceptTouchEvent(false)
-            }
-            return@setOnTouchListener false
-        }
-
-        binding.keyLayout.setEndIconOnClickListener {
-            Helpers.copyToClipboard(requireContext(), "SSH Key", keyData.key)
-        }
-
-        if (keyData.readOnly) binding.readOnlyChip.visibility = View.VISIBLE
-        if (keyData.verified) binding.verifiedChip.visibility = View.VISIBLE
+        val keyData = args.selectedSshKey
+        setDataInLayout(keyData)
 
         childFragmentManager.setFragmentResultListener(
             "result",
@@ -105,6 +75,41 @@ class SshDetailsFragment : Fragment() {
                 }
             }
         }
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun setDataInLayout(data: SshKey) {
+        SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH).parse(data.createdAt)
+            .also {
+                SimpleDateFormat("dd-MM-yyyy 'at' HH:mm 'UTC'", Locale.ENGLISH)
+                    .format(it!!).toString().also { formattedDate ->
+                        binding.createdAt.setText(formattedDate)
+                    }
+            }
+
+        binding.keyId.setText(data.id.toString())
+        binding.idLayout.setEndIconOnClickListener {
+            Helpers.copyToClipboard(requireContext(), "Key ID", data.id.toString())
+        }
+
+        binding.heading.text = data.title
+        binding.keyUrl.setText(data.url)
+
+        binding.sshKey.setText(data.key)
+        binding.sshKey.setOnTouchListener { v, event ->
+            v.parent.requestDisallowInterceptTouchEvent(true)
+            if ((event.action and MotionEvent.ACTION_MASK) == MotionEvent.ACTION_UP) {
+                v.parent.requestDisallowInterceptTouchEvent(false)
+            }
+            return@setOnTouchListener false
+        }
+
+        binding.keyLayout.setEndIconOnClickListener {
+            Helpers.copyToClipboard(requireContext(), "SSH Key", data.key)
+        }
+
+        if (data.readOnly) binding.readOnlyChip.visibility = View.VISIBLE
+        if (data.verified) binding.verifiedChip.visibility = View.VISIBLE
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
