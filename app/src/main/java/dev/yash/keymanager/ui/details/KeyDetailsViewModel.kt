@@ -1,6 +1,5 @@
 package dev.yash.keymanager.ui.details
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,24 +12,24 @@ import javax.inject.Inject
 class KeyDetailsViewModel @Inject constructor(
     private val repository: GithubRepository
 ) : ViewModel() {
-    var sshKeyDeleted: MutableLiveData<Boolean> = MutableLiveData()
-    var gpgKeyDeleted: MutableLiveData<Boolean> = MutableLiveData()
+    var sshKeyDeleted: MutableLiveData<String> = MutableLiveData()
+    var gpgKeyDeleted: MutableLiveData<String> = MutableLiveData()
 
     fun deleteSshKey(key: Long) = viewModelScope.launch {
-        try {
-            repository.delSshKey(key)
-            sshKeyDeleted.value = true
-        } catch (e: Exception) {
-            Log.e("ERROR", e.toString())
+        val res = repository.delSshKey(key)
+        if (res.code() == 204) {
+            sshKeyDeleted.value = "true"
+        } else {
+            sshKeyDeleted.value = res.message()
         }
     }
 
     fun deleteGpgKey(key: Long) = viewModelScope.launch {
-        try {
-            repository.delGpgKey(key)
-            gpgKeyDeleted.value = true
-        } catch (e: Exception) {
-            Log.e("ERROR", e.toString())
+        val res = repository.delGpgKey(key)
+        if (res.code() == 204) {
+            gpgKeyDeleted.value = "true"
+        } else {
+            gpgKeyDeleted.value = res.message()
         }
     }
 }

@@ -3,6 +3,7 @@ package dev.yash.keymanager.ui.details
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -87,7 +88,20 @@ class SshDetailsFragment : Fragment() {
             if (data) {
                 viewLifecycleOwner.lifecycleScope.launch {
                     viewModel.deleteSshKey(keyData.id)
-                    // TODO
+                    viewModel.sshKeyDeleted.observe(viewLifecycleOwner) {
+                        if (it == "true") {
+                            Navigation.findNavController(requireView()).navigateUp()
+                            Toast.makeText(
+                                requireContext(),
+                                "Successfully deleted key",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else {
+                            Toast.makeText(
+                                requireContext(), it, Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
                 }
             }
         }

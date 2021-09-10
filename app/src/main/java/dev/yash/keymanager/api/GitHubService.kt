@@ -4,6 +4,8 @@ import dev.yash.keymanager.models.GpgKey
 import dev.yash.keymanager.models.GpgModel
 import dev.yash.keymanager.models.SshKey
 import dev.yash.keymanager.models.SshModel
+import okhttp3.ResponseBody
+import retrofit2.Response
 import retrofit2.http.*
 
 interface GitHubService {
@@ -35,7 +37,7 @@ interface GitHubService {
     suspend fun deleteSshKey(
         @Header("Authorization") token: String,
         @Path(value = "keyID") keyID: Long
-    )
+    ): Response<ResponseBody>
 
     @Headers("Accept: application/vnd.github.v3+json")
     @POST("/user/gpg_keys")
@@ -49,7 +51,7 @@ interface GitHubService {
     suspend fun deleteGpgKey(
         @Header("Authorization") token: String,
         @Path(value = "keyID") keyID: Long
-    )
+    ): Response<ResponseBody>
 
     companion object {
         const val BASE_URL = "https://api.github.com"
