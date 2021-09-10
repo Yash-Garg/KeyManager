@@ -1,5 +1,6 @@
 package dev.yash.keymanager.ui.details
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -30,6 +31,7 @@ class GpgDetailsFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
@@ -67,7 +69,22 @@ class GpgDetailsFragment : Fragment() {
         }
 
         binding.gpgKey.setText(keyData.rawKey)
+        binding.gpgKey.setOnTouchListener { v, event ->
+            v.parent.requestDisallowInterceptTouchEvent(true)
+            if ((event.action and MotionEvent.ACTION_MASK) == MotionEvent.ACTION_UP) {
+                v.parent.requestDisallowInterceptTouchEvent(false)
+            }
+            return@setOnTouchListener false
+        }
+
         binding.gpgPublicKey.setText(keyData.publicKey)
+        binding.gpgPublicKey.setOnTouchListener { v, event ->
+            v.parent.requestDisallowInterceptTouchEvent(true)
+            if ((event.action and MotionEvent.ACTION_MASK) == MotionEvent.ACTION_UP) {
+                v.parent.requestDisallowInterceptTouchEvent(false)
+            }
+            return@setOnTouchListener false
+        }
 
         if (!keyData.emails.isNullOrEmpty()) {
             binding.emailLayout.visibility = View.VISIBLE

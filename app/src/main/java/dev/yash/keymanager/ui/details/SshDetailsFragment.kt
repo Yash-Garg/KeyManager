@@ -1,5 +1,6 @@
 package dev.yash.keymanager.ui.details
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
@@ -31,6 +32,7 @@ class SshDetailsFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
@@ -59,6 +61,14 @@ class SshDetailsFragment : Fragment() {
         binding.keyUrl.setText(keyData.url)
 
         binding.sshKey.setText(keyData.key)
+        binding.sshKey.setOnTouchListener { v, event ->
+            v.parent.requestDisallowInterceptTouchEvent(true)
+            if ((event.action and MotionEvent.ACTION_MASK) == MotionEvent.ACTION_UP) {
+                v.parent.requestDisallowInterceptTouchEvent(false)
+            }
+            return@setOnTouchListener false
+        }
+
         binding.keyLayout.setEndIconOnClickListener {
             Helpers.copyToClipboard(requireContext(), "SSH Key", keyData.key)
         }
