@@ -15,8 +15,12 @@ class GithubRepository @Inject constructor(
     private val service: GitHubService
 ) {
     private val token = "token ${preferences.getString("ACCESS_TOKEN", null)}"
+
     suspend fun getSshKeys(page: Int, perPage: Int) = service.getSshKeys(token, perPage, page)
     suspend fun postSshKey(key: SshModel) = service.postSshKey(token, key)
+    suspend fun delSshKey(sshKeyID: Long) = service.deleteSshKey(token, sshKeyID)
+
     suspend fun getGpgKeys(page: Int, perPage: Int) = service.getGpgKeys(token, perPage, page)
     suspend fun postGpgKey(key: GpgModel) = service.postGpgKey(token, key)
+    suspend fun delGpgKey(gpgKeyID: Long) = service.deleteGpgKey(token, gpgKeyID)
 }

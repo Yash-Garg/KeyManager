@@ -13,7 +13,6 @@ import app.yash.keymanager.databinding.SshFragmentBinding
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import dev.yash.keymanager.adapters.SshAdapter
-import dev.yash.keymanager.models.SshModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -54,7 +53,7 @@ class SshFragment : Fragment() {
         ) { _, bundle ->
             val data = bundle.getStringArrayList("ssh_key")
             if (!data.isNullOrEmpty()) {
-                viewModel.postSshKey(SshModel(data[1], data[0]))
+                viewModel.postSshKey(data[0], data[1])
                 viewModel.keyPosted.observe(viewLifecycleOwner) { result ->
                     if (result == true) {
                         Snackbar.make(view, "Key Added Successfully", Snackbar.LENGTH_SHORT).show()

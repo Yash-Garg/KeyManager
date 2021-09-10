@@ -3,7 +3,9 @@ package dev.yash.keymanager.ui.dialogs
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
+import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.setFragmentResult
 import app.yash.keymanager.R
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -17,7 +19,8 @@ class DeleteDialogFragment : DialogFragment() {
         val dialog = alertDialogBuilder.create()
         dialog.setOnShowListener {
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
-                // TODO: Implement delete key function
+                setFragmentResult("result", bundleOf("value" to true))
+                dialog.dismiss()
             }
         }
         return dialog

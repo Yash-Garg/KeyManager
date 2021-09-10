@@ -13,7 +13,6 @@ import app.yash.keymanager.databinding.GpgFragmentBinding
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import dev.yash.keymanager.adapters.GpgAdapter
-import dev.yash.keymanager.models.GpgModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -55,7 +54,7 @@ class GpgFragment : Fragment() {
         ) { _, bundle ->
             val newGpgKey = bundle.getString("gpg_key")
             if (!newGpgKey.isNullOrEmpty()) {
-                viewModel.postGpgKey(GpgModel(newGpgKey))
+                viewModel.postGpgKey(newGpgKey)
                 viewModel.keyPosted.observe(viewLifecycleOwner) { result ->
                     if (result == true) {
                         Snackbar.make(view, "Key Added Successfully", Snackbar.LENGTH_SHORT).show()

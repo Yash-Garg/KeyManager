@@ -31,10 +31,24 @@ interface GitHubService {
     )
 
     @Headers("Accept: application/vnd.github.v3+json")
+    @DELETE("/user/keys/{keyID}")
+    suspend fun deleteSshKey(
+        @Header("Authorization") token: String,
+        @Path(value = "keyID") keyID: Long
+    )
+
+    @Headers("Accept: application/vnd.github.v3+json")
     @POST("/user/gpg_keys")
     suspend fun postGpgKey(
         @Header("Authorization") token: String,
         @Body armoredKey: GpgModel
+    )
+
+    @Headers("Accept: application/vnd.github.v3+json")
+    @DELETE("/user/gpg_keys/{keyID}")
+    suspend fun deleteGpgKey(
+        @Header("Authorization") token: String,
+        @Path(value = "keyID") keyID: Long
     )
 
     companion object {

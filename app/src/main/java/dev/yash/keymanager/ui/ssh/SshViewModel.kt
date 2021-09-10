@@ -33,9 +33,10 @@ class SshViewModel @Inject constructor(
         ).flow.cachedIn(viewModelScope)
     }
 
-    fun postSshKey(key: SshModel) = viewModelScope.launch {
+    fun postSshKey(key: String, title: String) = viewModelScope.launch {
         try {
-            repository.postSshKey(key)
+            val keyModel = SshModel(title, key)
+            repository.postSshKey(keyModel)
             keyPosted.value = true
         } catch (e: Exception) {
             Log.e("ERROR", e.toString())

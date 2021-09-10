@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import app.yash.keymanager.R
@@ -12,6 +14,7 @@ import app.yash.keymanager.databinding.SshDetailsFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dev.yash.keymanager.ui.dialogs.DeleteDialogFragment
 import dev.yash.keymanager.utils.Helpers
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -20,6 +23,7 @@ class SshDetailsFragment : Fragment() {
     private var _binding: SshDetailsFragmentBinding? = null
     private val binding get() = _binding!!
     private val args: SshDetailsFragmentArgs by navArgs()
+    private val viewModel: KeyDetailsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,9 +41,8 @@ class SshDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
 
-        val actionBar = (requireActivity() as AppCompatActivity).supportActionBar
         val keyData = args.selectedSshKey
-
+        val actionBar = (requireActivity() as AppCompatActivity).supportActionBar
         actionBar?.setHomeButtonEnabled(true)
         actionBar?.setDisplayHomeAsUpEnabled(true)
         actionBar?.title = ""
@@ -75,6 +78,19 @@ class SshDetailsFragment : Fragment() {
 
         if (keyData.readOnly) binding.readOnlyChip.visibility = View.VISIBLE
         if (keyData.verified) binding.verifiedChip.visibility = View.VISIBLE
+
+        childFragmentManager.setFragmentResultListener(
+            "result",
+            viewLifecycleOwner
+        ) { _, bundle ->
+            val data = bundle.getBoolean("value")
+            if (data) {
+                viewLifecycleOwner.lifecycleScope.launch {
+                    viewModel.deleteSshKey(keyData.id)
+                    // TODO
+                }
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

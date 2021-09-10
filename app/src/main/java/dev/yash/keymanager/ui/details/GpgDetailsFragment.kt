@@ -6,6 +6,8 @@ import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import app.yash.keymanager.R
@@ -13,6 +15,7 @@ import app.yash.keymanager.databinding.GpgDetailsFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dev.yash.keymanager.ui.dialogs.DeleteDialogFragment
 import dev.yash.keymanager.utils.Helpers
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -21,6 +24,7 @@ class GpgDetailsFragment : Fragment() {
     private var _binding: GpgDetailsFragmentBinding? = null
     private val binding get() = _binding!!
     private val args: GpgDetailsFragmentArgs by navArgs()
+    private val viewModel: KeyDetailsViewModel by viewModels()
 
     override
     fun onCreateView(
@@ -102,6 +106,19 @@ class GpgDetailsFragment : Fragment() {
         if (keyData.canCertify) binding.encryptCertify.visibility = View.VISIBLE
         if (keyData.canEncryptComms) binding.commsCertify.visibility = View.VISIBLE
         if (keyData.canEncryptStorage) binding.storageCertify.visibility = View.VISIBLE
+
+        childFragmentManager.setFragmentResultListener(
+            "result",
+            viewLifecycleOwner
+        ) { _, bundle ->
+            val data = bundle.getBoolean("value")
+            if (data) {
+                viewLifecycleOwner.lifecycleScope.launch {
+                    viewModel.deleteGpgKey(keyData.id)
+                    // TODO
+                }
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

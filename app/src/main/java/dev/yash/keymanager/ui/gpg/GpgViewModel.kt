@@ -33,9 +33,10 @@ class GpgViewModel @Inject constructor(
         ).flow.cachedIn(viewModelScope)
     }
 
-    fun postGpgKey(key: GpgModel) = viewModelScope.launch {
+    fun postGpgKey(key: String) = viewModelScope.launch {
         try {
-            repository.postGpgKey(key)
+            val keyModel = GpgModel(key)
+            repository.postGpgKey(keyModel)
             keyPosted.value = true
         } catch (e: Exception) {
             Log.e("ERROR", e.toString())
