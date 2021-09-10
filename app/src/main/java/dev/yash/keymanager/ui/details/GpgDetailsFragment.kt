@@ -11,6 +11,8 @@ import app.yash.keymanager.databinding.GpgDetailsFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dev.yash.keymanager.ui.dialogs.DeleteDialogFragment
 import dev.yash.keymanager.utils.Helpers
+import java.text.SimpleDateFormat
+import java.util.*
 
 @AndroidEntryPoint
 class GpgDetailsFragment : Fragment() {
@@ -37,29 +39,25 @@ class GpgDetailsFragment : Fragment() {
         actionBar?.setDisplayHomeAsUpEnabled(true)
         actionBar?.title = ""
 
-//        SimpleDateFormat(
-//            "yyyy-MM-dd'T'HH:mm:ss.SSSZ",
-//            Locale.US
-//        ).parse(keyData.createdAt)
-//            .also {
-//                SimpleDateFormat("dd/mm/yyyy 'at' hh:mm a", Locale.ENGLISH)
-//                    .format(it!!).toString().also { formattedDate ->
-//                        binding.createdAt.setText(formattedDate)
-//                    }
-//            }
-//
-//        if (!keyData.expiresAt.isNullOrEmpty()) {
-//            SimpleDateFormat(
-//                "yyyy-MM-dd'T'HH:mm:ss.SSSZ",
-//                Locale.ENGLISH
-//            ).parse(keyData.expiresAt)
-//                .also {
-//                    SimpleDateFormat("dd/mm/yyyy 'at' hh:mm a", Locale.ENGLISH)
-//                        .format(it!!).toString().also { formattedDate ->
-//                            binding.expiresAt.setText(formattedDate)
-//                        }
-//                }
-//        } else binding.expiresAt.setText(R.string.not_expires)
+        SimpleDateFormat(
+            "yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.ENGLISH
+        ).parse(keyData.createdAt).also {
+            SimpleDateFormat("dd-MM-yyyy 'at' HH:mm 'UTC'", Locale.ENGLISH)
+                .format(it!!).toString().also { formattedDate ->
+                    binding.createdAt.setText(formattedDate)
+                }
+        }
+
+        if (!keyData.expiresAt.isNullOrEmpty()) {
+            SimpleDateFormat(
+                "yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.ENGLISH
+            ).parse(keyData.expiresAt).also {
+                SimpleDateFormat("dd-MM-yyyy 'at' HH:mm 'UTC'", Locale.ENGLISH)
+                    .format(it!!).toString().also { formattedDate ->
+                        binding.expiresAt.setText(formattedDate)
+                    }
+            }
+        } else binding.expiresAt.setText(R.string.not_expires)
 
         binding.keyId.setText(keyData.keyID)
         binding.idLayout.setEndIconOnClickListener {
