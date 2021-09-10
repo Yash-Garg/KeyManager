@@ -19,5 +19,6 @@ data class SshKey(
 
 @Keep
 data class SshModel(
+    val title: String,
     val key: String
 )

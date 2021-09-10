@@ -58,9 +58,9 @@ class SshFragment : Fragment() {
             "new_ssh_key",
             viewLifecycleOwner
         ) { _, bundle ->
-            val newSshKey = bundle.getString("ssh_key")
-            if (!newSshKey.isNullOrEmpty()) {
-                viewModel.postSshKey(SshModel(newSshKey))
+            val data = bundle.getStringArrayList("ssh_key")
+            if (!data.isNullOrEmpty()) {
+                viewModel.postSshKey(SshModel(data[1], data[0]))
                 viewModel.keyPosted.observe(viewLifecycleOwner) { result ->
                     if (result == true) {
                         Snackbar.make(view, "Key Added Successfully", Snackbar.LENGTH_SHORT).show()
