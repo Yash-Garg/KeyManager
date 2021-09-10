@@ -2,6 +2,7 @@ package dev.yash.keymanager.ui.details
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
@@ -59,6 +60,7 @@ class GpgDetailsFragment : Fragment() {
             }
         } else binding.expiresAt.setText(R.string.not_expires)
 
+        "ID - ${keyData.id}".also { binding.heading.text = it }
         binding.keyId.setText(keyData.keyID)
         binding.idLayout.setEndIconOnClickListener {
             Helpers.copyToClipboard(requireContext(), "Key ID", keyData.keyID)
@@ -66,6 +68,18 @@ class GpgDetailsFragment : Fragment() {
 
         binding.gpgKey.setText(keyData.rawKey)
         binding.gpgPublicKey.setText(keyData.publicKey)
+
+        if (!keyData.emails.isNullOrEmpty()) {
+            binding.emailLayout.visibility = View.VISIBLE
+            binding.emailId.setText(keyData.emails[0].email)
+            if (keyData.emails[0].verified) {
+                binding.emailLayout.setEndIconDrawable(R.drawable.ic_verified)
+                binding.emailLayout.isEndIconVisible = true
+                binding.emailLayout.setEndIconOnClickListener {
+                    Toast.makeText(requireContext(), "Email is verified", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
 
         if (keyData.canSign) binding.signCertify.visibility = View.VISIBLE
         if (keyData.canCertify) binding.encryptCertify.visibility = View.VISIBLE

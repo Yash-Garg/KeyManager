@@ -17,7 +17,6 @@
             android:layout_height="wrap_content"
             android:paddingVertical="50dp"
             android:paddingStart="10dp"
-            android:text="@string/gpg_key"
             android:textSize="50sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -127,6 +126,28 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/expires_at"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:editable="false"
+                android:textIsSelectable="true"
+                tools:ignore="Deprecated" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/email_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="@string/email"
+            android:visibility="gone"
+            app:endIconCheckable="true"
+            app:layout_constraintEnd_toEndOf="@id/expires_layout"
+            app:layout_constraintStart_toStartOf="@id/expires_layout"
+            app:layout_constraintTop_toBottomOf="@id/expires_layout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email_id"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:editable="false"

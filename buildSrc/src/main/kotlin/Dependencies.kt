@@ -22,5 +22,4 @@ object Dependencies {
     const val legacy_version = "1.0.0"
     const val chucker_version = "3.5.2"
     const val r8_version = "3.0.65"
-    const val browser_version = "1.3.0"
 }
