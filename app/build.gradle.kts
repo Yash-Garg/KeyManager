@@ -75,6 +75,10 @@ dependencies {
     // AppAuth
     implementation("net.openid:appauth:${Dependencies.appauth_version}")
 
+    // Chucker
+    debugImplementation("com.github.chuckerteam.chucker:library:${Dependencies.chucker_version}")
+    releaseImplementation("com.github.chuckerteam.chucker:library-no-op:${Dependencies.chucker_version}")
+
     // Design
     implementation("com.google.android.material:material:${Dependencies.material_version}")
     implementation("androidx.constraintlayout:constraintlayout:${Dependencies.constraint_layout_version}")
@@ -82,6 +86,16 @@ dependencies {
     // Hilt
     implementation("com.google.dagger:hilt-android:${Dependencies.hilt_version}")
     kapt("com.google.dagger:hilt-compiler:${Dependencies.hilt_version}")
+
+    // Lifecycle
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:${Dependencies.lifecycle_version}")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${Dependencies.lifecycle_version}")
+
+    // LeakCanary
+    debugImplementation("com.squareup.leakcanary:leakcanary-android:${Dependencies.leakcanary_version}")
+
+    // Lottie
+    implementation("com.airbnb.android:lottie:${Dependencies.lottie_version}")
 
     // Navigation
     implementation("androidx.navigation:navigation-fragment-ktx:${Dependencies.nav_version}")
@@ -100,17 +114,6 @@ dependencies {
     implementation("androidx.security:security-crypto:${Dependencies.crypto_version}")
     implementation("androidx.security:security-identity-credential:${Dependencies.identity_version}")
 
-    // Lifecycle
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:${Dependencies.lifecycle_version}")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${Dependencies.lifecycle_version}")
-
-    // Lottie
-    implementation("com.airbnb.android:lottie:${Dependencies.lottie_version}")
-
-    // LeakCanary
-    debugImplementation("com.squareup.leakcanary:leakcanary-android:${Dependencies.leakcanary_version}")
-
-    // Chucker
-    debugImplementation("com.github.chuckerteam.chucker:library:${Dependencies.chucker_version}")
-    releaseImplementation("com.github.chuckerteam.chucker:library-no-op:${Dependencies.chucker_version}")
+    // Timber
+    implementation("com.jakewharton.timber:timber:${Dependencies.timber_version}")
 }

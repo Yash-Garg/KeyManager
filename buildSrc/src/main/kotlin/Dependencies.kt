@@ -23,4 +23,5 @@ object Dependencies {
     const val chucker_version = "3.5.2"
     const val r8_version = "3.0.65"
     const val lottie_version = "4.1.0"
+    const val timber_version = "5.0.1"
 }

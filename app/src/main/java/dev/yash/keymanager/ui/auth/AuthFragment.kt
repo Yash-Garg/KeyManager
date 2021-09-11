@@ -16,6 +16,7 @@ import app.yash.keymanager.databinding.AuthFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dev.yash.keymanager.utils.AuthConfig
 import net.openid.appauth.AuthorizationService
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -42,6 +43,7 @@ class AuthFragment : Fragment(R.layout.auth_fragment) {
 
         val token = preferences.getString("ACCESS_TOKEN", null)
         if (!token.isNullOrEmpty()) {
+            Timber.d("Found Token - $token")
             Navigation.findNavController(view).navigate(R.id.action_authFragment_to_homeFragment)
             return
         }

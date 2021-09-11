@@ -17,6 +17,7 @@ import dev.yash.keymanager.utils.Helpers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -41,6 +42,7 @@ class GpgViewModel @Inject constructor(
             repository.postGpgKey(keyModel)
             keyPosted.postValue(Event("true"))
         } catch (e: HttpException) {
+            Timber.e(e.message())
             keyPosted.postValue(Event(Helpers.exceptionHandler(e.code())))
         }
     }

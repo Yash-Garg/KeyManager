@@ -2,7 +2,6 @@ package dev.yash.keymanager.ui.auth
 
 import android.content.Intent
 import android.content.SharedPreferences
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -10,6 +9,7 @@ import dev.yash.keymanager.utils.Secrets
 import net.openid.appauth.AuthorizationResponse
 import net.openid.appauth.AuthorizationService
 import net.openid.appauth.ClientSecretBasic
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -32,7 +32,7 @@ class AuthViewModel @Inject constructor(
                     accessToken.value = it
                     preferences.edit().putString("ACCESS_TOKEN", it).apply()
                 }
-            } else Log.e("Error", exception.toString())
+            } else Timber.e(exception)
         }
     }
 }

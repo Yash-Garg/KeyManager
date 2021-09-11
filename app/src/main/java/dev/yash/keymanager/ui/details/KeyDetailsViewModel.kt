@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.yash.keymanager.api.GithubRepository
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,6 +21,7 @@ class KeyDetailsViewModel @Inject constructor(
         if (res.code() == 204) {
             sshKeyDeleted.value = "true"
         } else {
+            Timber.d(res.message())
             sshKeyDeleted.value = res.message()
         }
     }
@@ -29,6 +31,7 @@ class KeyDetailsViewModel @Inject constructor(
         if (res.code() == 204) {
             gpgKeyDeleted.value = "true"
         } else {
+            Timber.d(res.message())
             gpgKeyDeleted.value = res.message()
         }
     }
