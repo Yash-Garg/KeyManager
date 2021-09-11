@@ -12,6 +12,7 @@ import dev.yash.keymanager.api.GithubRepository
 import dev.yash.keymanager.models.SshKey
 import dev.yash.keymanager.models.SshModel
 import dev.yash.keymanager.paging.SshKeysPagingSource
+import dev.yash.keymanager.utils.Event
 import dev.yash.keymanager.utils.Helpers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -22,7 +23,7 @@ import javax.inject.Inject
 class SshViewModel @Inject constructor(
     private val repository: GithubRepository
 ) : ViewModel() {
-    val keyPosted: MutableLiveData<String> = MutableLiveData()
+    val keyPosted: MutableLiveData<Event<String>> = MutableLiveData()
 
     fun getSshKeys(): Flow<PagingData<SshKey>> {
         return Pager(
@@ -38,9 +39,9 @@ class SshViewModel @Inject constructor(
         try {
             val keyModel = SshModel(title, key)
             repository.postSshKey(keyModel)
-            keyPosted.value = "true"
+            keyPosted.postValue(Event("true"))
         } catch (e: HttpException) {
-            keyPosted.value = Helpers.exceptionHandler(e.code())
+            keyPosted.postValue(Event(Helpers.exceptionHandler(e.code())))
         }
     }
 }

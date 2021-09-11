@@ -14,6 +14,7 @@ import app.yash.keymanager.databinding.GpgFragmentBinding
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import dev.yash.keymanager.adapters.GpgAdapter
+import dev.yash.keymanager.utils.EventObserver
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -59,7 +60,7 @@ class GpgFragment : Fragment() {
             }
         }
 
-        viewModel.keyPosted.observe(viewLifecycleOwner) { result ->
+        viewModel.keyPosted.observe(viewLifecycleOwner, EventObserver { result ->
             if (result == "true") {
                 Snackbar.make(
                     requireParentFragment().requireView().findViewById(R.id.add_key),
@@ -77,7 +78,7 @@ class GpgFragment : Fragment() {
                     Snackbar.LENGTH_LONG
                 ).show()
             }
-        }
+        })
 
         viewLifecycleOwner.lifecycleScope.launch {
             launch {
