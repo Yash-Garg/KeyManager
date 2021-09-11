@@ -4,6 +4,10 @@ An application to manage SSH and GPG keys on [GitHub](https://github.com/setting
 
 Thanks to [FreePik](https://www.flaticon.com/free-icon/password_4370811) for the app icon.
 
+## Screenshots
+
+![Feature Graphic](images/feature-graphic.png)
+
 ## Building
 
 You will need to create a `Secrets.kt` file in `utils/`. This file will contain your GitHub OAuth app credentials. The format for this file is as given below:
@@ -17,6 +21,7 @@ object Secrets {
     const val REDIRECT_URI = "dev.yash.keymanager://oauth2/callback"
 }
 ```
+
 > The OAuth Callback URL should be same as the `REDIRECT_URI` mentioned above.
 
 ## Third Party Libraries
