@@ -20,15 +20,9 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <TextView
+    <include
         android:id="@+id/empty_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_gravity="center"
-        android:text="@string/no_keys"
-        android:textSize="25sp"
-        android:visibility="gone" />
+        layout="@layout/empty_view" />
 
     <ProgressBar
         android:id="@+id/loading_indicator"

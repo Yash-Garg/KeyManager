@@ -104,6 +104,9 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:${Dependencies.lifecycle_version}")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${Dependencies.lifecycle_version}")
 
+    // Lottie
+    implementation("com.airbnb.android:lottie:${Dependencies.lottie_version}")
+
     // LeakCanary
     debugImplementation("com.squareup.leakcanary:leakcanary-android:${Dependencies.leakcanary_version}")
 
