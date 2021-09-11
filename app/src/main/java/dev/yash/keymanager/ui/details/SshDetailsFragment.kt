@@ -58,21 +58,22 @@ class SshDetailsFragment : Fragment() {
             if (data) {
                 viewLifecycleOwner.lifecycleScope.launch {
                     viewModel.deleteSshKey(keyData.id)
-                    viewModel.sshKeyDeleted.observe(viewLifecycleOwner) {
-                        if (it == "true") {
-                            Navigation.findNavController(requireView()).navigateUp()
-                            Toast.makeText(
-                                requireContext(),
-                                "Successfully deleted key",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        } else {
-                            Toast.makeText(
-                                requireContext(), it, Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    }
                 }
+            }
+        }
+
+        viewModel.sshKeyDeleted.observe(viewLifecycleOwner) {
+            if (it == "true") {
+                Toast.makeText(
+                    requireContext(),
+                    "Successfully deleted key",
+                    Toast.LENGTH_SHORT
+                ).show()
+                Navigation.findNavController(requireView()).navigateUp()
+            } else {
+                Toast.makeText(
+                    requireContext(), it, Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
+import app.yash.keymanager.R
 import app.yash.keymanager.databinding.SshFragmentBinding
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -59,13 +60,21 @@ class SshFragment : Fragment() {
 
         viewModel.keyPosted.observe(viewLifecycleOwner) { result ->
             if (result == "true") {
-                Snackbar.make(view, "Key Added Successfully", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(
+                    requireParentFragment().requireView().findViewById(R.id.add_key),
+                    "Key Added Successfully",
+                    Snackbar.LENGTH_LONG
+                ).show()
                 lifecycleScope.launch {
                     delay(1000)
                     sshAdapter.refresh()
                 }
             } else {
-                Snackbar.make(view, result, Snackbar.LENGTH_LONG).show()
+                Snackbar.make(
+                    requireParentFragment().requireView().findViewById(R.id.add_key),
+                    result,
+                    Snackbar.LENGTH_LONG
+                ).show()
             }
         }
 
