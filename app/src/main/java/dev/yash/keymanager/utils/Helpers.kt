@@ -33,4 +33,15 @@ object Helpers {
             else -> "Something went wrong!"
         }
     }
+
+    fun encryptionType(key: String): String {
+        return when {
+            key.contains("ssh-dsa") -> "dsa"
+            key.contains("ssh-ecdsa") -> "ecdsa"
+            key.contains("ssh-ed25519") -> "ed25519"
+            key.contains("ssh-ecdsa-sk") -> "ecdsa-sk"
+            key.contains("ssh-ed25519-sk") -> "ed25519-sk"
+            else -> "rsa"
+        }
+    }
 }

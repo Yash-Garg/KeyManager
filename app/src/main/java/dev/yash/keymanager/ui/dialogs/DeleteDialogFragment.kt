@@ -17,6 +17,7 @@ class DeleteDialogFragment : DialogFragment() {
         alertDialogBuilder.setPositiveButton(getString(R.string.delete), null)
         alertDialogBuilder.setNegativeButton(getString(R.string.cancel)) { _, _ -> dismiss() }
         val dialog = alertDialogBuilder.create()
+        dialog.window?.setBackgroundDrawableResource(R.color.material_dark)
         dialog.setOnShowListener {
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
                 setFragmentResult("result", bundleOf("value" to true))

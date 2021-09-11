@@ -11,4 +11,8 @@
     <style name="AlertDialogCustom" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:textColor">@color/white</item>
     </style>
+
+    <style name="CardViewCustom" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/material_dark</item>
+    </style>
 </resources>

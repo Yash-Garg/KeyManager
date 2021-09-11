@@ -19,6 +19,7 @@ class SshNewKeyDialogFragment : DialogFragment() {
         alertDialogBuilder.setPositiveButton(getString(R.string.create_button), null)
         alertDialogBuilder.setNegativeButton(getString(R.string.cancel)) { _, _ -> dismiss() }
         val dialog = alertDialogBuilder.create()
+        dialog.window?.setBackgroundDrawableResource(R.color.material_dark)
         dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
         dialog.setOnShowListener {
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
@@ -53,6 +54,7 @@ class GpgNewKeyDialogFragment : DialogFragment() {
         alertDialogBuilder.setPositiveButton(getString(R.string.create_button), null)
         alertDialogBuilder.setNegativeButton(getString(R.string.cancel)) { _, _ -> dismiss() }
         val dialog = alertDialogBuilder.create()
+        dialog.window?.setBackgroundDrawableResource(R.color.material_dark)
         dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
         dialog.setOnShowListener {
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {

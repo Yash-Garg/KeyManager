@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="10dp"
-    android:layout_marginVertical="5dp"
+    android:layout_margin="10dp"
+    style="@style/CardViewCustom"
     android:clickable="true"
     android:focusable="true"
     app:cardElevation="5dp">
@@ -16,13 +16,31 @@
         android:padding="15dp">
 
         <TextView
-            android:id="@+id/key_public"
+            android:id="@+id/key_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
-            android:maxLines="2"
-            android:textAppearance="?attr/textAppearanceHeadline6"
-            android:textColor="@color/white" />
+            android:maxLines="1"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/key_encryption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/key_public"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
