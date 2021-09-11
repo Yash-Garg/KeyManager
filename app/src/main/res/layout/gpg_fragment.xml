@@ -21,8 +21,14 @@
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <include
+        android:id="@+id/error_view"
+        layout="@layout/error_view"
+        android:visibility="gone" />
+
+    <include
         android:id="@+id/empty_view"
-        layout="@layout/empty_view" />
+        layout="@layout/empty_view"
+        android:visibility="gone" />
 
     <ProgressBar
         android:id="@+id/loading_indicator"

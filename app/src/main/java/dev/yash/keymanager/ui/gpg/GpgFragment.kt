@@ -82,8 +82,9 @@ class GpgFragment : Fragment() {
                     progressBar.isVisible = loadStates.refresh is LoadState.Loading
                     recyclerView.isVisible =
                         loadStates.refresh is LoadState.NotLoading && gpgAdapter.itemCount > 1
-                    binding.emptyView.root.isVisible =
-                        loadStates.refresh is LoadState.NotLoading && gpgAdapter.itemCount < 1
+                    binding.emptyView.root.isVisible = loadStates.refresh is LoadState.NotLoading
+                            && gpgAdapter.itemCount < 1 && loadStates.refresh !is LoadState.Error
+                    binding.errorView.root.isVisible = loadStates.refresh is LoadState.Error
                 }
             }
         }
