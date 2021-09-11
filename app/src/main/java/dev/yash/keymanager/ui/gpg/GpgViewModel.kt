@@ -22,7 +22,7 @@ import javax.inject.Inject
 class GpgViewModel @Inject constructor(
     private val repository: GithubRepository
 ) : ViewModel() {
-    var keyPosted: MutableLiveData<String> = MutableLiveData()
+    val keyPosted: MutableLiveData<String> = MutableLiveData()
 
     fun getGpgKeys(): Flow<PagingData<GpgKey>> {
         return Pager(

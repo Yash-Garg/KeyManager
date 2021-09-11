@@ -55,17 +55,18 @@ class GpgFragment : Fragment() {
             val newGpgKey = bundle.getString("gpg_key")
             if (!newGpgKey.isNullOrEmpty()) {
                 viewModel.postGpgKey(newGpgKey)
-                viewModel.keyPosted.observe(viewLifecycleOwner) { result ->
-                    if (result == "true") {
-                        Snackbar.make(view, "Key Added Successfully", Snackbar.LENGTH_LONG).show()
-                        lifecycleScope.launch {
-                            delay(1000)
-                            gpgAdapter.refresh()
-                        }
-                    } else {
-                        Snackbar.make(view, result, Snackbar.LENGTH_LONG).show()
-                    }
+            }
+        }
+
+        viewModel.keyPosted.observe(viewLifecycleOwner) { result ->
+            if (result == "true") {
+                Snackbar.make(view, "Key Added Successfully", Snackbar.LENGTH_LONG).show()
+                lifecycleScope.launch {
+                    delay(1000)
+                    gpgAdapter.refresh()
                 }
+            } else {
+                Snackbar.make(view, result, Snackbar.LENGTH_LONG).show()
             }
         }
 

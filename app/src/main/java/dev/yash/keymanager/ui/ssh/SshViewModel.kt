@@ -22,7 +22,7 @@ import javax.inject.Inject
 class SshViewModel @Inject constructor(
     private val repository: GithubRepository
 ) : ViewModel() {
-    var keyPosted: MutableLiveData<String> = MutableLiveData()
+    val keyPosted: MutableLiveData<String> = MutableLiveData()
 
     fun getSshKeys(): Flow<PagingData<SshKey>> {
         return Pager(
