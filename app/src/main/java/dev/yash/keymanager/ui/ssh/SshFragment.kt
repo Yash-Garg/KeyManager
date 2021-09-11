@@ -79,7 +79,10 @@ class SshFragment : Fragment() {
             launch {
                 sshAdapter.loadStateFlow.collectLatest { loadStates ->
                     progressBar.isVisible = loadStates.refresh is LoadState.Loading
-                    recyclerView.isVisible = loadStates.refresh is LoadState.NotLoading
+                    recyclerView.isVisible =
+                        loadStates.refresh is LoadState.NotLoading && sshAdapter.itemCount > 1
+                    binding.emptyView.isVisible =
+                        loadStates.refresh is LoadState.NotLoading && sshAdapter.itemCount < 1
                 }
             }
         }
