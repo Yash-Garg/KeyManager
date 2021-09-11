@@ -29,5 +29,4 @@
     <string name="not_expires">Does not expire</string>
     <string name="email">EMAIL</string>
     <string name="no_keys">No Keys Found</string>
-    <string name="error_message">Something went wrong</string>
 </resources>
