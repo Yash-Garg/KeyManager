@@ -1,5 +1,11 @@
 # KeyManager
 
+<a href="https://play.google.com/store/apps/details?id=dev.yash.keymanager" target="_blank">
+  <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+       alt="Get it on Google Play"
+       height="80" />
+</a>
+
 An application to manage SSH and GPG keys on [GitHub](https://github.com/settings/keys) written in Kotlin.
 
 Thanks to [FreePik](https://www.flaticon.com/free-icon/password_4370811) for the app icon.
