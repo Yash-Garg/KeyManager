@@ -11,14 +11,14 @@ plugins {
 
 android {
     compileSdk = 31
-    buildToolsVersion = "31.0.0"
+    buildToolsVersion = "30.0.3"
 
     defaultConfig {
         applicationId = "dev.yash.keymanager"
         minSdk = 24
         targetSdk = 31
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "1.1"
 
         manifestPlaceholders["appAuthRedirectScheme"] = "dev.yash.keymanager"
     }
