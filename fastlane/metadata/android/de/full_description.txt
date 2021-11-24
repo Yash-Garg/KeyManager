@@ -1,0 +1,1 @@
+Diese App hilft Dir, GPG- oder SSH-Schlüssel anzuzeigen / zu löschen / zu erstellen, die unter <a href'https://github.com/settings/keys' target='_blank' rel='nofollow'>https://github.com/settings/keys</a> eingesehen werden können. Es macht es einfacher, so dass Du nicht jedes Mal durch die Website gehen musst.

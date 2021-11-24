@@ -1,0 +1,1 @@
+This app helps you to view / delete / create GPG or SSH keys that can be seen at <a href'https://github.com/settings/keys' target='_blank' rel='nofollow'>https://github.com/settings/keys</a>. It makes it easier so that you don’t have to go through the website everytime.
