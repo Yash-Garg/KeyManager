@@ -35,6 +35,17 @@ android {
 
     buildFeatures { viewBinding = true }
 
+    packagingOptions {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "/META-INF/*.kotlin_module"
+            excludes += "**/kotlin/**"
+            excludes += "**/*.txt"
+            excludes += "**/*.xml"
+            excludes += "**/*.properties"
+        }
+    }
+
     kapt { correctErrorTypes = true }
 
     val keystoreConfigFile = rootProject.layout.projectDirectory.file("key.properties")
