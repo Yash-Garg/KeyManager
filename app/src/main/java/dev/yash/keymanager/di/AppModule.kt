@@ -14,12 +14,12 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import dev.yash.keymanager.api.GitHubService
 import dev.zacsweers.moshix.reflect.MetadataKotlinJsonAdapterFactory
+import javax.inject.Singleton
 import net.openid.appauth.AuthorizationService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -40,18 +40,17 @@ object AppModule {
     fun provideOkHttpClient(interceptor: ChuckerInterceptor): OkHttpClient {
         val logging = HttpLoggingInterceptor()
         logging.setLevel(HttpLoggingInterceptor.Level.BASIC)
-        return OkHttpClient.Builder()
-            .addInterceptor(logging)
-            .addInterceptor(interceptor)
-            .build()
+        return OkHttpClient.Builder().addInterceptor(logging).addInterceptor(interceptor).build()
     }
 
     @Singleton
     @Provides
     fun provideRetrofit(client: OkHttpClient, moshi: Moshi): Retrofit =
-        Retrofit.Builder().baseUrl(GitHubService.BASE_URL)
+        Retrofit.Builder()
+            .baseUrl(GitHubService.BASE_URL)
             .addConverterFactory(MoshiConverterFactory.create(moshi))
-            .client(client).build()
+            .client(client)
+            .build()
 
     @Singleton
     @Provides

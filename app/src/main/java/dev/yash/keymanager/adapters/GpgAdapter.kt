@@ -23,8 +23,7 @@ class GpgAdapter @Inject constructor() :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GpgViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val adapterLayout =
-            KeyCardBinding.inflate(inflater, parent, false)
+        val adapterLayout = KeyCardBinding.inflate(inflater, parent, false)
         return GpgViewHolder(adapterLayout)
     }
 

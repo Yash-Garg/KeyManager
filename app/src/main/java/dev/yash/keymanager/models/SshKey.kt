@@ -17,8 +17,4 @@ data class SshKey(
     @Json(name = "read_only") val readOnly: Boolean
 ) : Parcelable
 
-@Keep
-data class SshModel(
-    val title: String,
-    val key: String
-)
+@Keep data class SshModel(val title: String, val key: String)

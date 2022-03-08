@@ -16,20 +16,21 @@ import dagger.hilt.android.AndroidEntryPoint
 import dev.yash.keymanager.models.GpgKey
 import dev.yash.keymanager.ui.dialogs.DeleteDialogFragment
 import dev.yash.keymanager.utils.Helpers
-import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class GpgDetailsFragment : Fragment() {
     private var _binding: GpgDetailsFragmentBinding? = null
-    private val binding get() = _binding!!
+    private val binding
+        get() = _binding!!
     private val args: GpgDetailsFragmentArgs by navArgs()
     private val viewModel: KeyDetailsViewModel by viewModels()
 
-    override
-    fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = GpgDetailsFragmentBinding.inflate(inflater, container, false)
@@ -48,54 +49,44 @@ class GpgDetailsFragment : Fragment() {
         val keyData = args.selectedGpgKey
         setDataInLayout(keyData)
 
-        childFragmentManager.setFragmentResultListener(
-            "result",
-            viewLifecycleOwner
-        ) { _, bundle ->
+        childFragmentManager.setFragmentResultListener("result", viewLifecycleOwner) { _, bundle ->
             val data = bundle.getBoolean("value")
             if (data) {
-                viewLifecycleOwner.lifecycleScope.launch {
-                    viewModel.deleteGpgKey(keyData.id)
-                }
+                viewLifecycleOwner.lifecycleScope.launch { viewModel.deleteGpgKey(keyData.id) }
             }
         }
 
         viewModel.gpgKeyDeleted.observe(viewLifecycleOwner) {
             if (it == "true") {
-                Toast.makeText(
-                    requireContext(),
-                    "Successfully deleted key",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(requireContext(), "Successfully deleted key", Toast.LENGTH_SHORT)
+                    .show()
                 Navigation.findNavController(requireView()).navigateUp()
             } else {
-                Toast.makeText(
-                    requireContext(), it, Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
             }
         }
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private fun setDataInLayout(data: GpgKey) {
-        SimpleDateFormat(
-            "yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.ENGLISH
-        ).parse(data.createdAt).also {
-            SimpleDateFormat("dd-MM-yyyy 'at' HH:mm 'UTC'", Locale.ENGLISH)
-                .format(it!!).toString().also { formattedDate ->
-                    binding.createdAt.setText(formattedDate)
-                }
-        }
+        SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.ENGLISH)
+            .parse(data.createdAt)
+            .also {
+                SimpleDateFormat("dd-MM-yyyy 'at' HH:mm 'UTC'", Locale.ENGLISH)
+                    .format(it!!)
+                    .toString()
+                    .also { formattedDate -> binding.createdAt.setText(formattedDate) }
+            }
 
         if (!data.expiresAt.isNullOrEmpty()) {
-            SimpleDateFormat(
-                "yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.ENGLISH
-            ).parse(data.expiresAt).also {
-                SimpleDateFormat("dd-MM-yyyy 'at' HH:mm 'UTC'", Locale.ENGLISH)
-                    .format(it!!).toString().also { formattedDate ->
-                        binding.expiresAt.setText(formattedDate)
-                    }
-            }
+            SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.ENGLISH)
+                .parse(data.expiresAt)
+                .also {
+                    SimpleDateFormat("dd-MM-yyyy 'at' HH:mm 'UTC'", Locale.ENGLISH)
+                        .format(it!!)
+                        .toString()
+                        .also { formattedDate -> binding.expiresAt.setText(formattedDate) }
+                }
         } else binding.expiresAt.setText(R.string.not_expires)
 
         "ID - ${data.id}".also { binding.heading.text = it }
@@ -145,17 +136,18 @@ class GpgDetailsFragment : Fragment() {
         inflater.inflate(R.menu.top_bar, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
-        R.id.delete_key -> {
-            DeleteDialogFragment.newInstance().show(childFragmentManager, null)
-            true
+    override fun onOptionsItemSelected(item: MenuItem): Boolean =
+        when (item.itemId) {
+            R.id.delete_key -> {
+                DeleteDialogFragment.newInstance().show(childFragmentManager, null)
+                true
+            }
+            android.R.id.home -> {
+                Navigation.findNavController(requireView()).navigateUp()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
-        android.R.id.home -> {
-            Navigation.findNavController(requireView()).navigateUp()
-            true
-        }
-        else -> super.onOptionsItemSelected(item)
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()

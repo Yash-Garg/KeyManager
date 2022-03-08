@@ -14,36 +14,34 @@ import dev.yash.keymanager.models.SshModel
 import dev.yash.keymanager.paging.SshKeysPagingSource
 import dev.yash.keymanager.utils.Event
 import dev.yash.keymanager.utils.Helpers
+import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import timber.log.Timber
-import javax.inject.Inject
 
 @HiltViewModel
-class SshViewModel @Inject constructor(
-    private val repository: GithubRepository
-) : ViewModel() {
+class SshViewModel @Inject constructor(private val repository: GithubRepository) : ViewModel() {
     val keyPosted: MutableLiveData<Event<String>> = MutableLiveData()
 
     fun getSshKeys(): Flow<PagingData<SshKey>> {
         return Pager(
-            config = PagingConfig(
-                pageSize = 10,
-                enablePlaceholders = false
-            ),
-            pagingSourceFactory = { SshKeysPagingSource(repository) }
-        ).flow.cachedIn(viewModelScope)
+                config = PagingConfig(pageSize = 10, enablePlaceholders = false),
+                pagingSourceFactory = { SshKeysPagingSource(repository) }
+            )
+            .flow
+            .cachedIn(viewModelScope)
     }
 
-    fun postSshKey(key: String, title: String) = viewModelScope.launch {
-        try {
-            val keyModel = SshModel(title, key)
-            repository.postSshKey(keyModel)
-            keyPosted.postValue(Event("true"))
-        } catch (e: HttpException) {
-            Timber.e(e.message())
-            keyPosted.postValue(Event(Helpers.exceptionHandler(e.code())))
+    fun postSshKey(key: String, title: String) =
+        viewModelScope.launch {
+            try {
+                val keyModel = SshModel(title, key)
+                repository.postSshKey(keyModel)
+                keyPosted.postValue(Event("true"))
+            } catch (e: HttpException) {
+                Timber.e(e.message())
+                keyPosted.postValue(Event(Helpers.exceptionHandler(e.code())))
+            }
         }
-    }
 }

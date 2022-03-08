@@ -15,13 +15,15 @@ import dev.yash.keymanager.ui.dialogs.SshNewKeyDialogFragment
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
     private var _binding: HomeFragmentBinding? = null
-    private val binding get() = _binding!!
+    private val binding
+        get() = _binding!!
 
     private var viewPagerAdapter: ViewPagerAdapter? = null
     private var mediator: TabLayoutMediator? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = HomeFragmentBinding.inflate(inflater, container, false)
@@ -40,11 +42,12 @@ class HomeFragment : Fragment() {
             } else SshNewKeyDialogFragment.newInstance().show(childFragmentManager, null)
         }
 
-        mediator = TabLayoutMediator(binding.tabs, binding.pager) { tab, position ->
-            if (position == 0) {
-                tab.text = "SSH KEYS"
-            } else tab.text = "GPG KEYS"
-        }
+        mediator =
+            TabLayoutMediator(binding.tabs, binding.pager) { tab, position ->
+                if (position == 0) {
+                    tab.text = "SSH KEYS"
+                } else tab.text = "GPG KEYS"
+            }
         mediator?.attach()
     }
 

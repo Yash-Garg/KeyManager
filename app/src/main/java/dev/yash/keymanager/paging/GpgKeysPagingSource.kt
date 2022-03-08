@@ -5,9 +5,7 @@ import androidx.paging.PagingState
 import dev.yash.keymanager.api.GithubRepository
 import dev.yash.keymanager.models.GpgKey
 
-class GpgKeysPagingSource(
-    private val repository: GithubRepository
-) : PagingSource<Int, GpgKey>() {
+class GpgKeysPagingSource(private val repository: GithubRepository) : PagingSource<Int, GpgKey>() {
 
     override fun getRefreshKey(state: PagingState<Int, GpgKey>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
@@ -19,11 +17,7 @@ class GpgKeysPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, GpgKey> {
         return try {
             val page = params.key ?: 1
-            val articles =
-                repository.getGpgKeys(
-                    page = page,
-                    perPage = params.loadSize
-                )
+            val articles = repository.getGpgKeys(page = page, perPage = params.loadSize)
 
             LoadResult.Page(
                 data = articles,

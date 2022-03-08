@@ -5,9 +5,7 @@ import androidx.paging.PagingState
 import dev.yash.keymanager.api.GithubRepository
 import dev.yash.keymanager.models.SshKey
 
-class SshKeysPagingSource(
-    private val repository: GithubRepository
-) : PagingSource<Int, SshKey>() {
+class SshKeysPagingSource(private val repository: GithubRepository) : PagingSource<Int, SshKey>() {
 
     override fun getRefreshKey(state: PagingState<Int, SshKey>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
@@ -19,11 +17,7 @@ class SshKeysPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, SshKey> {
         return try {
             val page = params.key ?: 1
-            val articles =
-                repository.getSshKeys(
-                    page = page,
-                    perPage = params.loadSize
-                )
+            val articles = repository.getSshKeys(page = page, perPage = params.loadSize)
 
             LoadResult.Page(
                 data = articles,

@@ -24,8 +24,7 @@ class SshAdapter @Inject constructor() :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SshViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val adapterLayout =
-            KeyCardBinding.inflate(inflater, parent, false)
+        val adapterLayout = KeyCardBinding.inflate(inflater, parent, false)
         return SshViewHolder(adapterLayout)
     }
 
@@ -33,9 +32,7 @@ class SshAdapter @Inject constructor() :
         getItem(position)?.let { key ->
             holder.title.text = key.title
             holder.publicKey.text = key.key
-            "Encryption - ${Helpers.encryptionType(key.key)}".also {
-                holder.encryption.text = it
-            }
+            "Encryption - ${Helpers.encryptionType(key.key)}".also { holder.encryption.text = it }
             holder.itemView.setOnClickListener { view ->
                 val action = HomeFragmentDirections.actionHomeFragmentToSshDetailsFragment(key)
                 view.findNavController().navigate(action)

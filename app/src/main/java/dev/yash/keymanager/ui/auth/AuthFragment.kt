@@ -15,24 +15,24 @@ import app.yash.keymanager.R
 import app.yash.keymanager.databinding.AuthFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dev.yash.keymanager.utils.AuthConfig
+import javax.inject.Inject
 import net.openid.appauth.AuthorizationService
 import timber.log.Timber
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class AuthFragment : Fragment(R.layout.auth_fragment) {
     private var _binding: AuthFragmentBinding? = null
-    private val binding get() = _binding!!
+    private val binding
+        get() = _binding!!
     private val authViewModel: AuthViewModel by viewModels()
 
-    @Inject
-    lateinit var preferences: SharedPreferences
+    @Inject lateinit var preferences: SharedPreferences
 
-    @Inject
-    lateinit var authService: AuthorizationService
+    @Inject lateinit var authService: AuthorizationService
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = AuthFragmentBinding.inflate(inflater, container, false)

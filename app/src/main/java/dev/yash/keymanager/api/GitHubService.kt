@@ -27,10 +27,7 @@ interface GitHubService {
 
     @Headers("Accept: application/vnd.github.v3+json")
     @POST("/user/keys")
-    suspend fun postSshKey(
-        @Header("Authorization") token: String,
-        @Body key: SshModel
-    )
+    suspend fun postSshKey(@Header("Authorization") token: String, @Body key: SshModel)
 
     @Headers("Accept: application/vnd.github.v3+json")
     @DELETE("/user/keys/{keyID}")
@@ -41,10 +38,7 @@ interface GitHubService {
 
     @Headers("Accept: application/vnd.github.v3+json")
     @POST("/user/gpg_keys")
-    suspend fun postGpgKey(
-        @Header("Authorization") token: String,
-        @Body armoredKey: GpgModel
-    )
+    suspend fun postGpgKey(@Header("Authorization") token: String, @Body armoredKey: GpgModel)
 
     @Headers("Accept: application/vnd.github.v3+json")
     @DELETE("/user/gpg_keys/{keyID}")

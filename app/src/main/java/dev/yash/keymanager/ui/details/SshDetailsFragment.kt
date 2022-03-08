@@ -16,19 +16,21 @@ import dagger.hilt.android.AndroidEntryPoint
 import dev.yash.keymanager.models.SshKey
 import dev.yash.keymanager.ui.dialogs.DeleteDialogFragment
 import dev.yash.keymanager.utils.Helpers
-import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SshDetailsFragment : Fragment() {
     private var _binding: SshDetailsFragmentBinding? = null
-    private val binding get() = _binding!!
+    private val binding
+        get() = _binding!!
     private val args: SshDetailsFragmentArgs by navArgs()
     private val viewModel: KeyDetailsViewModel by viewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = SshDetailsFragmentBinding.inflate(inflater, container, false)
@@ -50,43 +52,32 @@ class SshDetailsFragment : Fragment() {
         val keyData = args.selectedSshKey
         setDataInLayout(keyData)
 
-        childFragmentManager.setFragmentResultListener(
-            "result",
-            viewLifecycleOwner
-        ) { _, bundle ->
+        childFragmentManager.setFragmentResultListener("result", viewLifecycleOwner) { _, bundle ->
             val data = bundle.getBoolean("value")
             if (data) {
-                viewLifecycleOwner.lifecycleScope.launch {
-                    viewModel.deleteSshKey(keyData.id)
-                }
+                viewLifecycleOwner.lifecycleScope.launch { viewModel.deleteSshKey(keyData.id) }
             }
         }
 
         viewModel.sshKeyDeleted.observe(viewLifecycleOwner) {
             if (it == "true") {
-                Toast.makeText(
-                    requireContext(),
-                    "Successfully deleted key",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(requireContext(), "Successfully deleted key", Toast.LENGTH_SHORT)
+                    .show()
                 Navigation.findNavController(requireView()).navigateUp()
             } else {
-                Toast.makeText(
-                    requireContext(), it, Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
             }
         }
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private fun setDataInLayout(data: SshKey) {
-        SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH).parse(data.createdAt)
-            .also {
-                SimpleDateFormat("dd-MM-yyyy 'at' HH:mm 'UTC'", Locale.ENGLISH)
-                    .format(it!!).toString().also { formattedDate ->
-                        binding.createdAt.setText(formattedDate)
-                    }
-            }
+        SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH).parse(data.createdAt).also {
+            SimpleDateFormat("dd-MM-yyyy 'at' HH:mm 'UTC'", Locale.ENGLISH)
+                .format(it!!)
+                .toString()
+                .also { formattedDate -> binding.createdAt.setText(formattedDate) }
+        }
 
         binding.keyId.setText(data.id.toString())
         binding.idLayout.setEndIconOnClickListener {
@@ -118,17 +109,18 @@ class SshDetailsFragment : Fragment() {
         inflater.inflate(R.menu.top_bar, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
-        R.id.delete_key -> {
-            DeleteDialogFragment.newInstance().show(childFragmentManager, null)
-            true
+    override fun onOptionsItemSelected(item: MenuItem): Boolean =
+        when (item.itemId) {
+            R.id.delete_key -> {
+                DeleteDialogFragment.newInstance().show(childFragmentManager, null)
+                true
+            }
+            android.R.id.home -> {
+                Navigation.findNavController(requireView()).navigateUp()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
-        android.R.id.home -> {
-            Navigation.findNavController(requireView()).navigateUp()
-            true
-        }
-        else -> super.onOptionsItemSelected(item)
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()
