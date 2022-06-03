@@ -42,7 +42,7 @@ timber = "com.jakewharton.timber:timber:5.0.1"
 build-spotless = "com.diffplug.spotless:spotless-plugin-gradle:6.3.0"
 build-r8 = "com.android.tools:r8:3.1.51"
 build-gradle = "com.android.tools.build:gradle:7.1.2"
-build-gradle-kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10"
+build-gradle-kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.21"
 build-gradle-dagger = "com.google.dagger:hilt-android-gradle-plugin:2.40"
 build-navigation-safeargs = "androidx.navigation:navigation-safe-args-gradle-plugin:2.4.1"
 
