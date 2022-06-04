@@ -16,7 +16,7 @@ androidx-lifecycle-livedata = { module = "androidx.lifecycle:lifecycle-livedata-
 androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 androidx-navigation-fragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
 androidx-navigation-ui = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation" }
-androidx-paging-runtime = "androidx.paging:paging-runtime:3.0.1"
+androidx-paging-runtime = "androidx.paging:paging-runtime:3.1.1"
 androidx-security-crypto = "androidx.security:security-crypto:1.0.0"
 androidx-security-identity = "androidx.security:security-identity-credential:1.0.0-alpha02"
 
