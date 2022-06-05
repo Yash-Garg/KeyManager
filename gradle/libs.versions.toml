@@ -1,7 +1,7 @@
 [versions]
 fragment = "1.4.1"
 hilt = "2.40"
-kotlin = "1.6.10"
+kotlin = "1.6.21"
 lifecycle = "2.4.0"
 navigation = "2.4.1"
 
