@@ -8,7 +8,7 @@ navigation = "2.4.2"
 [libraries]
 androidx-activity = "androidx.activity:activity-ktx:1.4.0"
 androidx-appcompat = "androidx.appcompat:appcompat:1.4.2"
-androidx-core = "androidx.core:core-ktx:1.7.0"
+androidx-core = "androidx.core:core-ktx:1.8.0"
 androidx-constraintlayout = "androidx.constraintlayout:constraintlayout:2.1.4"
 androidx-fragment = { module = "androidx.fragment:fragment-ktx", version.ref = "fragment" }
 androidx-legacy = "androidx.legacy:legacy-support-v4:1.0.0"
