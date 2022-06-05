@@ -39,7 +39,7 @@ moshi-metadata-reflect = "dev.zacsweers.moshix:moshi-metadata-reflect:0.14.1"
 openid-appauth = "net.openid:appauth:0.10.0"
 timber = "com.jakewharton.timber:timber:5.0.1"
 
-build-spotless = "com.diffplug.spotless:spotless-plugin-gradle:6.3.0"
+build-spotless = "com.diffplug.spotless:spotless-plugin-gradle:6.6.1"
 build-r8 = "com.android.tools:r8:3.3.28"
 build-gradle = "com.android.tools.build:gradle:7.2.1"
 build-gradle-kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.21"
