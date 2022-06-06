@@ -43,7 +43,7 @@ build-spotless = "com.diffplug.spotless:spotless-plugin-gradle:6.6.1"
 build-r8 = "com.android.tools:r8:3.3.28"
 build-gradle = "com.android.tools.build:gradle:7.2.1"
 build-gradle-kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.21"
-build-gradle-dagger = "com.google.dagger:hilt-android-gradle-plugin:2.40"
+build-gradle-dagger = "com.google.dagger:hilt-android-gradle-plugin:2.42"
 build-navigation-safeargs = "androidx.navigation:navigation-safe-args-gradle-plugin:2.4.2"
 
 [bundles]
