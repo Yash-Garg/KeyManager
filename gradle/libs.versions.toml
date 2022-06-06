@@ -23,7 +23,7 @@ androidx-security-identity = "androidx.security:security-identity-credential:1.0
 chucker-library = "com.github.chuckerteam.chucker:library:3.5.2"
 chucker-no-op = "com.github.chuckerteam.chucker:library-no-op:3.5.2"
 
-google-material = "com.google.android.material:material:1.4.0"
+google-material = "com.google.android.material:material:1.6.1"
 google-dagger = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 google-dagger-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
 
