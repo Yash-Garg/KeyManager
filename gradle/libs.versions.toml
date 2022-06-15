@@ -32,7 +32,7 @@ square-moshi-converter = "com.squareup.retrofit2:converter-moshi:2.9.0"
 square-okhttp-logging = "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.7"
 
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
-kotlin-ktfmt = "com.facebook:ktfmt:0.37"
+kotlin-ktfmt = "com.facebook:ktfmt:0.39"
 leakcanary = "com.squareup.leakcanary:leakcanary-android:2.9.1"
 lottie = "com.airbnb.android:lottie:5.2.0"
 moshi-metadata-reflect = "dev.zacsweers.moshix:moshi-metadata-reflect:0.17.2"
