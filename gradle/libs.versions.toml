@@ -29,7 +29,7 @@ google-dagger-compiler = { module = "com.google.dagger:hilt-compiler", version.r
 
 square-moshi = "com.squareup.moshi:moshi-kotlin:1.13.0"
 square-moshi-converter = "com.squareup.retrofit2:converter-moshi:2.9.0"
-square-okhttp-logging = "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.7"
+square-okhttp-logging = "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.10"
 
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
 kotlin-ktfmt = "com.facebook:ktfmt:0.37"
