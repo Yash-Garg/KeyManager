@@ -1,25 +1,20 @@
-buildscript {
-    repositories {
-        gradlePluginPortal()
-        google()
-        mavenCentral()
-    }
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+@file:Suppress("DSL_SCOPE_VIOLATION")
 
-    dependencies {
-        classpath(libs.build.spotless)
-        classpath(libs.build.r8)
-        classpath(libs.build.gradle)
-        classpath(libs.build.gradle.kotlin)
-        classpath(libs.build.gradle.dagger)
-        classpath(libs.build.navigation.safeargs)
-    }
+import com.android.build.gradle.internal.tasks.factory.dependsOn
+
+plugins {
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.hilt) apply false
+    alias(libs.plugins.kotlin.kapt) apply false
+    alias(libs.plugins.navigation.safeargs) apply false
+
+    id("dev.yash.keymanager.spotless")
+    id("dev.yash.keymanager.githooks")
 }
 
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
+val clean by tasks.existing(Delete::class) { delete(rootProject.buildDir) }
 
-apply("buildscripts/githooks.gradle")
+afterEvaluate { clean.dependsOn("copyGitHooks") }

@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 import java.util.*
 
 plugins {
@@ -7,19 +9,19 @@ plugins {
     id("dagger.hilt.android.plugin")
     id("androidx.navigation.safeargs.kotlin")
     id("kotlin-parcelize")
-    id("com.diffplug.spotless")
 }
 
 android {
-    compileSdk = 32
+    namespace = "dev.yash.keymanager"
+    compileSdk = 33
     buildToolsVersion = "31.0.0"
 
     defaultConfig {
         applicationId = "dev.yash.keymanager"
         minSdk = 26
-        targetSdk = 32
-        versionCode = 2
-        versionName = "1.1"
+        targetSdk = 33
+        versionCode = 3
+        versionName = "2.0"
 
         manifestPlaceholders["appAuthRedirectScheme"] = "dev.yash.keymanager"
     }
@@ -29,9 +31,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
-    }
+    kotlinOptions { jvmTarget = JavaVersion.VERSION_1_8.toString() }
 
     buildFeatures { viewBinding = true }
 
@@ -50,7 +50,7 @@ android {
 
     val keystoreConfigFile = rootProject.layout.projectDirectory.file("key.properties")
     if (keystoreConfigFile.asFile.exists()) {
-        val contents = providers.fileContents(keystoreConfigFile).asText.forUseAtConfigurationTime()
+        val contents = providers.fileContents(keystoreConfigFile).asText
         val keystoreProperties = Properties()
         keystoreProperties.load(contents.get().byteInputStream())
         signingConfigs {
@@ -63,32 +63,13 @@ android {
         }
         buildTypes.all { signingConfig = signingConfigs.getByName("release") }
     }
+
     buildTypes {
         getByName("release") {
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles("proguard-android-optimize.txt", "proguard-rules.pro")
         }
-    }
-}
-
-
-spotless {
-    kotlin {
-        ktfmt().kotlinlangStyle()
-        target("**/*.kt")
-        targetExclude("**/build/")
-    }
-    groovyGradle {
-        target("**/*.gradle")
-        targetExclude("**/build/")
-    }
-    format("xml") {
-        target("**/*.xml")
-        targetExclude("**/build/", ".idea/")
-        trimTrailingWhitespace()
-        indentWithSpaces()
-        endWithNewline()
     }
 }
 
@@ -118,9 +99,6 @@ dependencies {
     implementation(libs.square.moshi.converter)
     implementation(libs.moshi.metadata.reflect)
     implementation(libs.square.okhttp.logging)
-
-    implementation(libs.kotlin.stdlib)
-    implementation(libs.kotlin.ktfmt)
 
     debugImplementation(libs.leakcanary)
     implementation(libs.lottie)
