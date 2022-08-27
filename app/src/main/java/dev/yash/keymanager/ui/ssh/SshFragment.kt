@@ -9,11 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
-import app.yash.keymanager.R
-import app.yash.keymanager.databinding.SshFragmentBinding
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import dev.yash.keymanager.R
 import dev.yash.keymanager.adapters.SshAdapter
+import dev.yash.keymanager.databinding.SshFragmentBinding
 import dev.yash.keymanager.utils.EventObserver
 import javax.inject.Inject
 import kotlinx.coroutines.delay

@@ -3,8 +3,8 @@ package dev.yash.keymanager.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import app.yash.keymanager.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
+import dev.yash.keymanager.databinding.ActivityMainBinding
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {

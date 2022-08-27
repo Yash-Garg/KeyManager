@@ -10,9 +10,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
-import app.yash.keymanager.R
-import app.yash.keymanager.databinding.GpgDetailsFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
+import dev.yash.keymanager.R
+import dev.yash.keymanager.databinding.GpgDetailsFragmentBinding
 import dev.yash.keymanager.models.GpgKey
 import dev.yash.keymanager.ui.dialogs.DeleteDialogFragment
 import dev.yash.keymanager.utils.Helpers
@@ -113,7 +113,7 @@ class GpgDetailsFragment : Fragment() {
             return@setOnTouchListener false
         }
 
-        if (!data.emails.isNullOrEmpty()) {
+        if (data.emails.isNotEmpty()) {
             binding.emailLayout.visibility = View.VISIBLE
             binding.emailId.setText(data.emails[0].email)
             if (data.emails[0].verified) {

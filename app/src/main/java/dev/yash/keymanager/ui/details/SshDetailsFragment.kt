@@ -10,9 +10,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
-import app.yash.keymanager.R
-import app.yash.keymanager.databinding.SshDetailsFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
+import dev.yash.keymanager.R
+import dev.yash.keymanager.databinding.SshDetailsFragmentBinding
 import dev.yash.keymanager.models.SshKey
 import dev.yash.keymanager.ui.dialogs.DeleteDialogFragment
 import dev.yash.keymanager.utils.Helpers

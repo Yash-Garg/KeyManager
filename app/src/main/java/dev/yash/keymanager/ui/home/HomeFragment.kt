@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import app.yash.keymanager.databinding.HomeFragmentBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import dev.yash.keymanager.adapters.ViewPagerAdapter
+import dev.yash.keymanager.databinding.HomeFragmentBinding
 import dev.yash.keymanager.ui.dialogs.GpgNewKeyDialogFragment
 import dev.yash.keymanager.ui.dialogs.SshNewKeyDialogFragment
 

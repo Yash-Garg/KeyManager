@@ -7,7 +7,7 @@ import androidx.navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import app.yash.keymanager.databinding.KeyCardBinding
+import dev.yash.keymanager.databinding.KeyCardBinding
 import dev.yash.keymanager.models.SshKey
 import dev.yash.keymanager.ui.home.HomeFragmentDirections
 import dev.yash.keymanager.utils.Helpers

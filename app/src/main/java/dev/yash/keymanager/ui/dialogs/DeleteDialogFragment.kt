@@ -6,8 +6,8 @@ import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
-import app.yash.keymanager.R
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import dev.yash.keymanager.R
 
 class DeleteDialogFragment : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

@@ -11,9 +11,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
-import app.yash.keymanager.R
-import app.yash.keymanager.databinding.AuthFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
+import dev.yash.keymanager.R
+import dev.yash.keymanager.databinding.AuthFragmentBinding
 import dev.yash.keymanager.utils.AuthConfig
 import javax.inject.Inject
 import net.openid.appauth.AuthorizationService
