@@ -106,7 +106,7 @@ class GpgDetailsFragment : Fragment(R.layout.gpg_details_fragment) {
                 }
         } else binding.expiresAt.setText(R.string.not_expires)
 
-        "ID - ${data.id}".also { binding.heading.text = it }
+        binding.heading.text = data.name ?: data.id.toString()
         binding.keyId.setText(data.keyID)
         binding.idLayout.setEndIconOnClickListener {
             Helpers.copyToClipboard(requireContext(), "Key ID", data.keyID)

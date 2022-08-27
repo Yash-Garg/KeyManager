@@ -9,6 +9,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class GpgKey(
     val id: Long,
+    val name: String? = null,
     @Json(name = "primary_key_id") val primaryKeyID: Long? = null,
     @Json(name = "key_id") val keyID: String,
     @Json(name = "raw_key") val rawKey: String? = null,
