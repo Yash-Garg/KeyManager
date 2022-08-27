@@ -5,8 +5,11 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
@@ -42,7 +45,31 @@ class SshDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setHasOptionsMenu(true)
+
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(
+            object : MenuProvider {
+                override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                    menuInflater.inflate(R.menu.top_bar, menu)
+                }
+
+                override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                    return when (menuItem.itemId) {
+                        R.id.delete_key -> {
+                            DeleteDialogFragment.newInstance().show(childFragmentManager, null)
+                            true
+                        }
+                        android.R.id.home -> {
+                            Navigation.findNavController(requireView()).navigateUp()
+                            true
+                        }
+                        else -> false
+                    }
+                }
+            },
+            viewLifecycleOwner,
+            Lifecycle.State.RESUMED
+        )
 
         val actionBar = (requireActivity() as AppCompatActivity).supportActionBar
         actionBar?.setHomeButtonEnabled(true)
@@ -103,24 +130,6 @@ class SshDetailsFragment : Fragment() {
         if (data.readOnly) binding.readOnlyChip.visibility = View.VISIBLE
         if (data.verified) binding.verifiedChip.visibility = View.VISIBLE
     }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.top_bar, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean =
-        when (item.itemId) {
-            R.id.delete_key -> {
-                DeleteDialogFragment.newInstance().show(childFragmentManager, null)
-                true
-            }
-            android.R.id.home -> {
-                Navigation.findNavController(requireView()).navigateUp()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
 
     override fun onDestroyView() {
         super.onDestroyView()
