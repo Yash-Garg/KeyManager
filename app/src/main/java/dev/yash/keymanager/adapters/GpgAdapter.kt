@@ -29,7 +29,7 @@ class GpgAdapter @Inject constructor() :
 
     override fun onBindViewHolder(holder: GpgViewHolder, position: Int) {
         getItem(position)?.let { key ->
-            holder.title.text = key.keyID
+            holder.title.text = key.name ?: key.keyID
             holder.publicKey.text = key.publicKey
             "GIT ID - ${key.id}".also { holder.encryption.text = it }
             holder.itemView.setOnClickListener { view ->
