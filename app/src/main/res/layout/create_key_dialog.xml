@@ -7,16 +7,37 @@
     android:padding="15dp">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/gpg_key_field"
+        android:id="@+id/keyName_til"
         style="@style/AlertDialogCustom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/gpg_key_value"
+            android:id="@+id/keyName_tiet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_title"
+            android:drawablePadding="10dp"
+            android:hint="@string/key_name_hint"
+            android:inputType="text" />
+
+        <requestFocus />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/key_til"
+        style="@style/AlertDialogCustom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="@id/keyName_til"
+        app:layout_constraintStart_toStartOf="@id/keyName_til"
+        app:layout_constraintTop_toBottomOf="@id/keyName_til">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/key_tiet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableEnd="@drawable/ic_key"
@@ -26,7 +47,5 @@
             android:maxLines="15"
             android:scrollbarStyle="outsideOverlay"
             android:scrollbars="vertical" />
-
-        <requestFocus />
     </com.google.android.material.textfield.TextInputLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

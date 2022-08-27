@@ -25,4 +25,8 @@ data class GpgKey(
 
 @Keep @Parcelize data class Email(val email: String, val verified: Boolean) : Parcelable
 
-@Keep data class GpgModel(@Json(name = "armored_public_key") val armoredPublicKey: String)
+@Keep
+data class GpgModel(
+    val name: String,
+    @Json(name = "armored_public_key") val armoredPublicKey: String
+)

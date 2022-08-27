@@ -41,9 +41,9 @@ class GpgFragment : Fragment(R.layout.gpg_fragment) {
         parentFragmentManager.setFragmentResultListener("new_gpg_key", viewLifecycleOwner) {
             _,
             bundle ->
-            val newGpgKey = bundle.getString("gpg_key")
+            val newGpgKey = bundle.getStringArrayList("gpg_key")
             if (!newGpgKey.isNullOrEmpty()) {
-                viewModel.postGpgKey(newGpgKey)
+                viewModel.postGpgKey(newGpgKey[0], newGpgKey[1])
             }
         }
 

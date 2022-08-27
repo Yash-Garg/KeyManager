@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.view.WindowManager
-import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -15,7 +14,7 @@ class SshNewKeyDialogFragment : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val alertDialogBuilder = MaterialAlertDialogBuilder(requireContext())
         alertDialogBuilder.setTitle(R.string.create_ssh)
-        alertDialogBuilder.setView(R.layout.ssh_create_dialog)
+        alertDialogBuilder.setView(R.layout.create_key_dialog)
         alertDialogBuilder.setPositiveButton(getString(R.string.create_button), null)
         alertDialogBuilder.setNegativeButton(getString(R.string.cancel)) { _, _ -> dismiss() }
         val dialog = alertDialogBuilder.create()
@@ -23,8 +22,8 @@ class SshNewKeyDialogFragment : DialogFragment() {
         dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
         dialog.setOnShowListener {
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
-                val key = dialog.findViewById<TextInputEditText>(R.id.ssh_key_value)
-                val keyTitle = dialog.findViewById<TextInputEditText>(R.id.ssh_key_name_field)
+                val key = dialog.findViewById<TextInputEditText>(R.id.key_tiet)
+                val keyTitle = dialog.findViewById<TextInputEditText>(R.id.keyName_tiet)
                 val bundle = Bundle()
                 if (!key?.text.isNullOrEmpty()) {
                     bundle.putStringArrayList(
@@ -50,7 +49,7 @@ class GpgNewKeyDialogFragment : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val alertDialogBuilder = MaterialAlertDialogBuilder(requireContext())
         alertDialogBuilder.setTitle(R.string.create_gpg)
-        alertDialogBuilder.setView(R.layout.gpg_create_dialog)
+        alertDialogBuilder.setView(R.layout.create_key_dialog)
         alertDialogBuilder.setPositiveButton(getString(R.string.create_button), null)
         alertDialogBuilder.setNegativeButton(getString(R.string.cancel)) { _, _ -> dismiss() }
         val dialog = alertDialogBuilder.create()
@@ -58,15 +57,18 @@ class GpgNewKeyDialogFragment : DialogFragment() {
         dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
         dialog.setOnShowListener {
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
-                val editTextView = dialog.findViewById<TextInputEditText>(R.id.gpg_key_value)
-                if (!editTextView?.text.isNullOrEmpty()) {
-                    setFragmentResult(
-                        "new_gpg_key",
-                        bundleOf("gpg_key" to editTextView?.text.toString())
+                val keyName = dialog.findViewById<TextInputEditText>(R.id.keyName_tiet)
+                val gpgKeyTv = dialog.findViewById<TextInputEditText>(R.id.key_tiet)
+                val bundle = Bundle()
+                if (!gpgKeyTv?.text.isNullOrEmpty()) {
+                    bundle.putStringArrayList(
+                        "gpg_key",
+                        arrayListOf(gpgKeyTv?.text.toString(), keyName?.text.toString())
                     )
+                    setFragmentResult("new_gpg_key", bundle)
                     dialog.dismiss()
                 } else {
-                    editTextView?.error = "This field is required"
+                    gpgKeyTv?.error = "This field is required"
                 }
             }
         }

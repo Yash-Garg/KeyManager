@@ -33,10 +33,10 @@ class GpgViewModel @Inject constructor(private val repository: GithubRepository)
             .cachedIn(viewModelScope)
     }
 
-    fun postGpgKey(key: String) =
+    fun postGpgKey(key: String, name: String) =
         viewModelScope.launch {
             try {
-                val keyModel = GpgModel(key)
+                val keyModel = GpgModel(name = name, key)
                 repository.postGpgKey(keyModel)
                 keyPosted.postValue(Event("true"))
             } catch (e: HttpException) {
