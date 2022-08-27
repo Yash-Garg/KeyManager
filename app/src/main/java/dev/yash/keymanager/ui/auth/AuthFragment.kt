@@ -3,9 +3,7 @@ package dev.yash.keymanager.ui.auth
 import android.app.Activity.RESULT_OK
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -15,29 +13,19 @@ import dagger.hilt.android.AndroidEntryPoint
 import dev.yash.keymanager.R
 import dev.yash.keymanager.databinding.AuthFragmentBinding
 import dev.yash.keymanager.utils.AuthConfig
+import dev.yash.keymanager.utils.viewBinding
 import javax.inject.Inject
 import net.openid.appauth.AuthorizationService
 import timber.log.Timber
 
 @AndroidEntryPoint
 class AuthFragment : Fragment(R.layout.auth_fragment) {
-    private var _binding: AuthFragmentBinding? = null
-    private val binding
-        get() = _binding!!
+    private val binding by viewBinding(AuthFragmentBinding::bind)
     private val authViewModel: AuthViewModel by viewModels()
 
     @Inject lateinit var preferences: SharedPreferences
 
     @Inject lateinit var authService: AuthorizationService
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = AuthFragmentBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
@@ -80,10 +68,5 @@ class AuthFragment : Fragment(R.layout.auth_fragment) {
     override fun onStop() {
         super.onStop()
         (requireActivity() as AppCompatActivity).supportActionBar?.show()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

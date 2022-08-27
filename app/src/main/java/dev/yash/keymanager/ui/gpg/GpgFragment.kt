@@ -1,9 +1,7 @@
 package dev.yash.keymanager.ui.gpg
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -15,29 +13,18 @@ import dev.yash.keymanager.R
 import dev.yash.keymanager.adapters.GpgAdapter
 import dev.yash.keymanager.databinding.GpgFragmentBinding
 import dev.yash.keymanager.utils.EventObserver
+import dev.yash.keymanager.utils.viewBinding
 import javax.inject.Inject
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class GpgFragment : Fragment() {
-    private var _binding: GpgFragmentBinding? = null
-    private val binding
-        get() = _binding!!
-
+class GpgFragment : Fragment(R.layout.gpg_fragment) {
+    private val binding by viewBinding(GpgFragmentBinding::bind)
     private val viewModel: GpgViewModel by viewModels()
 
     @Inject lateinit var gpgAdapter: GpgAdapter
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = GpgFragmentBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -97,20 +84,17 @@ class GpgFragment : Fragment() {
                 gpgAdapter.loadStateFlow.collectLatest { loadStates ->
                     progressBar.isVisible = loadStates.refresh is LoadState.Loading
                     recyclerView.isVisible =
-                        loadStates.refresh is LoadState.NotLoading && gpgAdapter.itemCount > 1
+                        loadStates.refresh is LoadState.NotLoading && gpgAdapter.itemCount >= 1
                     binding.emptyView.root.isVisible =
-                        loadStates.refresh is LoadState.NotLoading &&
-                            gpgAdapter.itemCount < 1 &&
-                            loadStates.refresh !is LoadState.Error
+                        loadStates.refresh is LoadState.NotLoading && gpgAdapter.itemCount < 1
                     binding.errorView.root.isVisible = loadStates.refresh is LoadState.Error
                 }
             }
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun onStop() {
+        super.onStop()
         binding.gpgList.adapter = null
-        _binding = null
     }
 }

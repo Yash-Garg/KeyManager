@@ -19,26 +19,16 @@ import dev.yash.keymanager.databinding.GpgDetailsFragmentBinding
 import dev.yash.keymanager.models.GpgKey
 import dev.yash.keymanager.ui.dialogs.DeleteDialogFragment
 import dev.yash.keymanager.utils.Helpers
+import dev.yash.keymanager.utils.viewBinding
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class GpgDetailsFragment : Fragment() {
-    private var _binding: GpgDetailsFragmentBinding? = null
-    private val binding
-        get() = _binding!!
+class GpgDetailsFragment : Fragment(R.layout.gpg_details_fragment) {
+    private val binding by viewBinding(GpgDetailsFragmentBinding::bind)
     private val args: GpgDetailsFragmentArgs by navArgs()
     private val viewModel: KeyDetailsViewModel by viewModels()
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = GpgDetailsFragmentBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -158,12 +148,11 @@ class GpgDetailsFragment : Fragment() {
         if (data.canEncryptStorage) binding.storageCertify.visibility = View.VISIBLE
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun onStop() {
+        super.onStop()
         Helpers.resetActionBar(
             requireContext(),
             (requireActivity() as AppCompatActivity).supportActionBar
         )
-        _binding = null
     }
 }

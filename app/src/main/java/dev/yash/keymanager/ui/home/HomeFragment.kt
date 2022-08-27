@@ -1,34 +1,23 @@
 package dev.yash.keymanager.ui.home
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
+import dev.yash.keymanager.R
 import dev.yash.keymanager.adapters.ViewPagerAdapter
 import dev.yash.keymanager.databinding.HomeFragmentBinding
 import dev.yash.keymanager.ui.dialogs.GpgNewKeyDialogFragment
 import dev.yash.keymanager.ui.dialogs.SshNewKeyDialogFragment
+import dev.yash.keymanager.utils.viewBinding
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
-    private var _binding: HomeFragmentBinding? = null
-    private val binding
-        get() = _binding!!
+class HomeFragment : Fragment(R.layout.home_fragment) {
+    private val binding by viewBinding(HomeFragmentBinding::bind)
 
     private var viewPagerAdapter: ViewPagerAdapter? = null
     private var mediator: TabLayoutMediator? = null
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = HomeFragmentBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -51,12 +40,11 @@ class HomeFragment : Fragment() {
         mediator?.attach()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun onStop() {
+        super.onStop()
         mediator?.detach()
         mediator = null
         binding.pager.adapter = null
         viewPagerAdapter = null
-        _binding = null
     }
 }

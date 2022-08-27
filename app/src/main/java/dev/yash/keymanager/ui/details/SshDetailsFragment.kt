@@ -19,29 +19,16 @@ import dev.yash.keymanager.databinding.SshDetailsFragmentBinding
 import dev.yash.keymanager.models.SshKey
 import dev.yash.keymanager.ui.dialogs.DeleteDialogFragment
 import dev.yash.keymanager.utils.Helpers
+import dev.yash.keymanager.utils.viewBinding
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class SshDetailsFragment : Fragment() {
-    private var _binding: SshDetailsFragmentBinding? = null
-    private val binding
-        get() = _binding!!
+class SshDetailsFragment : Fragment(R.layout.ssh_details_fragment) {
+    private val binding by viewBinding(SshDetailsFragmentBinding::bind)
     private val args: SshDetailsFragmentArgs by navArgs()
     private val viewModel: KeyDetailsViewModel by viewModels()
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = SshDetailsFragmentBinding.inflate(inflater, container, false)
-        val actionBar = (requireActivity() as AppCompatActivity).supportActionBar
-        actionBar?.setHomeButtonEnabled(true)
-        actionBar?.setDisplayHomeAsUpEnabled(true)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -131,12 +118,11 @@ class SshDetailsFragment : Fragment() {
         if (data.verified) binding.verifiedChip.visibility = View.VISIBLE
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun onStop() {
+        super.onStop()
         Helpers.resetActionBar(
             requireContext(),
             (requireActivity() as AppCompatActivity).supportActionBar
         )
-        _binding = null
     }
 }

@@ -1,9 +1,7 @@
 package dev.yash.keymanager.ui.ssh
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -15,28 +13,18 @@ import dev.yash.keymanager.R
 import dev.yash.keymanager.adapters.SshAdapter
 import dev.yash.keymanager.databinding.SshFragmentBinding
 import dev.yash.keymanager.utils.EventObserver
+import dev.yash.keymanager.utils.viewBinding
 import javax.inject.Inject
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class SshFragment : Fragment() {
-    private var _binding: SshFragmentBinding? = null
-    private val binding
-        get() = _binding!!
+class SshFragment : Fragment(R.layout.ssh_fragment) {
+    private val binding by viewBinding(SshFragmentBinding::bind)
     private val viewModel: SshViewModel by viewModels()
 
     @Inject lateinit var sshAdapter: SshAdapter
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = SshFragmentBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -44,6 +32,7 @@ class SshFragment : Fragment() {
         val progressBar = binding.loadingIndicator
         val recyclerView = binding.sshList
         val swipeRefreshLayout = binding.sshSwiperefresh
+        recyclerView.adapter = sshAdapter
 
         swipeRefreshLayout.setOnRefreshListener {
             sshAdapter.refresh()
@@ -87,29 +76,25 @@ class SshFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             launch {
                 viewModel.getSshKeys().collectLatest { pagingData ->
-                    recyclerView.adapter = sshAdapter
                     sshAdapter.submitData(pagingData)
                 }
             }
 
             launch {
-                sshAdapter.loadStateFlow.collectLatest { loadStates ->
-                    progressBar.isVisible = loadStates.refresh is LoadState.Loading
+                sshAdapter.loadStateFlow.collectLatest { state ->
+                    progressBar.isVisible = state.refresh is LoadState.Loading
                     recyclerView.isVisible =
-                        loadStates.refresh is LoadState.NotLoading && sshAdapter.itemCount > 1
+                        state.refresh is LoadState.NotLoading && sshAdapter.itemCount >= 1
                     binding.emptyView.root.isVisible =
-                        loadStates.refresh is LoadState.NotLoading &&
-                            sshAdapter.itemCount < 1 &&
-                            loadStates.refresh !is LoadState.Error
-                    binding.errorView.root.isVisible = loadStates.refresh is LoadState.Error
+                        state.refresh is LoadState.NotLoading && sshAdapter.itemCount < 1
+                    binding.errorView.root.isVisible = state.refresh is LoadState.Error
                 }
             }
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun onStop() {
+        super.onStop()
         binding.sshList.adapter = null
-        _binding = null
     }
 }
