@@ -32,7 +32,7 @@ class SshAdapter @Inject constructor() :
         getItem(position)?.let { key ->
             holder.title.text = key.title
             holder.publicKey.text = key.key
-            "Encryption - ${Helpers.encryptionType(key.key)}".also { holder.encryption.text = it }
+            "${Helpers.encryptionType(key.key)} Encryption".also { holder.encryption.text = it }
             holder.itemView.setOnClickListener { view ->
                 val action = HomeFragmentDirections.actionHomeFragmentToSshDetailsFragment(key)
                 view.findNavController().navigate(action)

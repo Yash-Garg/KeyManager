@@ -42,6 +42,6 @@ object Helpers {
             key.contains("ssh-ecdsa-sk") -> "ecdsa-sk"
             key.contains("ssh-ed25519-sk") -> "ed25519-sk"
             else -> "rsa"
-        }
+        }.uppercase()
     }
 }

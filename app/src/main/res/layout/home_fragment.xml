@@ -6,11 +6,27 @@
     android:orientation="vertical"
     tools:context="dev.yash.keymanager.ui.home.HomeFragment">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabs"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="5dp" />
+        android:fitsSystemWindows="true">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="@string/app_name" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabGravity="fill"
+            app:tabMaxWidth="0dp"
+            app:tabMode="fixed" />
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -28,7 +44,7 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="20dp"
             android:contentDescription="@string/fab_text"
-            app:backgroundTint="@color/accentColor"
-            app:srcCompat="@drawable/ic_add" />
+            android:src="@drawable/ic_add"
+            app:backgroundTint="@color/accentColor" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>

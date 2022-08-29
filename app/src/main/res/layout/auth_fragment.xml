@@ -8,11 +8,12 @@
     android:padding="30dp"
     tools:context="dev.yash.keymanager.ui.auth.AuthFragment">
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/signin_button"
         android:layout_width="0dp"
-        android:layout_height="55dp"
+        android:layout_height="wrap_content"
         android:letterSpacing="0.1"
+        android:paddingVertical="12dp"
         android:text="@string/signin_button_text"
         android:textColor="@color/black"
         android:textSize="16sp"

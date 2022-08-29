@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">KeyManager</string>
-    <string name="signin_button_text">SIGN IN WITH GITHUB</string>
+    <string name="signin_button_text">Sign in with GitHub</string>
     <string name="github_logo_desc">GitHub Logo</string>
     <string name="fab_text">Add Key</string>
     <string name="gpg_item">GPG Keys</string>
