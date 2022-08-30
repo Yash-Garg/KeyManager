@@ -27,7 +27,7 @@ build-spotless = { module = "com.diffplug.spotless:spotless-plugin-gradle", vers
 chucker-library = "com.github.chuckerteam.chucker:library:3.5.2"
 chucker-no-op = "com.github.chuckerteam.chucker:library-no-op:3.5.2"
 
-google-material = "com.google.android.material:material:1.7.0-beta01"
+google-material = "com.google.android.material:material:1.7.0-rc01"
 google-dagger = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 google-dagger-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
 
