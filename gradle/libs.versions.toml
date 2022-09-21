@@ -1,6 +1,6 @@
 [versions]
 fragment = "1.5.2"
-hilt = "2.43.2"
+hilt = "2.44"
 kotlin = "1.7.10"
 lifecycle = "2.5.1"
 navigation = "2.5.2"
