@@ -3,7 +3,7 @@ package dev.yash.keymanager.di
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.security.crypto.EncryptedSharedPreferences
-import androidx.security.crypto.MasterKeys
+import androidx.security.crypto.MasterKey
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.squareup.moshi.Moshi
@@ -63,11 +63,13 @@ object AppModule {
     @Singleton
     @Provides
     fun provideEncryptedSharedPrefs(@ApplicationContext context: Context): SharedPreferences {
-        val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
+        val masterKey =
+            MasterKey.Builder(context).setKeyScheme(MasterKey.KeyScheme.AES256_GCM).build()
+
         return EncryptedSharedPreferences.create(
-            "token_encrypted_prefs",
-            masterKeyAlias,
             context,
+            "token_encrypted_prefs",
+            masterKey,
             EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
             EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
         )

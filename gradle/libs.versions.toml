@@ -4,7 +4,7 @@ hilt = "2.44"
 kotlin = "1.7.20"
 lifecycle = "2.5.1"
 navigation = "2.5.2"
-agp = "8.0.0-alpha03"
+agp = "7.3.0"
 spotless = "6.11.0"
 
 [libraries]
@@ -19,7 +19,7 @@ androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmode
 androidx-navigation-fragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
 androidx-navigation-ui = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation" }
 androidx-paging-runtime = "androidx.paging:paging-runtime:3.1.1"
-androidx-security-crypto = "androidx.security:security-crypto:1.0.0"
+androidx-security-crypto = "androidx.security:security-crypto:1.1.0-alpha03"
 androidx-security-identity = "androidx.security:security-identity-credential:1.0.0-alpha03"
 
 build-spotless = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "spotless" }
