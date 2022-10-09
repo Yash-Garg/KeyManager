@@ -20,8 +20,8 @@ android {
         applicationId = "dev.yash.keymanager"
         minSdk = 26
         targetSdk = 33
-        versionCode = 4
-        versionName = "2.1"
+        versionCode = 5
+        versionName = "2.2"
 
         manifestPlaceholders["appAuthRedirectScheme"] = "dev.yash.keymanager"
     }

@@ -11,6 +11,7 @@ import dev.yash.keymanager.databinding.HomeFragmentBinding
 import dev.yash.keymanager.ui.dialogs.GpgNewKeyDialogFragment
 import dev.yash.keymanager.ui.dialogs.SshNewKeyDialogFragment
 import dev.yash.keymanager.utils.viewBinding
+import timber.log.Timber
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.home_fragment) {
@@ -40,8 +41,9 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         mediator?.attach()
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onDestroy() {
+        Timber.tag(HomeFragment::class.simpleName!!).i("onDestroy() called")
+        super.onDestroy()
         mediator?.detach()
         mediator = null
         binding.pager.adapter = null

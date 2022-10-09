@@ -93,8 +93,8 @@ class SshFragment : Fragment(R.layout.ssh_fragment) {
         }
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onDestroy() {
+        super.onDestroy()
         binding.sshList.adapter = null
     }
 }

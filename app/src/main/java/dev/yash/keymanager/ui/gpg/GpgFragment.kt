@@ -93,8 +93,8 @@ class GpgFragment : Fragment(R.layout.gpg_fragment) {
         }
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onDestroy() {
+        super.onDestroy()
         binding.gpgList.adapter = null
     }
 }
