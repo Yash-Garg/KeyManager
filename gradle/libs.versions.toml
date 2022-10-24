@@ -3,7 +3,7 @@ fragment = "1.5.3"
 hilt = "2.44"
 kotlin = "1.7.20"
 lifecycle = "2.5.1"
-navigation = "2.5.2"
+navigation = "2.5.3"
 agp = "7.3.0"
 spotless = "6.11.0"
 
