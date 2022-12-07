@@ -1,5 +1,5 @@
 [versions]
-fragment = "1.5.3"
+fragment = "1.5.5"
 hilt = "2.44"
 kotlin = "1.7.20"
 lifecycle = "2.5.1"
