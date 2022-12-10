@@ -8,8 +8,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.yash.keymanager.data.utils.AuthConfig
 import dev.yash.keymanager.data.utils.Secrets
 import javax.inject.Inject
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import net.openid.appauth.AuthorizationResponse
 import net.openid.appauth.AuthorizationService
@@ -22,19 +23,17 @@ constructor(
     private val preferences: SharedPreferences,
     private val authService: AuthorizationService
 ) : ViewModel() {
-    private val _authStatus = MutableSharedFlow<AuthStatus>()
-    val authStatus = _authStatus.asSharedFlow()
+    private val _authState = MutableStateFlow(AuthState())
+    val authState = _authState.asStateFlow()
 
     init {
         viewModelScope.launch { checkAuthentication() }
     }
 
-    private suspend fun checkAuthentication() {
+    private fun checkAuthentication() {
         val token = preferences.getString(AuthConfig.TOKEN_KEY, null)
         if (token != null) {
-            _authStatus.emit(AuthStatus.AUTHENTICATED)
-        } else {
-            _authStatus.emit(AuthStatus.UNAUTHENTICATED)
+            _authState.update { it.copy(isAuthenticated = true) }
         }
     }
 
@@ -50,9 +49,9 @@ constructor(
                 response,
                 _ ->
                 if (response != null) {
-                    requireNotNull(response.accessToken).let {
-                        preferences.edit().putString(AuthConfig.TOKEN_KEY, it).apply()
-                        viewModelScope.launch { _authStatus.emit(AuthStatus.AUTHENTICATED) }
+                    requireNotNull(response.accessToken).let { token ->
+                        preferences.edit().putString(AuthConfig.TOKEN_KEY, token).apply()
+                        _authState.update { it.copy(isAuthenticated = true) }
                     }
                 }
             }

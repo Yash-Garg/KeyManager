@@ -27,11 +27,11 @@ import dev.yash.keymanager.ui.theme.KeyManagerTheme
 
 @Composable
 fun AuthScreen(authViewModel: AuthViewModel = viewModel()) {
-    val authState by authViewModel.authStatus.collectAsState(initial = AuthStatus.UNAUTHENTICATED)
+    val authState by authViewModel.authState.collectAsState()
 
-    when (authState) {
-        AuthStatus.AUTHENTICATED -> {}
-        AuthStatus.UNAUTHENTICATED -> {
+    when (authState.isAuthenticated) {
+        true -> {}
+        false -> {
             val getAuthCodeFromResult =
                 rememberLauncherForActivityResult(
                     ActivityResultContracts.StartActivityForResult()
