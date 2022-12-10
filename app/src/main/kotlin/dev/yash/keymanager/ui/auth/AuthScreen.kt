@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.lifecycle.viewmodel.compose.viewModel
 import dev.yash.keymanager.R
+import dev.yash.keymanager.ui.home.HomeScreen
 import dev.yash.keymanager.ui.theme.KeyManagerTheme
 
 @Composable
@@ -30,7 +31,7 @@ fun AuthScreen(authViewModel: AuthViewModel = viewModel()) {
     val authState by authViewModel.authState.collectAsState()
 
     when (authState.isAuthenticated) {
-        true -> {}
+        true -> HomeScreen()
         false -> {
             val getAuthCodeFromResult =
                 rememberLauncherForActivityResult(

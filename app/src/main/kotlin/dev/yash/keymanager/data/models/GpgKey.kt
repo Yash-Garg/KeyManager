@@ -19,10 +19,10 @@ data class GpgKey(
     @Json(name = "can_certify") val canCertify: Boolean,
     @Json(name = "created_at") val createdAt: String,
     @Json(name = "expires_at") val expiresAt: String? = null
-)
+) : Key
 
 @Keep
 data class GpgModel(
     val name: String,
     @Json(name = "armored_public_key") val armoredPublicKey: String
-)
+) : KeyModel

@@ -12,6 +12,6 @@ data class SshKey(
     val verified: Boolean,
     @Json(name = "created_at") val createdAt: String,
     @Json(name = "read_only") val readOnly: Boolean
-)
+) : Key
 
-@Keep data class SshModel(val title: String, val key: String)
+@Keep data class SshModel(val title: String, val key: String) : KeyModel
