@@ -38,6 +38,9 @@ constructor(
         }
     }
 
+    fun getAuthReqIntent(): Intent =
+        authService.getAuthorizationRequestIntent(AuthConfig.authRequest)
+
     fun requestAccessToken(authIntent: Intent) {
         val resp = AuthorizationResponse.fromIntent(authIntent)
         val clientAuth = ClientSecretBasic(Secrets.CLIENT_SECRET)

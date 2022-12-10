@@ -1,5 +1,8 @@
 package dev.yash.keymanager.ui.auth
 
+import android.app.Activity.RESULT_OK
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -27,13 +30,26 @@ fun AuthScreen(authViewModel: AuthViewModel = viewModel()) {
     val authState by authViewModel.authStatus.collectAsState(initial = AuthStatus.UNAUTHENTICATED)
 
     when (authState) {
-        AuthStatus.AUTHENTICATED -> TODO("Navigate to HomeScreen")
-        AuthStatus.UNAUTHENTICATED -> LoginUI()
+        AuthStatus.AUTHENTICATED -> {}
+        AuthStatus.UNAUTHENTICATED -> {
+            val getAuthCodeFromResult =
+                rememberLauncherForActivityResult(
+                    ActivityResultContracts.StartActivityForResult()
+                ) { result ->
+                    if (result.resultCode == RESULT_OK) {
+                        authViewModel.requestAccessToken(requireNotNull(result.data))
+                    }
+                }
+
+            AuthenticationUI(
+                onSignIn = { getAuthCodeFromResult.launch(authViewModel.getAuthReqIntent()) }
+            )
+        }
     }
 }
 
 @Composable
-fun LoginUI() {
+fun AuthenticationUI(onSignIn: () -> Unit) {
     ConstraintLayout(modifier = Modifier.fillMaxSize()) {
         val (icon, button) = createRefs()
 
@@ -50,7 +66,7 @@ fun LoginUI() {
         )
 
         Button(
-            onClick = { /*TODO*/},
+            onClick = onSignIn,
             modifier =
                 Modifier.fillMaxWidth(.9f).padding(vertical = 12.dp).constrainAs(button) {
                     bottom.linkTo(parent.bottom)
@@ -70,5 +86,5 @@ fun LoginUI() {
 @Preview(showSystemUi = true, showBackground = true, device = "id:pixel_4_xl")
 @Composable
 fun AuthScreenPreview() {
-    KeyManagerTheme { LoginUI() }
+    KeyManagerTheme { AuthenticationUI(onSignIn = {}) }
 }
