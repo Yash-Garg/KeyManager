@@ -1,32 +1,3 @@
 <resources>
     <string name="app_name">KeyManager</string>
-    <string name="signin_button_text">Sign in with GitHub</string>
-    <string name="github_logo_desc">GitHub Logo</string>
-    <string name="fab_text">Add Key</string>
-    <string name="gpg_item">GPG Keys</string>
-    <string name="ssh_item">SSH Keys</string>
-    <string name="create_button">Create</string>
-    <string name="create_ssh">Enter SSH key below</string>
-    <string name="create_gpg">Enter GPG key below</string>
-    <string name="delete_confirmation">Are you sure you want to delete this key?</string>
-    <string name="cancel">Cancel</string>
-    <string name="delete">Delete</string>
-    <string name="key_hint">Key</string>
-    <string name="key_name_hint">Title</string>
-    <string name="url_hint">URL</string>
-    <string name="created_on">CREATED ON</string>
-    <string name="ssh_public_key">SSH PUBLIC KEY</string>
-    <string name="key_id">KEY ID</string>
-    <string name="verified">VERIFIED</string>
-    <string name="read_only">READ ONLY</string>
-    <string name="gpg_raw_key">GPG RAW KEY</string>
-    <string name="can_encrypt">CAN ENCRYPT</string>
-    <string name="certify_comms">CAN CERTIFY COMMS</string>
-    <string name="certify_storage">CAN CERTIFY STORAGE</string>
-    <string name="can_sign">CAN SIGN</string>
-    <string name="gpg_public_key">GPG PUBLIC KEY</string>
-    <string name="expires">EXPIRES ON</string>
-    <string name="not_expires">Does not expire</string>
-    <string name="email">EMAIL</string>
-    <string name="no_keys">No Keys Found</string>
 </resources>

@@ -1,29 +1,41 @@
-@file:Suppress("UnstableApiUsage")
-
-import java.util.*
+@file:Suppress("UnstableApiUsage", "DSL_SCOPE_VIOLATION")
 
 plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
-    id("androidx.navigation.safeargs.kotlin")
-    id("kotlin-parcelize")
 }
 
 android {
     namespace = "dev.yash.keymanager"
     compileSdk = 33
-    buildToolsVersion = "31.0.0"
 
     defaultConfig {
         applicationId = "dev.yash.keymanager"
         minSdk = 26
         targetSdk = 33
-        versionCode = 5
-        versionName = "2.2"
+        versionCode = 6
+        versionName = "3.0"
+        multiDexEnabled = true
 
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders["appAuthRedirectScheme"] = "dev.yash.keymanager"
+        setProperty("archivesBaseName", "${defaultConfig.applicationId}-$versionName")
+
+        vectorDrawables { useSupportLibrary = true }
+    }
+
+    buildTypes {
+        release {
+            isShrinkResources = true
+            isMinifyEnabled = true
+            versionNameSuffix = "-release"
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
     }
 
     compileOptions {
@@ -33,7 +45,12 @@ android {
 
     kotlinOptions { jvmTarget = JavaVersion.VERSION_1_8.toString() }
 
-    buildFeatures { viewBinding = true }
+    buildFeatures { compose = true }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion =
+            libs.compose.compiler.get().versionConstraint.requiredVersion
+    }
 
     packagingOptions {
         resources {
@@ -45,63 +62,37 @@ android {
             excludes += "**/*.properties"
         }
     }
-
-    kapt { correctErrorTypes = true }
-
-    val keystoreConfigFile = rootProject.layout.projectDirectory.file("key.properties")
-    if (keystoreConfigFile.asFile.exists()) {
-        val contents = providers.fileContents(keystoreConfigFile).asText
-        val keystoreProperties = Properties()
-        keystoreProperties.load(contents.get().byteInputStream())
-        signingConfigs {
-            register("release") {
-                keyAlias = keystoreProperties["keyAlias"] as String
-                keyPassword = keystoreProperties["keyPassword"] as String
-                storeFile = rootProject.file(keystoreProperties["storeFile"] as String)
-                storePassword = keystoreProperties["storePassword"] as String
-            }
-        }
-        buildTypes.all { signingConfig = signingConfigs.getByName("release") }
-    }
-
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = true
-            isShrinkResources = true
-            proguardFiles("proguard-android-optimize.txt", "proguard-rules.pro")
-        }
-    }
 }
 
 dependencies {
-    implementation(libs.androidx.activity)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.core)
-    implementation(libs.androidx.constraintlayout)
-    implementation(libs.androidx.fragment)
-    implementation(libs.androidx.legacy)
-    implementation(libs.androidx.lifecycle.livedata)
-    implementation(libs.androidx.lifecycle.viewmodel)
-    implementation(libs.androidx.navigation.fragment)
-    implementation(libs.androidx.navigation.ui)
-    implementation(libs.androidx.paging.runtime)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.core.splashscreen)
+    implementation(libs.androidx.lifecycle.ktx)
+    implementation(libs.androidx.paging)
     implementation(libs.androidx.security.crypto)
     implementation(libs.androidx.security.identity)
 
-    debugImplementation(libs.chucker.library)
-    releaseImplementation(libs.chucker.no.op)
-
-    implementation(libs.google.dagger)
-    kapt(libs.google.dagger.compiler)
-    implementation(libs.google.material)
+    implementation(libs.compose.activity)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.material3)
+    implementation(libs.compose.navigation)
+    implementation(libs.compose.navigation.hilt)
+    implementation(libs.compose.paging)
+    implementation(libs.compose.ui)
+    implementation(libs.compose.ui.graphics)
+    implementation(libs.compose.ui.tooling.preview)
+    debugImplementation(libs.compose.ui.tooling)
+    debugImplementation(libs.compose.ui.test.manifest)
 
     implementation(libs.square.moshi)
     implementation(libs.square.moshi.converter)
-    implementation(libs.moshi.metadata.reflect)
+    implementation(libs.square.moshi.metadata.reflect)
     implementation(libs.square.okhttp.logging)
+    debugImplementation(libs.square.leakcanary)
 
-    debugImplementation(libs.leakcanary)
-    implementation(libs.lottie)
-    implementation(libs.openid.appauth)
-    implementation(libs.timber)
+    implementation(libs.google.dagger.hilt)
+    kapt(libs.google.dagger.hilt.compiler)
+
+    implementation(libs.appauth)
+    testImplementation(libs.junit)
 }

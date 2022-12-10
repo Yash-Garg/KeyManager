@@ -3,9 +3,9 @@
 pluginManagement {
     repositories {
         includeBuild("build-logic")
-        gradlePluginPortal()
         google()
         mavenCentral()
+        gradlePluginPortal()
     }
 }
 
@@ -17,7 +17,7 @@ dependencyResolutionManagement {
     }
 }
 
-enableFeaturePreview("VERSION_CATALOGS")
+enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
