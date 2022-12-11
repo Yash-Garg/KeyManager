@@ -16,7 +16,7 @@ android {
         minSdk = 26
         targetSdk = 33
         versionCode = 6
-        versionName = "3.0"
+        versionName = "v3.0"
         multiDexEnabled = true
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -91,6 +91,7 @@ dependencies {
     implementation(libs.square.okhttp.logging)
     debugImplementation(libs.square.leakcanary)
 
+    implementation(libs.google.accompanist.systemuicontroller)
     implementation(libs.google.dagger.hilt)
     kapt(libs.google.dagger.hilt.compiler)
 
