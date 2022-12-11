@@ -1,4 +1,4 @@
-package dev.yash.keymanager.ui.ssh
+package dev.yash.keymanager.ui.common
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,11 +13,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.items
-import dev.yash.keymanager.data.models.Encryption
 import dev.yash.keymanager.data.models.SshKey
 
 @Composable
@@ -49,7 +49,7 @@ fun SshKeyCard(key: SshKey, onKeyClick: () -> Unit) {
             Column {
                 Text(key.title, fontWeight = FontWeight.SemiBold)
                 Text("Key ID - ${key.id}")
-                Text("${Encryption.enumFor(key.key)} Encryption")
+                Text(key.key, maxLines = 1, overflow = TextOverflow.Ellipsis)
             }
         }
     }
