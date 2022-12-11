@@ -3,7 +3,6 @@ package dev.yash.keymanager.ui.auth
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.yash.keymanager.data.utils.AuthConfig
 import dev.yash.keymanager.data.utils.Secrets
@@ -11,7 +10,6 @@ import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import net.openid.appauth.AuthorizationResponse
 import net.openid.appauth.AuthorizationService
 import net.openid.appauth.ClientSecretBasic
@@ -27,7 +25,7 @@ constructor(
     val authState = _authState.asStateFlow()
 
     init {
-        viewModelScope.launch { checkAuthentication() }
+        checkAuthentication()
     }
 
     private fun checkAuthentication() {
