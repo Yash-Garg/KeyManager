@@ -16,10 +16,10 @@ constructor(
     private val pagingSourceFactory: GithubPagingSource.Factory
 ) : ViewModel() {
     private val sshKeysPager =
-        Pager(PagingConfig(pageSize = 10)) { pagingSourceFactory.create(repository::getSshKeys) }
+        Pager(PagingConfig(pageSize = 5)) { pagingSourceFactory.create(repository::getSshKeys) }
 
     private val gpgKeysPager =
-        Pager(PagingConfig(pageSize = 10)) { pagingSourceFactory.create(repository::getGpgKeys) }
+        Pager(PagingConfig(pageSize = 5)) { pagingSourceFactory.create(repository::getGpgKeys) }
 
     val sshKeys
         get() = sshKeysPager.flow

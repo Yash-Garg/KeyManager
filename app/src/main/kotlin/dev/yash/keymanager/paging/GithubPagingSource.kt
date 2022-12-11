@@ -27,7 +27,7 @@ constructor(@Assisted private val source: suspend (Int, Int) -> List<Key>) :
             LoadResult.Page(
                 data = keys,
                 prevKey = if (page == 1) null else page - 1,
-                nextKey = if (keys.isNotEmpty()) page + 1 else null
+                nextKey = if (keys.isNotEmpty() && keys.size >= params.loadSize) page + 1 else null
             )
         } catch (e: Exception) {
             LoadResult.Error(e)
