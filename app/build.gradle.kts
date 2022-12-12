@@ -2,6 +2,8 @@
 
 import java.util.*
 
+val isGithubCi = System.getenv("GITHUB_CI") != null
+
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -55,6 +57,13 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+
+        if (isGithubCi) {
+            configureEach {
+                buildConfigField("String", "CLIENT_ID", System.getenv("CLIENT_ID"))
+                buildConfigField("String", "CLIENT_SECRET", System.getenv("CLIENT_SECRET"))
+            }
         }
     }
 
