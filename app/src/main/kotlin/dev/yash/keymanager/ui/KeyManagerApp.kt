@@ -5,6 +5,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import dev.yash.keymanager.data.models.NavDestinations
 import dev.yash.keymanager.ui.auth.AuthScreen
 import dev.yash.keymanager.ui.auth.AuthViewModel
 import dev.yash.keymanager.ui.home.HomeScreen
@@ -16,15 +17,20 @@ fun KeyManagerApp() {
     val navController = rememberNavController()
 
     KeyManagerTheme {
-        NavHost(navController = navController, startDestination = "authentication") {
-            composable("authentication") {
+        NavHost(
+            navController = navController,
+            startDestination = NavDestinations.AuthScreen.route
+        ) {
+            composable(NavDestinations.AuthScreen.route) {
                 val authViewModel = hiltViewModel<AuthViewModel>()
                 AuthScreen(
                     viewModel = authViewModel,
-                    onAuthNavigate = { navController.navigate("home") { popUpTo(0) } }
+                    onAuthNavigate = {
+                        navController.navigate(NavDestinations.HomeScreen.route) { popUpTo(0) }
+                    }
                 )
             }
-            composable("home") {
+            composable(NavDestinations.HomeScreen.route) {
                 val homeViewModel = hiltViewModel<HomeViewModel>()
                 HomeScreen(viewModel = homeViewModel)
             }
