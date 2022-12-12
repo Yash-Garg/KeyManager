@@ -24,16 +24,22 @@ constructor(
     private val sshKeysPager =
         Pager(PagingConfig(pageSize = 5)) { pagingSourceFactory.create(repository::getSshKeys) }
 
+    //    private val sshSigningKeysPager =
+    //        Pager(PagingConfig(pageSize = 5)) {
+    //            pagingSourceFactory.create(repository::getSshSigningKeys)
+    //        }
+
     private val gpgKeysPager =
         Pager(PagingConfig(pageSize = 5)) { pagingSourceFactory.create(repository::getGpgKeys) }
 
     val sshKeys
         get() = sshKeysPager.flow
+    //            .cachedIn(viewModelScope).flatMapMerge { sshSigningKeysPager.flow }
 
     val gpgKeys
         get() = gpgKeysPager.flow
 
-    fun addKey(key: KeyModel) = viewModelScope.launch { repository.postKey(key) }
+    fun createKey(key: KeyModel) = viewModelScope.launch { repository.createKey(key) }
 
     fun logout() = preferences.edit().remove(AuthConfig.TOKEN_KEY).apply()
 }

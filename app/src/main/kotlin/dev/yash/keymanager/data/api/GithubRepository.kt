@@ -20,7 +20,7 @@ import retrofit2.Response
 class GithubRepository
 @Inject
 constructor(preferences: SharedPreferences, private val service: GitHubService) {
-    private val token = "token ${preferences.getString(AuthConfig.TOKEN_KEY, null)}"
+    private val token = "Bearer ${preferences.getString(AuthConfig.TOKEN_KEY, null)}"
 
     suspend fun getGpgKeys(page: Int, perPage: Int): List<GpgKey> {
         return service.getGpgKeys(token, perPage, page)
@@ -30,11 +30,19 @@ constructor(preferences: SharedPreferences, private val service: GitHubService) 
         return service.getSshKeys(token, perPage, page)
     }
 
-    suspend fun postKey(key: KeyModel) {
+    suspend fun getSshSigningKeys(page: Int, perPage: Int): List<SshKey> {
+        return service.getSshSigningKeys(token, perPage, page)
+    }
+
+    suspend fun createKey(key: KeyModel) {
         return when (key) {
-            is GpgModel -> service.postGpgKey(token, key)
-            is SshModel -> service.postSshKey(token, key)
+            is GpgModel -> service.createGpgKey(token, key)
+            is SshModel -> service.createSshKey(token, key)
         }
+    }
+
+    suspend fun createSshSigningKey(key: SshModel) {
+        return service.createSshSigningKey(token, key)
     }
 
     suspend fun deleteKey(key: Key): Response<ResponseBody> {
@@ -43,4 +51,7 @@ constructor(preferences: SharedPreferences, private val service: GitHubService) 
             is SshKey -> service.deleteSshKey(token, key.id)
         }
     }
+
+    suspend fun getSshKeyFromId(keyId: Long) = service.getSshKeyFromId(token, keyId)
+    suspend fun getGpgKeyFromId(keyId: Long) = service.getGpgKeyfromId(token, keyId)
 }
