@@ -61,8 +61,8 @@ android {
 
         if (isGithubCi) {
             configureEach {
-                buildConfigField("String", "CLIENT_ID", System.getenv("CLIENT_ID"))
-                buildConfigField("String", "CLIENT_SECRET", System.getenv("CLIENT_SECRET"))
+                buildConfigField("String", "CLIENT_ID", "\"${System.getenv("CLIENT_ID")}\"")
+                buildConfigField("String", "CLIENT_SECRET", "\"${System.getenv("CLIENT_SECRET")}\"")
             }
         }
     }
@@ -74,7 +74,10 @@ android {
 
     kotlinOptions { jvmTarget = JavaVersion.VERSION_1_8.toString() }
 
-    buildFeatures { compose = true }
+    buildFeatures {
+        compose = true
+        buildConfig = true
+    }
 
     composeOptions {
         kotlinCompilerExtensionVersion =
