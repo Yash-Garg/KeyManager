@@ -32,7 +32,12 @@ fun KeyManagerApp() {
             }
             composable(NavDestinations.HomeScreen.route) {
                 val homeViewModel = hiltViewModel<HomeViewModel>()
-                HomeScreen(viewModel = homeViewModel)
+                HomeScreen(
+                    viewModel = homeViewModel,
+                    onLogoutNavigate = {
+                        navController.navigate(NavDestinations.AuthScreen.route) { popUpTo(0) }
+                    }
+                )
             }
         }
     }

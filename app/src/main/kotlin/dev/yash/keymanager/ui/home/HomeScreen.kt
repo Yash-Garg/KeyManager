@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.twotone.ExitToApp
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
@@ -14,6 +15,7 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -33,16 +35,19 @@ import dev.yash.keymanager.R
 import dev.yash.keymanager.data.models.GpgKey
 import dev.yash.keymanager.data.models.NavDestinations
 import dev.yash.keymanager.data.models.SshKey
+import kotlinx.coroutines.runBlocking
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Suppress("UNCHECKED_CAST")
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel = viewModel(),
-    navController: NavHostController = rememberNavController()
+    navController: NavHostController = rememberNavController(),
+    onLogoutNavigate: () -> Unit,
 ) {
     val sshKeys = viewModel.sshKeys.collectAsLazyPagingItems() as LazyPagingItems<SshKey>
     val gpgKeys = viewModel.gpgKeys.collectAsLazyPagingItems() as LazyPagingItems<GpgKey>
+    val openLogoutDialog = remember { mutableStateOf(false) }
     val openAddDialog = remember { mutableStateOf(false) }
 
     Scaffold(
@@ -57,15 +62,15 @@ fun HomeScreen(
                 },
                 scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(),
                 actions = {
-                    IconButton(onClick = { /*TODO*/}) { Icon(Icons.TwoTone.ExitToApp, null) }
+                    IconButton(onClick = { openLogoutDialog.value = true }) {
+                        Icon(Icons.TwoTone.ExitToApp, null)
+                    }
                 }
             )
         },
         bottomBar = { HomeBottomBar(navController = navController) },
         floatingActionButton = {
-            FloatingActionButton(onClick = { openAddDialog.value = true }) {
-                Icon(Icons.Filled.Add, null)
-            }
+            FloatingActionButton(onClick = {}) { Icon(Icons.Filled.Add, null) }
         },
         floatingActionButtonPosition = FabPosition.End
     ) {
@@ -75,6 +80,37 @@ fun HomeScreen(
             sshKeys = sshKeys,
             gpgKeys = gpgKeys
         )
+
+        if (openLogoutDialog.value) {
+            AlertDialog(
+                onDismissRequest = { openLogoutDialog.value = false },
+                title = {
+                    Text(
+                        text = "Are you sure you want to logout?",
+                        fontWeight = FontWeight.SemiBold
+                    )
+                },
+                text = { Text(text = "This will delete the stored access token.") },
+                confirmButton = {
+                    TextButton(
+                        onClick = {
+                            runBlocking { viewModel.logout() }
+                            onLogoutNavigate()
+                            openLogoutDialog.value = false
+                        }
+                    ) {
+                        Text("Confirm")
+                    }
+                },
+                dismissButton = {
+                    TextButton(onClick = { openLogoutDialog.value = false }) { Text("Dismiss") }
+                }
+            )
+        }
+
+        if (openAddDialog.value) {
+            // TODO: Open a dialog for adding key
+        }
     }
 }
 
@@ -90,7 +126,7 @@ fun HomeBottomBar(navController: NavHostController) {
                 selected = selectedTab == index,
                 onClick = {
                     selectedTab = index
-                    navController.navigate(item.route)
+                    navController.navigate(item.route) { popUpTo(0) }
                 },
                 icon = { Icon(requireNotNull(item.icon), null) }
             )
