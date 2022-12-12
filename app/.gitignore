@@ -2,3 +2,4 @@
 *.jks
 *.apk
 release/
+key.properties

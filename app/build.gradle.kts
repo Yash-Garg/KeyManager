@@ -1,5 +1,7 @@
 @file:Suppress("UnstableApiUsage", "DSL_SCOPE_VIOLATION")
 
+import java.util.*
+
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -24,6 +26,24 @@ android {
         setProperty("archivesBaseName", "${defaultConfig.applicationId}-$versionName")
 
         vectorDrawables { useSupportLibrary = true }
+    }
+
+    kapt { correctErrorTypes = true }
+
+    val keystoreConfigFile = rootProject.layout.projectDirectory.file("key.properties")
+    if (keystoreConfigFile.asFile.exists()) {
+        val contents = providers.fileContents(keystoreConfigFile).asText
+        val keystoreProperties = Properties()
+        keystoreProperties.load(contents.get().byteInputStream())
+        signingConfigs {
+            register("release") {
+                keyAlias = keystoreProperties["keyAlias"] as String
+                keyPassword = keystoreProperties["keyPassword"] as String
+                storeFile = rootProject.file(keystoreProperties["storeFile"] as String)
+                storePassword = keystoreProperties["storePassword"] as String
+            }
+        }
+        buildTypes.all { signingConfig = signingConfigs.getByName("release") }
     }
 
     buildTypes {
