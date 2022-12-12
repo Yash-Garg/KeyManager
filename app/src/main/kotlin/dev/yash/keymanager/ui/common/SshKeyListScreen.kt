@@ -63,7 +63,7 @@ fun SshKeyListScreen(lazyPagingItems: LazyPagingItems<SshKey>, modifier: Modifie
 @Composable
 fun SshKeyCard(key: SshKey, onKeyClick: () -> Unit) {
     Card(onClick = onKeyClick, modifier = Modifier.fillMaxWidth().padding(15.dp)) {
-        Box(Modifier.fillMaxSize().padding(12.dp)) {
+        Box(Modifier.fillMaxSize().padding(horizontal = 12.dp, vertical = 6.dp)) {
             Column {
                 Text(key.title, fontWeight = FontWeight.SemiBold)
                 Text("Key ID - ${key.id}")

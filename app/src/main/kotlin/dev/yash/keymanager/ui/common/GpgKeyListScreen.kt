@@ -63,7 +63,7 @@ fun GpgKeyListScreen(lazyPagingItems: LazyPagingItems<GpgKey>, modifier: Modifie
 @Composable
 fun GpgKeyCard(key: GpgKey, onKeyClick: () -> Unit) {
     Card(onClick = onKeyClick, modifier = Modifier.fillMaxWidth().padding(15.dp)) {
-        Box(Modifier.fillMaxSize().padding(12.dp)) {
+        Box(Modifier.fillMaxSize().padding(horizontal = 12.dp, vertical = 6.dp)) {
             Column {
                 Text(key.name ?: key.id.toString(), fontWeight = FontWeight.SemiBold)
                 Text("Key ID - ${key.keyID}")
