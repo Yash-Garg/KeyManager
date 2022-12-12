@@ -5,6 +5,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.twotone.ExitToApp
 import androidx.compose.material.icons.twotone.Lock
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
@@ -15,6 +16,7 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -41,6 +43,7 @@ fun HomeScreen(viewModel: HomeViewModel = viewModel()) {
     val sshKeys = viewModel.sshKeys.collectAsLazyPagingItems() as LazyPagingItems<SshKey>
     val gpgKeys = viewModel.gpgKeys.collectAsLazyPagingItems() as LazyPagingItems<GpgKey>
     var selectedItem by remember { mutableStateOf(0) }
+    val openAddDialog = remember { mutableStateOf(false) }
     val items = listOf("SSH KEYS", "GPG KEYS")
 
     Scaffold(
@@ -72,13 +75,29 @@ fun HomeScreen(viewModel: HomeViewModel = viewModel()) {
             }
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = { /*TODO*/}) { Icon(Icons.Filled.Add, null) }
+            FloatingActionButton(onClick = { openAddDialog.value = true }) {
+                Icon(Icons.Filled.Add, null)
+            }
         },
         floatingActionButtonPosition = FabPosition.End
     ) {
         when (selectedItem) {
             0 -> SshKeyListScreen(lazyPagingItems = sshKeys, modifier = Modifier.padding(it))
             1 -> GpgKeyListScreen(lazyPagingItems = gpgKeys, modifier = Modifier.padding(it))
+        }
+
+        if (openAddDialog.value) {
+            AlertDialog(
+                onDismissRequest = { openAddDialog.value = false },
+                title = { Text(text = "Add new key", fontWeight = FontWeight.SemiBold) },
+                text = { Text(text = "Dialog for adding a new SSH / GPG key") },
+                confirmButton = {
+                    TextButton(onClick = { openAddDialog.value = false }) { Text("Confirm") }
+                },
+                dismissButton = {
+                    TextButton(onClick = { openAddDialog.value = false }) { Text("Dismiss") }
+                }
+            )
         }
     }
 }
