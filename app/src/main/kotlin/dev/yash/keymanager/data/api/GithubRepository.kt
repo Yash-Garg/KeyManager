@@ -20,7 +20,7 @@ import retrofit2.Response
 class GithubRepository
 @Inject
 constructor(preferences: SharedPreferences, private val service: GitHubService) {
-    private val token = "Bearer ${preferences.getString(AuthConfig.TOKEN_KEY, null)}"
+    private val token = "token ${preferences.getString(AuthConfig.TOKEN_KEY, null)}"
 
     suspend fun getGpgKeys(page: Int, perPage: Int): List<GpgKey> {
         return service.getGpgKeys(token, perPage, page)

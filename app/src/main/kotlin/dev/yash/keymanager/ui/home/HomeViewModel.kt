@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
+import androidx.paging.cachedIn
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.yash.keymanager.data.api.GithubRepository
 import dev.yash.keymanager.data.models.KeyModel
@@ -24,17 +25,17 @@ constructor(
     private val sshKeysPager =
         Pager(PagingConfig(pageSize = 5)) { pagingSourceFactory.create(repository::getSshKeys) }
 
-    //    private val sshSigningKeysPager =
-    //        Pager(PagingConfig(pageSize = 5)) {
-    //            pagingSourceFactory.create(repository::getSshSigningKeys)
-    //        }
+    private val sshSigningKeysPager =
+        Pager(PagingConfig(pageSize = 5)) {
+            pagingSourceFactory.create(repository::getSshSigningKeys)
+        }
 
     private val gpgKeysPager =
         Pager(PagingConfig(pageSize = 5)) { pagingSourceFactory.create(repository::getGpgKeys) }
 
     val sshKeys
-        get() = sshKeysPager.flow
-    //            .cachedIn(viewModelScope).flatMapMerge { sshSigningKeysPager.flow }
+        get() = sshKeysPager.flow.cachedIn(viewModelScope)
+    //            .flatMapMerge { sshSigningKeysPager.flow }
 
     val gpgKeys
         get() = gpgKeysPager.flow
