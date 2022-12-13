@@ -108,6 +108,7 @@ dependencies {
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.constraintlayout)
     implementation(libs.compose.material)
+    implementation(libs.compose.material.icons)
     implementation(libs.compose.material3)
     implementation(libs.compose.navigation)
     implementation(libs.compose.navigation.hilt)

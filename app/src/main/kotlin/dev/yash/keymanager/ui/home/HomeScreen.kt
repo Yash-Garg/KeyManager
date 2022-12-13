@@ -1,5 +1,6 @@
 package dev.yash.keymanager.ui.home
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
@@ -25,6 +26,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -49,6 +51,7 @@ fun HomeScreen(
     navController: NavHostController = rememberNavController(),
     onLogoutNavigate: () -> Unit,
 ) {
+    val context = LocalContext.current
     val sshKeys = viewModel.sshKeys.collectAsLazyPagingItems() as LazyPagingItems<SshKey>
     val sshSigningKeys =
         viewModel.sshSigningKeys.collectAsLazyPagingItems() as LazyPagingItems<SshKey>
@@ -76,7 +79,12 @@ fun HomeScreen(
         },
         bottomBar = { HomeBottomBar(navController = navController) },
         floatingActionButton = {
-            FloatingActionButton(onClick = { openAddDialog.value = true }) {
+            FloatingActionButton(
+                onClick = {
+                    openAddDialog.value = false
+                    Toast.makeText(context, "Unimplemented", Toast.LENGTH_SHORT).show()
+                }
+            ) {
                 Icon(Icons.Filled.Add, null)
             }
         },
