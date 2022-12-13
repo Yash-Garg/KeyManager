@@ -12,7 +12,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import dev.yash.keymanager.data.api.GitHubService
+import dev.yash.keymanager.data.api.GitHubApi
 import dev.zacsweers.moshix.reflect.MetadataKotlinJsonAdapterFactory
 import javax.inject.Singleton
 import net.openid.appauth.AuthorizationService
@@ -47,7 +47,7 @@ object AppModule {
     @Provides
     fun provideRetrofit(client: OkHttpClient, moshi: Moshi): Retrofit =
         Retrofit.Builder()
-            .baseUrl(GitHubService.BASE_URL)
+            .baseUrl(GitHubApi.BASE_URL)
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .client(client)
             .build()
@@ -58,7 +58,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideApi(retrofit: Retrofit): GitHubService = retrofit.create(GitHubService::class.java)
+    fun provideApi(retrofit: Retrofit): GitHubApi = retrofit.create(GitHubApi::class.java)
 
     @Singleton
     @Provides

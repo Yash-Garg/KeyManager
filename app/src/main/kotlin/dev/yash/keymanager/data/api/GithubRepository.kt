@@ -19,39 +19,39 @@ import retrofit2.Response
 @InstallIn(ActivityRetainedComponent::class)
 class GithubRepository
 @Inject
-constructor(preferences: SharedPreferences, private val service: GitHubService) {
+constructor(preferences: SharedPreferences, private val api: GitHubApi) {
     private val token = "token ${preferences.getString(AuthConfig.TOKEN_KEY, null)}"
 
     suspend fun getGpgKeys(page: Int, perPage: Int): List<GpgKey> {
-        return service.getGpgKeys(token, perPage, page)
+        return api.getGpgKeys(token, perPage, page)
     }
 
     suspend fun getSshKeys(page: Int, perPage: Int): List<SshKey> {
-        return service.getSshKeys(token, perPage, page)
+        return api.getSshKeys(token, perPage, page)
     }
 
     suspend fun getSshSigningKeys(page: Int, perPage: Int): List<SshKey> {
-        return service.getSshSigningKeys(token, perPage, page)
+        return api.getSshSigningKeys(token, perPage, page)
     }
 
     suspend fun createKey(key: KeyModel) {
         return when (key) {
-            is GpgModel -> service.createGpgKey(token, key)
-            is SshModel -> service.createSshKey(token, key)
+            is GpgModel -> api.createGpgKey(token, key)
+            is SshModel -> api.createSshKey(token, key)
         }
     }
 
     suspend fun createSshSigningKey(key: SshModel) {
-        return service.createSshSigningKey(token, key)
+        return api.createSshSigningKey(token, key)
     }
 
     suspend fun deleteKey(key: Key): Response<ResponseBody> {
         return when (key) {
-            is GpgKey -> service.deleteGpgKey(token, key.id)
-            is SshKey -> service.deleteSshKey(token, key.id)
+            is GpgKey -> api.deleteGpgKey(token, key.id)
+            is SshKey -> api.deleteSshKey(token, key.id)
         }
     }
 
-    suspend fun getSshKeyFromId(keyId: Long) = service.getSshKeyFromId(token, keyId)
-    suspend fun getGpgKeyFromId(keyId: Long) = service.getGpgKeyfromId(token, keyId)
+    suspend fun getSshKeyFromId(keyId: Long) = api.getSshKeyFromId(token, keyId)
+    suspend fun getGpgKeyFromId(keyId: Long) = api.getGpgKeyfromId(token, keyId)
 }
