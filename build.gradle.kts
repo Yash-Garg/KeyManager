@@ -7,9 +7,8 @@ plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.android.library) apply false
     alias(libs.plugins.kotlin.android) apply false
-    alias(libs.plugins.hilt) apply false
     alias(libs.plugins.kotlin.kapt) apply false
-    alias(libs.plugins.navigation.safeargs) apply false
+    alias(libs.plugins.hilt) apply false
 
     id("dev.yash.keymanager.spotless")
     id("dev.yash.keymanager.githooks")
@@ -17,4 +16,6 @@ plugins {
 
 val clean by tasks.existing(Delete::class) { delete(rootProject.buildDir) }
 
-afterEvaluate { clean.dependsOn("copyGitHooks") }
+afterEvaluate {
+    tasks.prepareKotlinBuildScriptModel.dependsOn(tasks.copyGitHooks, tasks.installGitHooks)
+}

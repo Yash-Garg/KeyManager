@@ -1,4 +1,5 @@
 /build
-/release
-*.properties
 *.jks
+*.apk
+release/
+key.properties

@@ -1,20 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.keymanager" parent="Theme.Material3.Dark.NoActionBar">
-        <item name="colorPrimary">@color/accentColor</item>
-        <item name="colorPrimaryVariant">@color/accentColor</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <item name="android:navigationBarColor">@android:color/transparent</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
-        <item name="android:windowBackground">@color/colorPrimary</item>
-    </style>
-
-    <style name="AlertDialogCustom" parent="Widget.Material3.TextInputLayout.OutlinedBox">
-        <item name="android:textColor">@color/white</item>
-    </style>
-
-    <style name="CardViewCustom" parent="Widget.Material3.CardView.Filled">
-        <item name="cardBackgroundColor">@color/material_dark</item>
-    </style>
+    <style name="Theme.KeyManager" parent="android:Theme.Material.Light.NoActionBar" />
 </resources>

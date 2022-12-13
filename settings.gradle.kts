@@ -3,9 +3,9 @@
 pluginManagement {
     repositories {
         includeBuild("build-logic")
-        gradlePluginPortal()
         google()
         mavenCentral()
+        gradlePluginPortal()
     }
 }
 
@@ -14,10 +14,11 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven("https://oss.sonatype.org/content/repositories/snapshots/")
     }
 }
 
-enableFeaturePreview("VERSION_CATALOGS")
+enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 

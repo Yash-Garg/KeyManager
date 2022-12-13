@@ -1,49 +1,33 @@
-@file:Suppress("UnstableApiUsage")
+@file:Suppress("UnstableApiUsage", "DSL_SCOPE_VIOLATION")
 
 import java.util.*
+
+val isGithubCi = System.getenv("GITHUB_CI") != null
 
 plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
-    id("androidx.navigation.safeargs.kotlin")
-    id("kotlin-parcelize")
 }
 
 android {
     namespace = "dev.yash.keymanager"
     compileSdk = 33
-    buildToolsVersion = "31.0.0"
 
     defaultConfig {
         applicationId = "dev.yash.keymanager"
         minSdk = 26
         targetSdk = 33
-        versionCode = 5
-        versionName = "2.2"
+        versionCode = 6
+        versionName = "v3.0"
+        multiDexEnabled = true
 
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders["appAuthRedirectScheme"] = "dev.yash.keymanager"
-    }
+        setProperty("archivesBaseName", "${defaultConfig.applicationId}-$versionName")
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-
-    kotlinOptions { jvmTarget = JavaVersion.VERSION_1_8.toString() }
-
-    buildFeatures { viewBinding = true }
-
-    packagingOptions {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-            excludes += "/META-INF/*.kotlin_module"
-            excludes += "**/kotlin/**"
-            excludes += "**/*.txt"
-            excludes += "**/*.xml"
-            excludes += "**/*.properties"
-        }
+        vectorDrawables { useSupportLibrary = true }
     }
 
     kapt { correctErrorTypes = true }
@@ -65,43 +49,88 @@ android {
     }
 
     buildTypes {
-        getByName("release") {
-            isMinifyEnabled = true
+        release {
             isShrinkResources = true
-            proguardFiles("proguard-android-optimize.txt", "proguard-rules.pro")
+            isMinifyEnabled = true
+            versionNameSuffix = "-release"
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+
+        if (isGithubCi) {
+            configureEach {
+                buildConfigField("String", "CLIENT_ID", "\"${System.getenv("CLIENT_ID")}\"")
+                buildConfigField("String", "CLIENT_SECRET", "\"${System.getenv("CLIENT_SECRET")}\"")
+            }
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions { jvmTarget = JavaVersion.VERSION_1_8.toString() }
+
+    buildFeatures {
+        compose = true
+        buildConfig = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion =
+            libs.compose.compiler.get().versionConstraint.requiredVersion
+    }
+
+    packagingOptions {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "/META-INF/*.kotlin_module"
+            excludes += "**/kotlin/**"
+            excludes += "**/*.txt"
+            excludes += "**/*.xml"
+            excludes += "**/*.properties"
         }
     }
 }
 
 dependencies {
-    implementation(libs.androidx.activity)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.core)
-    implementation(libs.androidx.constraintlayout)
-    implementation(libs.androidx.fragment)
-    implementation(libs.androidx.legacy)
-    implementation(libs.androidx.lifecycle.livedata)
-    implementation(libs.androidx.lifecycle.viewmodel)
-    implementation(libs.androidx.navigation.fragment)
-    implementation(libs.androidx.navigation.ui)
-    implementation(libs.androidx.paging.runtime)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.core.splashscreen)
+    implementation(libs.androidx.lifecycle.ktx)
+    implementation(libs.androidx.paging)
     implementation(libs.androidx.security.crypto)
     implementation(libs.androidx.security.identity)
 
-    debugImplementation(libs.chucker.library)
-    releaseImplementation(libs.chucker.no.op)
-
-    implementation(libs.google.dagger)
-    kapt(libs.google.dagger.compiler)
-    implementation(libs.google.material)
+    implementation(libs.compose.activity)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.constraintlayout)
+    implementation(libs.compose.material)
+    implementation(libs.compose.material.icons)
+    implementation(libs.compose.material3)
+    implementation(libs.compose.navigation)
+    implementation(libs.compose.navigation.hilt)
+    implementation(libs.compose.paging)
+    implementation(libs.compose.ui)
+    implementation(libs.compose.ui.graphics)
+    implementation(libs.compose.ui.tooling.preview)
+    debugImplementation(libs.compose.ui.tooling)
+    debugImplementation(libs.compose.ui.test.manifest)
 
     implementation(libs.square.moshi)
     implementation(libs.square.moshi.converter)
-    implementation(libs.moshi.metadata.reflect)
+    implementation(libs.square.moshi.metadata.reflect)
     implementation(libs.square.okhttp.logging)
+    debugImplementation(libs.square.leakcanary)
 
-    debugImplementation(libs.leakcanary)
-    implementation(libs.lottie)
-    implementation(libs.openid.appauth)
-    implementation(libs.timber)
+    implementation(libs.google.accompanist.systemuicontroller)
+    implementation(libs.google.dagger.hilt)
+    kapt(libs.google.dagger.hilt.compiler)
+
+    implementation(libs.appauth)
+    debugImplementation(libs.chucker)
+    releaseImplementation(libs.chucker.no.op)
+    testImplementation(libs.junit)
 }
