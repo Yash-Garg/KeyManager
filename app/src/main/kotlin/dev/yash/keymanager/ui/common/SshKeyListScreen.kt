@@ -36,7 +36,7 @@ fun SshKeyListScreen(lazyPagingItems: LazyPagingItems<SshKey>, modifier: Modifie
 
     Box(modifier = modifier.pullRefresh(pullRefreshState)) {
         if (lazyPagingItems.itemCount == 0 && refreshLoadState is LoadState.Error) {
-            Text(text = "Failed to load data.")
+            LoadError(message = "Failed to load data.\n${refreshLoadState.error}")
         } else {
             LazyColumn(modifier = Modifier.fillMaxSize()) {
                 items(lazyPagingItems, key = { key -> key.id }) { key ->

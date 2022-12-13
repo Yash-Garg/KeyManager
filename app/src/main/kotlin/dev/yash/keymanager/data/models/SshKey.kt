@@ -7,7 +7,7 @@ import com.squareup.moshi.Json
 data class SshKey(
     val id: Long,
     val key: String,
-    val url: String,
+    val url: String? = null,
     val title: String,
     val verified: Boolean? = null,
     @Json(name = "created_at") val createdAt: String,

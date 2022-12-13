@@ -12,6 +12,7 @@ import dev.yash.keymanager.data.models.KeyModel
 import dev.yash.keymanager.data.utils.AuthConfig
 import dev.yash.keymanager.paging.GithubPagingSource
 import javax.inject.Inject
+import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.launch
 
 @HiltViewModel
@@ -34,8 +35,11 @@ constructor(
         Pager(PagingConfig(pageSize = 5)) { pagingSourceFactory.create(repository::getGpgKeys) }
 
     val sshKeys
-        get() = sshKeysPager.flow.cachedIn(viewModelScope)
-    //            .flatMapMerge { sshSigningKeysPager.flow }
+        get() =
+            merge(
+                sshKeysPager.flow.cachedIn(viewModelScope),
+                sshSigningKeysPager.flow.cachedIn(viewModelScope)
+            )
 
     val gpgKeys
         get() = gpgKeysPager.flow
