@@ -1,7 +1,8 @@
-name: Android CI (PR)
+name: Android CI
 
 on:
   pull_request:
+  push:
 
 concurrency:
   group: ${{ github.ref }}
