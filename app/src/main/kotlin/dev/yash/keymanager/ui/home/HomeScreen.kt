@@ -50,6 +50,8 @@ fun HomeScreen(
     onLogoutNavigate: () -> Unit,
 ) {
     val sshKeys = viewModel.sshKeys.collectAsLazyPagingItems() as LazyPagingItems<SshKey>
+    val sshSigningKeys =
+        viewModel.sshSigningKeys.collectAsLazyPagingItems() as LazyPagingItems<SshKey>
     val gpgKeys = viewModel.gpgKeys.collectAsLazyPagingItems() as LazyPagingItems<GpgKey>
     val openLogoutDialog = remember { mutableStateOf(false) }
     val openAddDialog = remember { mutableStateOf(false) }
@@ -84,6 +86,7 @@ fun HomeScreen(
             navController = navController,
             modifier = Modifier.padding(it),
             sshKeys = sshKeys,
+            sshSigningKeys = sshSigningKeys,
             gpgKeys = gpgKeys
         )
 

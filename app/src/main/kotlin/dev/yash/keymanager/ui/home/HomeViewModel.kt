@@ -5,14 +5,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import androidx.paging.cachedIn
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.yash.keymanager.data.api.GithubRepository
 import dev.yash.keymanager.data.models.KeyModel
 import dev.yash.keymanager.data.utils.AuthConfig
 import dev.yash.keymanager.paging.GithubPagingSource
 import javax.inject.Inject
-import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.launch
 
 @HiltViewModel
@@ -35,11 +33,10 @@ constructor(
         Pager(PagingConfig(pageSize = 5)) { pagingSourceFactory.create(repository::getGpgKeys) }
 
     val sshKeys
-        get() =
-            merge(
-                sshKeysPager.flow.cachedIn(viewModelScope),
-                sshSigningKeysPager.flow.cachedIn(viewModelScope)
-            )
+        get() = sshKeysPager.flow
+
+    val sshSigningKeys
+        get() = sshSigningKeysPager.flow
 
     val gpgKeys
         get() = gpgKeysPager.flow

@@ -29,14 +29,28 @@ import dev.yash.keymanager.data.models.SshKey
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun SshKeyListScreen(lazyPagingItems: LazyPagingItems<SshKey>, modifier: Modifier = Modifier) {
+fun SshKeyListScreen(
+    lazyPagingItems: LazyPagingItems<SshKey>,
+    lazyPagingSigningItems: LazyPagingItems<SshKey>,
+    modifier: Modifier = Modifier
+) {
     val refreshLoadState = lazyPagingItems.loadState.refresh
-    val isRefreshing = refreshLoadState is LoadState.Loading
-    val pullRefreshState = rememberPullRefreshState(isRefreshing, lazyPagingItems::refresh)
+    val refreshSigningLoadState = lazyPagingSigningItems.loadState.refresh
+
+    val isRefreshing =
+        refreshLoadState is LoadState.Loading || refreshSigningLoadState is LoadState.Loading
+    val pullRefreshState =
+        rememberPullRefreshState(
+            isRefreshing,
+            {
+                lazyPagingItems.refresh()
+                lazyPagingSigningItems.refresh()
+            }
+        )
 
     Box(modifier = modifier.pullRefresh(pullRefreshState)) {
-        if (lazyPagingItems.itemCount == 0 && refreshLoadState is LoadState.Error) {
-            LoadError(message = "Failed to load data.\n${refreshLoadState.error}")
+        if (refreshLoadState is LoadState.Error || refreshSigningLoadState is LoadState.Error) {
+            LoadError(message = "Failed to load data.")
         } else {
             LazyColumn(modifier = Modifier.fillMaxSize()) {
                 items(lazyPagingItems, key = { key -> key.id }) { key ->
@@ -44,7 +58,17 @@ fun SshKeyListScreen(lazyPagingItems: LazyPagingItems<SshKey>, modifier: Modifie
                         SshKeyCard(key = key, onKeyClick = { /* TODO */})
                     }
                 }
-                if (lazyPagingItems.loadState.append == LoadState.Loading) {
+
+                items(lazyPagingSigningItems, key = { key -> key.id }) { key ->
+                    if (key != null) {
+                        SshKeyCard(key = key, onKeyClick = { /* TODO */})
+                    }
+                }
+
+                if (
+                    lazyPagingItems.loadState.append == LoadState.Loading ||
+                        lazyPagingSigningItems.loadState.append == LoadState.Loading
+                ) {
                     item { LinearProgressIndicator(modifier = modifier.fillMaxWidth(.8f)) }
                 }
             }

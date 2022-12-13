@@ -18,12 +18,17 @@ import dev.yash.keymanager.ui.common.SshKeyListScreen
 fun HomeNavGraph(
     navController: NavHostController,
     sshKeys: LazyPagingItems<SshKey>,
+    sshSigningKeys: LazyPagingItems<SshKey>,
     gpgKeys: LazyPagingItems<GpgKey>,
     modifier: Modifier = Modifier
 ) {
     NavHost(navController = navController, startDestination = NavDestinations.SshScreen.route) {
         composable(NavDestinations.SshScreen.route) {
-            SshKeyListScreen(lazyPagingItems = sshKeys, modifier = modifier)
+            SshKeyListScreen(
+                lazyPagingItems = sshKeys,
+                lazyPagingSigningItems = sshSigningKeys,
+                modifier = modifier
+            )
         }
         composable(NavDestinations.GpgScreen.route) {
             GpgKeyListScreen(lazyPagingItems = gpgKeys, modifier = modifier)
