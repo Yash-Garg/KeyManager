@@ -130,6 +130,7 @@ dependencies {
     kapt(libs.google.dagger.hilt.compiler)
 
     implementation(libs.appauth)
+    implementation(libs.kotlin.result)
     debugImplementation(libs.chucker)
     releaseImplementation(libs.chucker.no.op)
     testImplementation(libs.junit)

@@ -21,6 +21,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -38,9 +39,13 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import dev.yash.keymanager.R
 import dev.yash.keymanager.data.models.GpgKey
+import dev.yash.keymanager.data.models.GpgModel
+import dev.yash.keymanager.data.models.KeyType
 import dev.yash.keymanager.data.models.NavDestinations
 import dev.yash.keymanager.data.models.SshKey
+import dev.yash.keymanager.data.models.SshModel
 import dev.yash.keymanager.ui.common.DialogWithTextField
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.runBlocking
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -52,10 +57,16 @@ fun HomeScreen(
     onLogoutNavigate: () -> Unit,
 ) {
     val context = LocalContext.current
+
+    LaunchedEffect(Unit) {
+        viewModel.status.collectLatest { Toast.makeText(context, it, Toast.LENGTH_SHORT).show() }
+    }
+
     val sshKeys = viewModel.sshKeys.collectAsLazyPagingItems() as LazyPagingItems<SshKey>
     val sshSigningKeys =
         viewModel.sshSigningKeys.collectAsLazyPagingItems() as LazyPagingItems<SshKey>
     val gpgKeys = viewModel.gpgKeys.collectAsLazyPagingItems() as LazyPagingItems<GpgKey>
+
     val openLogoutDialog = remember { mutableStateOf(false) }
     val openAddDialog = remember { mutableStateOf(false) }
 
@@ -79,12 +90,7 @@ fun HomeScreen(
         },
         bottomBar = { HomeBottomBar(navController = navController) },
         floatingActionButton = {
-            FloatingActionButton(
-                onClick = {
-                    openAddDialog.value = false
-                    Toast.makeText(context, "Unimplemented", Toast.LENGTH_SHORT).show()
-                }
-            ) {
+            FloatingActionButton(onClick = { openAddDialog.value = true }) {
                 Icon(Icons.Filled.Add, null)
             }
         },
@@ -129,7 +135,15 @@ fun HomeScreen(
         if (openAddDialog.value) {
             DialogWithTextField(
                 title = "Add new key",
-                onDismissRequest = { openAddDialog.value = false }
+                onDismissRequest = { openAddDialog.value = false },
+                onConfirm = { title, key, type ->
+                    when (type) {
+                        KeyType.SSH -> viewModel.createKey(SshModel(title, key))
+                        KeyType.SSH_SIGNING -> viewModel.createSigningKey(SshModel(title, key))
+                        KeyType.GPG -> viewModel.createKey(GpgModel(title, key))
+                    }
+                    openAddDialog.value = false
+                }
             )
         }
     }
