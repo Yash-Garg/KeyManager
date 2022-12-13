@@ -1,4 +1,4 @@
-package dev.yash.keymanager.ui.common
+package dev.yash.keymanager.ui.keys
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,6 +26,7 @@ import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.items
 import dev.yash.keymanager.data.models.GpgKey
+import dev.yash.keymanager.ui.common.LoadError
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable

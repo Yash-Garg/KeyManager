@@ -1,4 +1,4 @@
-package dev.yash.keymanager.ui.common
+package dev.yash.keymanager.ui.keys
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,6 +26,7 @@ import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.items
 import dev.yash.keymanager.data.models.SshKey
+import dev.yash.keymanager.ui.common.LoadError
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -55,13 +56,13 @@ fun SshKeyListScreen(
             LazyColumn(modifier = Modifier.fillMaxSize()) {
                 items(lazyPagingItems, key = { key -> key.id }) { key ->
                     if (key != null) {
-                        SshKeyCard(key = key, onKeyClick = { /* TODO */})
+                        SshKeyCard(key = key, onKeyClick = {})
                     }
                 }
 
                 items(lazyPagingSigningItems, key = { key -> key.id }) { key ->
                     if (key != null) {
-                        SshKeyCard(key = key, onKeyClick = { /* TODO */})
+                        SshKeyCard(key = key, onKeyClick = {})
                     }
                 }
 

@@ -3,16 +3,14 @@ package dev.yash.keymanager.ui.home
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.navArgument
 import androidx.paging.compose.LazyPagingItems
 import dev.yash.keymanager.data.models.GpgKey
 import dev.yash.keymanager.data.models.NavDestinations
 import dev.yash.keymanager.data.models.SshKey
-import dev.yash.keymanager.ui.common.GpgKeyListScreen
-import dev.yash.keymanager.ui.common.SshKeyListScreen
+import dev.yash.keymanager.ui.keys.GpgKeyListScreen
+import dev.yash.keymanager.ui.keys.SshKeyListScreen
 
 @Composable
 fun HomeNavGraph(
@@ -33,9 +31,5 @@ fun HomeNavGraph(
         composable(NavDestinations.GpgScreen.route) {
             GpgKeyListScreen(lazyPagingItems = gpgKeys, modifier = modifier)
         }
-        composable(
-            NavDestinations.KeyDetailsScreen.route,
-            arguments = listOf(navArgument("keyID") { type = NavType.StringType })
-        ) {}
     }
 }

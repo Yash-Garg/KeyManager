@@ -80,6 +80,13 @@ interface GitHubApi {
         @Path(value = "keyID") keyID: Long
     ): GpgKey
 
+    @Headers("Accept: application/vnd.github+json")
+    @GET("/user/ssh_signing_keys/{keyID}")
+    suspend fun getSshSigningKeyfromId(
+        @Header("Authorization") token: String,
+        @Path(value = "keyID") keyID: Long
+    ): SshKey
+
     companion object {
         const val BASE_URL = "https://api.github.com"
     }
