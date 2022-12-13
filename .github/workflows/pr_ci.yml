@@ -34,7 +34,7 @@ jobs:
     if: needs.file-changes.outputs.any == 'true'
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3.1.0
+        uses: actions/checkout@v3.2.0
         with:
           fetch-depth: 0
       - name: Set up JDK
@@ -59,7 +59,7 @@ jobs:
     if: needs.file-changes.outputs.any == 'true'
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3.1.0
+        uses: actions/checkout@v3.2.0
         with:
           fetch-depth: 0
       - name: Set up JDK
