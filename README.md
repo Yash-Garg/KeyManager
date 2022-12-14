@@ -1,4 +1,9 @@
 # KeyManager
+[![Android CI](https://github.com/Yash-Garg/KeyManager/actions/workflows/pr_ci.yml/badge.svg)](https://github.com/Yash-Garg/KeyManager/actions/workflows/pr_ci.yml)
+
+An application to manage your SSH and GPG keys on [GitHub](https://github.com/settings/keys) written in Kotlin & Jetpack Compose.
+
+## Download
 
 <a href="https://play.google.com/store/apps/details?id=dev.yash.keymanager">
   <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
@@ -10,8 +15,6 @@
        alt="Get it on IzzyOnDroid"
        height="80" />
 </a>
-
-An application to manage SSH and GPG keys on [GitHub](https://github.com/settings/keys) written in Kotlin & Jetpack Compose.
 
 ## Screenshots
 
