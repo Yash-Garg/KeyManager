@@ -39,14 +39,18 @@ fun GpgKeyListScreen(lazyPagingItems: LazyPagingItems<GpgKey>, modifier: Modifie
         if (lazyPagingItems.itemCount == 0 && refreshLoadState is LoadState.Error) {
             LoadError(message = "Failed to load data.")
         } else {
-            LazyColumn(modifier = Modifier.fillMaxSize()) {
-                items(lazyPagingItems, key = { key -> key.id }) { key ->
-                    if (key != null) {
-                        GpgKeyCard(key = key, onKeyClick = { /* TODO */})
+            if (lazyPagingItems.itemCount == 0 && !isRefreshing) {
+                LoadError(message = "So many locks but no keys :(")
+            } else {
+                LazyColumn(modifier = Modifier.fillMaxSize()) {
+                    items(lazyPagingItems, key = { key -> key.id }) { key ->
+                        if (key != null) {
+                            GpgKeyCard(key = key, onKeyClick = { /* TODO */})
+                        }
                     }
-                }
-                if (lazyPagingItems.loadState.append == LoadState.Loading) {
-                    item { LinearProgressIndicator(modifier = modifier.fillMaxWidth(.8f)) }
+                    if (lazyPagingItems.loadState.append == LoadState.Loading) {
+                        item { LinearProgressIndicator(modifier = modifier.fillMaxWidth(.8f)) }
+                    }
                 }
             }
         }
