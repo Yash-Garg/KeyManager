@@ -13,7 +13,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.KeyManager"
+        android:theme="@style/Theme.KeyManager.SplashScreen"
         tools:targetApi="33">
         <activity
             android:name=".MainActivity"

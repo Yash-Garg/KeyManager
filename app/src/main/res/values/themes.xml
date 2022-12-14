@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="Theme.KeyManager.SplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">?android:attr/colorAccent</item>
+        <item name="android:windowLightStatusBar">?android:isLightTheme</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher_foreground</item>
+        <item name="windowSplashScreenAnimationDuration">1000</item>
+        <item name="postSplashScreenTheme">@style/Theme.KeyManager</item>
+    </style>
+
     <style name="Theme.KeyManager" parent="android:Theme.Material.Light.NoActionBar" />
 </resources>
