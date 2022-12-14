@@ -10,7 +10,11 @@ import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.runCatching
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.yash.keymanager.data.api.GithubRepository
+import dev.yash.keymanager.data.models.GpgModel
+import dev.yash.keymanager.data.models.KeyActionEvent
+import dev.yash.keymanager.data.models.KeyEvent
 import dev.yash.keymanager.data.models.KeyModel
+import dev.yash.keymanager.data.models.KeyType
 import dev.yash.keymanager.data.models.SshModel
 import dev.yash.keymanager.data.utils.AuthConfig
 import dev.yash.keymanager.data.utils.ExceptionHandler
@@ -28,7 +32,7 @@ constructor(
     private val preferences: SharedPreferences,
     private val pagingSourceFactory: GithubPagingSource.Factory
 ) : ViewModel() {
-    private val _status = MutableSharedFlow<String>()
+    private val _status = MutableSharedFlow<KeyActionEvent>()
     val status = _status.asSharedFlow()
 
     private val sshKeysPager =
@@ -53,9 +57,18 @@ constructor(
 
     fun createKey(key: KeyModel) {
         viewModelScope.launch {
+            val type = if (key is GpgModel) KeyType.GPG else KeyType.SSH
             when (val result = runCatching { repository.createKey(key) }) {
-                is Ok -> _status.emit("Successfully added key.")
-                is Err -> _status.emit(ExceptionHandler.mapException(result.error.message))
+                is Ok ->
+                    _status.emit(KeyActionEvent(type, KeyEvent.ADDED, "Successfully added key."))
+                is Err ->
+                    _status.emit(
+                        KeyActionEvent(
+                            type,
+                            KeyEvent.FAILED,
+                            ExceptionHandler.mapException(result.error.message)
+                        )
+                    )
             }
         }
     }
@@ -63,8 +76,22 @@ constructor(
     fun createSigningKey(key: SshModel) {
         viewModelScope.launch {
             when (val result = runCatching { repository.createSshSigningKey(key) }) {
-                is Ok -> _status.emit("Successfully added key.")
-                is Err -> _status.emit(ExceptionHandler.mapException(result.error.message))
+                is Ok ->
+                    _status.emit(
+                        KeyActionEvent(
+                            KeyType.SSH_SIGNING,
+                            KeyEvent.ADDED,
+                            "Successfully added key."
+                        )
+                    )
+                is Err ->
+                    _status.emit(
+                        KeyActionEvent(
+                            KeyType.SSH_SIGNING,
+                            KeyEvent.FAILED,
+                            ExceptionHandler.mapException(result.error.message)
+                        )
+                    )
             }
         }
     }

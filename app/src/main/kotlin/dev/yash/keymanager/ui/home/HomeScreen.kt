@@ -40,6 +40,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import dev.yash.keymanager.R
 import dev.yash.keymanager.data.models.GpgKey
 import dev.yash.keymanager.data.models.GpgModel
+import dev.yash.keymanager.data.models.KeyEvent
 import dev.yash.keymanager.data.models.KeyType
 import dev.yash.keymanager.data.models.NavDestinations
 import dev.yash.keymanager.data.models.SshKey
@@ -58,10 +59,6 @@ fun HomeScreen(
 ) {
     val context = LocalContext.current
 
-    LaunchedEffect(Unit) {
-        viewModel.status.collectLatest { Toast.makeText(context, it, Toast.LENGTH_SHORT).show() }
-    }
-
     val sshKeys = viewModel.sshKeys.collectAsLazyPagingItems() as LazyPagingItems<SshKey>
     val sshSigningKeys =
         viewModel.sshSigningKeys.collectAsLazyPagingItems() as LazyPagingItems<SshKey>
@@ -69,6 +66,25 @@ fun HomeScreen(
 
     val openLogoutDialog = remember { mutableStateOf(false) }
     val openAddDialog = remember { mutableStateOf(false) }
+
+    LaunchedEffect(Unit) {
+        viewModel.status.collectLatest {
+            when (it.event) {
+                KeyEvent.ADDED -> {
+                    when (it.type) {
+                        KeyType.SSH,
+                        KeyType.SSH_SIGNING -> {
+                            sshKeys.refresh()
+                            sshSigningKeys.refresh()
+                        }
+                        KeyType.GPG -> gpgKeys.refresh()
+                    }
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                }
+                KeyEvent.FAILED -> Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
 
     Scaffold(
         topBar = {
