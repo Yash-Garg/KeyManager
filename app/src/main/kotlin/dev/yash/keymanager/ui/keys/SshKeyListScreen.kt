@@ -33,6 +33,7 @@ import dev.yash.keymanager.ui.common.LoadError
 fun SshKeyListScreen(
     lazyPagingItems: LazyPagingItems<SshKey>,
     lazyPagingSigningItems: LazyPagingItems<SshKey>,
+    onKeyClick: (Long) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val refreshLoadState = lazyPagingItems.loadState.refresh
@@ -59,13 +60,13 @@ fun SshKeyListScreen(
                 LazyColumn(modifier = Modifier.fillMaxSize()) {
                     items(lazyPagingItems, key = { key -> key.id }) { key ->
                         if (key != null) {
-                            SshKeyCard(key = key, onKeyClick = {})
+                            SshKeyCard(key = key, onKeyClick = { onKeyClick(key.id) })
                         }
                     }
 
                     items(lazyPagingSigningItems, key = { key -> key.id }) { key ->
                         if (key != null) {
-                            SshKeyCard(key = key, onKeyClick = {})
+                            SshKeyCard(key = key, onKeyClick = { onKeyClick(key.id) })
                         }
                     }
 

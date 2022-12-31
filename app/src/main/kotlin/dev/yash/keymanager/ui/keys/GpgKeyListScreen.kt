@@ -30,7 +30,11 @@ import dev.yash.keymanager.ui.common.LoadError
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun GpgKeyListScreen(lazyPagingItems: LazyPagingItems<GpgKey>, modifier: Modifier = Modifier) {
+fun GpgKeyListScreen(
+    lazyPagingItems: LazyPagingItems<GpgKey>,
+    modifier: Modifier = Modifier,
+    onKeyClick: (Long) -> Unit
+) {
     val refreshLoadState = lazyPagingItems.loadState.refresh
     val isRefreshing = refreshLoadState is LoadState.Loading
     val pullRefreshState = rememberPullRefreshState(isRefreshing, lazyPagingItems::refresh)
@@ -45,7 +49,7 @@ fun GpgKeyListScreen(lazyPagingItems: LazyPagingItems<GpgKey>, modifier: Modifie
                 LazyColumn(modifier = Modifier.fillMaxSize()) {
                     items(lazyPagingItems, key = { key -> key.id }) { key ->
                         if (key != null) {
-                            GpgKeyCard(key = key, onKeyClick = { /* TODO */})
+                            GpgKeyCard(key = key, onKeyClick = { onKeyClick(key.id) })
                         }
                     }
                     if (lazyPagingItems.loadState.append == LoadState.Loading) {

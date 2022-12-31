@@ -10,4 +10,5 @@ sealed class NavDestinations(val title: String, val icon: ImageVector? = null, v
     object HomeScreen : NavDestinations("Home", null, "home")
     object SshScreen : NavDestinations("SSH", Icons.Filled.Key, "ssh")
     object GpgScreen : NavDestinations("GPG", Icons.Filled.Lock, "gpg")
+    object KeyDetailsScreen : NavDestinations("KeyDetails", null, "key_details/{keyId}")
 }

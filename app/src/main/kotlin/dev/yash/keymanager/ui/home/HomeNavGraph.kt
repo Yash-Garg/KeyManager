@@ -18,18 +18,24 @@ fun HomeNavGraph(
     sshKeys: LazyPagingItems<SshKey>,
     sshSigningKeys: LazyPagingItems<SshKey>,
     gpgKeys: LazyPagingItems<GpgKey>,
+    onKeyClickNavigate: (Long) -> Unit,
     modifier: Modifier = Modifier
 ) {
     NavHost(navController = navController, startDestination = NavDestinations.SshScreen.route) {
         composable(NavDestinations.SshScreen.route) {
             SshKeyListScreen(
+                modifier = modifier,
                 lazyPagingItems = sshKeys,
                 lazyPagingSigningItems = sshSigningKeys,
-                modifier = modifier
+                onKeyClick = { onKeyClickNavigate(it) }
             )
         }
         composable(NavDestinations.GpgScreen.route) {
-            GpgKeyListScreen(lazyPagingItems = gpgKeys, modifier = modifier)
+            GpgKeyListScreen(
+                modifier = modifier,
+                lazyPagingItems = gpgKeys,
+                onKeyClick = { onKeyClickNavigate(it) }
+            )
         }
     }
 }

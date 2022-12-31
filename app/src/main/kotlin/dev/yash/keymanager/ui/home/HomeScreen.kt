@@ -56,6 +56,7 @@ fun HomeScreen(
     viewModel: HomeViewModel = viewModel(),
     navController: NavHostController = rememberNavController(),
     onLogoutNavigate: () -> Unit,
+    onKeyClickNavigate: (Long) -> Unit
 ) {
     val context = LocalContext.current
 
@@ -117,6 +118,7 @@ fun HomeScreen(
             modifier = Modifier.padding(it),
             sshKeys = sshKeys,
             sshSigningKeys = sshSigningKeys,
+            onKeyClickNavigate = { onKeyClickNavigate(it) },
             gpgKeys = gpgKeys
         )
 
