@@ -1,5 +1,5 @@
 [versions]
-agp = "8.0.0-alpha10"
+agp = "8.0.0-alpha11"
 compose = "1.3.2"
 hilt = "2.44.2"
 kotlin = "1.7.20"
