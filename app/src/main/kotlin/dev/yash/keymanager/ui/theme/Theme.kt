@@ -30,7 +30,7 @@ private val LightColorScheme =
         onBackground = Color(0xFF1C1B1F),
         onSurface = Color(0xFF1C1B1F),
         */
-        )
+    )
 
 @Composable
 fun KeyManagerTheme(
