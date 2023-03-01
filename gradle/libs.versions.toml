@@ -1,6 +1,6 @@
 [versions]
 agp = "8.0.0-beta03"
-compose = "1.4.3"
+compose = "1.3.2"
 hilt = "2.45"
 kotlin = "1.8.10"
 navigation = "2.5.3"
