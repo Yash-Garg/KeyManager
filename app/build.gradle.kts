@@ -19,8 +19,8 @@ android {
         applicationId = "dev.yash.keymanager"
         minSdk = 26
         targetSdk = 33
-        versionCode = 8
-        versionName = "v3.1"
+        versionCode = 9
+        versionName = "v3.2"
         multiDexEnabled = true
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -68,11 +68,11 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
-    kotlinOptions { jvmTarget = JavaVersion.VERSION_1_8.toString() }
+    kotlinOptions { jvmTarget = JavaVersion.VERSION_11.toString() }
 
     buildFeatures {
         compose = true
