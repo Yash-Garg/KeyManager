@@ -17,7 +17,7 @@ androidx-security-identity = "androidx.security:security-identity-credential:1.0
 build-spotless = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "spotless" }
 
 compose-activity = "androidx.activity:activity-compose:1.6.1"
-compose-bom = "androidx.compose:compose-bom:2023.01.00"
+compose-bom = "androidx.compose:compose-bom:2023.05.01"
 compose-compiler = { module = "androidx.compose.compiler:compiler", version.ref = "compose" }
 compose-constraintlayout = "androidx.constraintlayout:constraintlayout-compose:1.0.1"
 compose-material = "androidx.compose.material:material:1.3.1"
