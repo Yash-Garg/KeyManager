@@ -19,8 +19,8 @@ android {
         applicationId = "dev.yash.keymanager"
         minSdk = 26
         targetSdk = 33
-        versionCode = 9
-        versionName = "v3.2"
+        versionCode = 10
+        versionName = "v3.3"
         multiDexEnabled = true
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

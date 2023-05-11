@@ -45,7 +45,7 @@ import dev.yash.keymanager.data.models.KeyType
 import dev.yash.keymanager.data.models.NavDestinations
 import dev.yash.keymanager.data.models.SshKey
 import dev.yash.keymanager.data.models.SshModel
-import dev.yash.keymanager.ui.common.DialogWithTextField
+import dev.yash.keymanager.ui.common.KeyDialogWithTextField
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.runBlocking
 
@@ -118,7 +118,7 @@ fun HomeScreen(
             modifier = Modifier.padding(it),
             sshKeys = sshKeys,
             sshSigningKeys = sshSigningKeys,
-            onKeyClickNavigate = { onKeyClickNavigate(it) },
+            onKeyClickNavigate = { key -> onKeyClickNavigate(key) },
             gpgKeys = gpgKeys
         )
 
@@ -151,7 +151,7 @@ fun HomeScreen(
         }
 
         if (openAddDialog.value) {
-            DialogWithTextField(
+            KeyDialogWithTextField(
                 title = "Add new key",
                 onDismissRequest = { openAddDialog.value = false },
                 onConfirm = { title, key, type ->

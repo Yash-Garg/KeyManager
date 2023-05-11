@@ -47,12 +47,14 @@ constructor(
                 response,
                 _ ->
                 if (response != null) {
-                    requireNotNull(response.accessToken).let { token ->
-                        preferences.edit().putString(AuthConfig.TOKEN_KEY, token).apply()
-                        _authState.update { it.copy(isAuthenticated = true) }
-                    }
+                    saveToken(requireNotNull(response.accessToken))
                 }
             }
         }
+    }
+
+    fun saveToken(token: String) {
+        preferences.edit().putString(AuthConfig.TOKEN_KEY, token).apply()
+        _authState.update { it.copy(isAuthenticated = true) }
     }
 }

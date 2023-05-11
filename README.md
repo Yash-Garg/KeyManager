@@ -25,6 +25,22 @@ An application to manage your SSH and GPG keys on [GitHub](https://github.com/se
 You will need to add your credentials in the [`Secrets.kt`](https://github.com/Yash-Garg/KeyManager/blob/develop/app/src/main/kotlin/dev/yash/keymanager/data/utils/Secrets.kt) file. 
 This file will contain your GitHub OAuth app credentials.
 
+## How to generate access token?
+
+Go to [GitHub Developer Settings](https://github.com/settings/tokens) and generate a new **classic** token with the following scopes:
+
+- `admin:public_key` (Full control of user public keys)
+    - `write:public_key` (Write user public keys)
+    - `read:public_key` (Read user public keys)
+
+- `admin:gpg_key` (Full control of public user GPG keys)
+    - `write:gpg_key` (Write public user GPG keys)
+    - `read:gpg_key` (Read public user GPG keys)
+
+- `admin:ssh_signing_key` (Full control of public user SSH signing keys)
+    - `write:ssh_signing_key` (Write public user SSH signing keys)
+    - `read:ssh_signing_key` (Read public user SSH signing keys)
+
 ## Third Party Libraries
 
 - [openid/AppAuth-Android](https://github.com/openid/AppAuth-Android)
