@@ -32,7 +32,7 @@ compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = 
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
 compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "compose" }
 
-google-accompanist-systemuicontroller = "com.google.accompanist:accompanist-systemuicontroller:0.28.0"
+google-accompanist-systemuicontroller = "com.google.accompanist:accompanist-systemuicontroller:0.30.1"
 google-dagger-hilt = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 google-dagger-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
 
