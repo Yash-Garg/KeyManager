@@ -24,6 +24,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.itemContentType
+import androidx.paging.compose.itemKey
 import androidx.paging.compose.items
 import dev.yash.keymanager.data.models.SshKey
 import dev.yash.keymanager.ui.common.LoadError
@@ -58,15 +60,25 @@ fun SshKeyListScreen(
                 LoadError(message = "So many locks but no keys :(")
             } else {
                 LazyColumn(modifier = Modifier.fillMaxSize()) {
-                    items(lazyPagingItems, key = { key -> key.id }) { key ->
-                        if (key != null) {
-                            SshKeyCard(key = key, onKeyClick = { onKeyClick(key.id) })
+                    items(
+                        count = lazyPagingItems.itemCount,
+                        key = lazyPagingItems.itemKey(key = { key -> key.id }),
+                        contentType = lazyPagingItems.itemContentType()
+                    ) { index ->
+                        val item = lazyPagingItems[index]
+                        if (item != null) {
+                            SshKeyCard(key = item, onKeyClick = { onKeyClick(item.id) })
                         }
                     }
 
-                    items(lazyPagingSigningItems, key = { key -> key.id }) { key ->
-                        if (key != null) {
-                            SshKeyCard(key = key, onKeyClick = { onKeyClick(key.id) })
+                    items(
+                        count = lazyPagingSigningItems.itemCount,
+                        key = lazyPagingSigningItems.itemKey(key = { key -> key.id }),
+                        contentType = lazyPagingSigningItems.itemContentType()
+                    ) { index ->
+                        val item = lazyPagingSigningItems[index]
+                        if (item != null) {
+                            SshKeyCard(key = item, onKeyClick = { onKeyClick(item.id) })
                         }
                     }
 
