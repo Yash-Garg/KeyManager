@@ -10,7 +10,7 @@ spotless = "6.18.0"
 androidx-core-ktx = "androidx.core:core-ktx:1.10.1"
 androidx-core-splashscreen = "androidx.core:core-splashscreen:1.0.1"
 androidx-lifecycle-ktx = "androidx.lifecycle:lifecycle-runtime-ktx:2.6.1"
-androidx-paging = "androidx.paging:paging-runtime:3.1.1"
+androidx-paging = "androidx.paging:paging-runtime:3.2.1"
 androidx-security-crypto = "androidx.security:security-crypto:1.1.0-alpha06"
 androidx-security-identity = "androidx.security:security-identity-credential:1.0.0-alpha03"
 
@@ -25,7 +25,7 @@ compose-material-icons = "androidx.compose.material:material-icons-extended:1.4.
 compose-material3 = "androidx.compose.material3:material3:1.1.0"
 compose-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
 compose-navigation-hilt = "androidx.hilt:hilt-navigation-compose:1.0.0"
-compose-paging = "androidx.paging:paging-compose:1.0.0-alpha19"
+compose-paging = "androidx.paging:paging-compose:1.0.0-alpha20"
 compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
 compose-ui-graphics = { module = "androidx.compose.ui:ui-graphics", version.ref = "compose" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
