@@ -1,7 +1,7 @@
 [versions]
 agp = "8.2.0-alpha03"
 compose = "1.4.3"
-hilt = "2.46"
+hilt = "2.48.1"
 kotlin = "1.8.21"
 navigation = "2.5.3"
 spotless = "6.18.0"
