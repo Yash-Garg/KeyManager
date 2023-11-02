@@ -1,5 +1,11 @@
 {
   "extends": [
     "config:base"
+  ],
+  "packageRules": [
+    {
+      "matchPackagePatterns": ["dev.yash.keymanager"],
+      "enabled": false
+    }
   ]
 }
