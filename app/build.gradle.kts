@@ -5,22 +5,22 @@ import java.util.*
 val isGithubCi = System.getenv("GITHUB_CI") != null
 
 plugins {
-    id("com.android.application")
-    kotlin("android")
-    kotlin("kapt")
-    id("dagger.hilt.android.plugin")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.hilt)
 }
 
 android {
     namespace = "dev.yash.keymanager"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "dev.yash.keymanager"
         minSdk = 26
-        targetSdk = 33
-        versionCode = 10
-        versionName = "v3.3"
+        targetSdk = 34
+        versionCode = 11
+        versionName = "v3.4"
         multiDexEnabled = true
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

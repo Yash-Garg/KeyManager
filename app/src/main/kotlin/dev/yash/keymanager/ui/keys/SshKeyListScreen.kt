@@ -26,7 +26,6 @@ import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.itemContentType
 import androidx.paging.compose.itemKey
-import androidx.paging.compose.items
 import dev.yash.keymanager.data.models.SshKey
 import dev.yash.keymanager.ui.common.LoadError
 

@@ -1,7 +1,6 @@
 package dev.yash.keymanager.ui
 
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -19,7 +18,6 @@ import dev.yash.keymanager.ui.home.HomeViewModel
 import dev.yash.keymanager.ui.keys.KeyDetailsScreen
 import dev.yash.keymanager.ui.theme.KeyManagerTheme
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun KeyManagerApp() {
     val navController = rememberNavController()
@@ -40,6 +38,7 @@ fun KeyManagerApp() {
                         }
                     )
                 }
+
                 composable(NavDestinations.HomeScreen.route) {
                     val homeViewModel = hiltViewModel<HomeViewModel>()
                     HomeScreen(
@@ -50,6 +49,7 @@ fun KeyManagerApp() {
                         }
                     )
                 }
+
                 composable(
                     NavDestinations.KeyDetailsScreen.route,
                     arguments = listOf(navArgument("keyId") { type = NavType.LongType })
