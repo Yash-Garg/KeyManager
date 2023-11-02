@@ -45,7 +45,7 @@ square-okhttp-logging = "com.squareup.okhttp3:logging-interceptor:5.0.0-SNAPSHOT
 
 junit = "junit:junit:4.13.2"
 appauth = "net.openid:appauth:0.11.1"
-chucker = "com.github.chuckerteam.chucker:library:4.0.0-SNAPSHOT"
+chucker = "com.github.chuckerteam.chucker:library:4.0.0"
 chucker-no-op = "com.github.chuckerteam.chucker:library-no-op:4.0.0-SNAPSHOT"
 kotlin-result = "com.michael-bull.kotlin-result:kotlin-result:1.1.18"
 
