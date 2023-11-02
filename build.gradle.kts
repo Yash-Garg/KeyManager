@@ -9,9 +9,8 @@ plugins {
     alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.kotlin.kapt) apply false
     alias(libs.plugins.hilt) apply false
-
-    id("dev.yash.keymanager.spotless")
-    id("dev.yash.keymanager.githooks")
+    alias(libs.plugins.custom.githooks) apply true
+    alias(libs.plugins.custom.spotless) apply true
 }
 
 val clean by tasks.existing(Delete::class) { delete(rootProject.buildDir) }

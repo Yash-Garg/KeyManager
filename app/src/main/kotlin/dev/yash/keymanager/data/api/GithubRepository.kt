@@ -53,6 +53,8 @@ constructor(preferences: SharedPreferences, private val api: GitHubApi) {
     }
 
     suspend fun getSshKeyFromId(keyId: Long) = api.getSshKeyFromId(token, keyId)
+
     suspend fun getSshSigningKeyFromId(keyId: Long) = api.getSshSigningKeyfromId(token, keyId)
+
     suspend fun getGpgKeyFromId(keyId: Long) = api.getGpgKeyfromId(token, keyId)
 }
