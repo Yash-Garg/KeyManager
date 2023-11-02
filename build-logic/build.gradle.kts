@@ -20,10 +20,12 @@ gradlePlugin {
         register("spotless") {
             id = "dev.yash.keymanager.spotless"
             implementationClass = "dev.yash.keymanager.gradle.SpotlessPlugin"
+            version = "1.0.0"
         }
         register("githooks") {
             id = "dev.yash.keymanager.githooks"
             implementationClass = "dev.yash.keymanager.gradle.GitHooksPlugin"
+            version = "1.0.0"
         }
     }
 }
