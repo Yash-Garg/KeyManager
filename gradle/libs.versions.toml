@@ -19,7 +19,7 @@ build-spotless = { module = "com.diffplug.spotless:spotless-plugin-gradle", vers
 
 compose-activity = "androidx.activity:activity-compose:1.8.0"
 compose-bom = "androidx.compose:compose-bom:2023.10.01"
-compose-compiler = "androidx.compose.compiler:compiler:1.5.3"
+compose-compiler = "androidx.compose.compiler:compiler:1.5.4"
 compose-constraintlayout = "androidx.constraintlayout:constraintlayout-compose:1.0.1"
 compose-material = "androidx.compose.material:material:1.5.4"
 compose-material-icons = "androidx.compose.material:material-icons-extended:1.5.4"
