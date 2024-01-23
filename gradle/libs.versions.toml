@@ -5,7 +5,7 @@ custom = "1.0.0"
 hilt = "2.48.1"
 kotlin = "1.9.20"
 navigation = "2.7.5"
-spotless = "6.22.0"
+spotless = "6.25.0"
 
 [libraries]
 androidx-core-ktx = "androidx.core:core-ktx:1.12.0"
