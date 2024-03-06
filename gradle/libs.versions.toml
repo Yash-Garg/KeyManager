@@ -23,7 +23,7 @@ compose-compiler = "androidx.compose.compiler:compiler:1.5.4"
 compose-constraintlayout = "androidx.constraintlayout:constraintlayout-compose:1.0.1"
 compose-material = "androidx.compose.material:material:1.5.4"
 compose-material-icons = "androidx.compose.material:material-icons-extended:1.5.4"
-compose-material3 = "androidx.compose.material3:material3:1.1.2"
+compose-material3 = "androidx.compose.material3:material3:1.2.1"
 compose-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
 compose-navigation-hilt = "androidx.hilt:hilt-navigation-compose:1.1.0"
 compose-paging = "androidx.paging:paging-compose:3.2.1"
