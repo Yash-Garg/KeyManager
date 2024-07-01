@@ -134,4 +134,6 @@ dependencies {
     debugImplementation(libs.chucker)
     releaseImplementation(libs.chucker.no.op)
     testImplementation(libs.junit)
+
+    implementation(projects.data)
 }

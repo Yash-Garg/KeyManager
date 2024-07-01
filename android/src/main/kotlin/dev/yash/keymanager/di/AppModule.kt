@@ -1,4 +1,4 @@
-package dev.yash.keymanager.data
+package dev.yash.keymanager.di
 
 import android.content.Context
 import android.content.SharedPreferences

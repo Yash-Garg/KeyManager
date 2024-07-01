@@ -2,7 +2,7 @@
 
 pluginManagement {
     repositories {
-        includeBuild("build-logic")
+        includeBuild("spotless")
         google()
         mavenCentral()
         gradlePluginPortal()
@@ -24,4 +24,4 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 rootProject.name = "KeyManager"
 
-include(":app")
+include(":android", ":data")

@@ -1,6 +1,6 @@
 @file:Suppress("UnstableApiUsage")
 
-rootProject.name = "build-logic"
+rootProject.name = "spotless"
 
 pluginManagement {
     repositories {
