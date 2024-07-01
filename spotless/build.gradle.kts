@@ -6,12 +6,12 @@ dependencies { implementation(libs.build.spotless) }
 
 afterEvaluate {
     tasks.withType<JavaCompile>().configureEach {
-        sourceCompatibility = JavaVersion.VERSION_17.toString()
-        targetCompatibility = JavaVersion.VERSION_17.toString()
+        sourceCompatibility = JavaVersion.VERSION_21.toString()
+        targetCompatibility = JavaVersion.VERSION_21.toString()
     }
 
     tasks.withType<KotlinCompile>().configureEach {
-        kotlinOptions { jvmTarget = JavaVersion.VERSION_17.toString() }
+        kotlinOptions { jvmTarget = JavaVersion.VERSION_21.toString() }
     }
 }
 

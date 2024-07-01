@@ -2,8 +2,6 @@
 
 import java.util.*
 
-val isGithubCi = System.getenv("GITHUB_CI") != null
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -58,26 +56,16 @@ android {
                 "proguard-rules.pro"
             )
         }
-
-        if (isGithubCi) {
-            configureEach {
-                buildConfigField("String", "CLIENT_ID", "\"${System.getenv("CLIENT_ID")}\"")
-                buildConfigField("String", "CLIENT_SECRET", "\"${System.getenv("CLIENT_SECRET")}\"")
-            }
-        }
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 
-    kotlinOptions { jvmTarget = JavaVersion.VERSION_17.toString() }
+    kotlinOptions { jvmTarget = JavaVersion.VERSION_21.toString() }
 
-    buildFeatures {
-        compose = true
-        buildConfig = true
-    }
+    buildFeatures { compose = true }
 
     composeOptions {
         kotlinCompilerExtensionVersion =

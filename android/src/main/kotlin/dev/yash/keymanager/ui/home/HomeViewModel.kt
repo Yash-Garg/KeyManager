@@ -5,8 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import com.github.michaelbull.result.Err
-import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.runCatching
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.yash.keymanager.data.api.GithubRepository
@@ -58,10 +56,12 @@ constructor(
     fun createKey(key: KeyModel) {
         viewModelScope.launch {
             val type = if (key is GpgModel) KeyType.GPG else KeyType.SSH
-            when (val result = runCatching { repository.createKey(key) }) {
-                is Ok ->
+            val result = runCatching { repository.createKey(key) }
+
+            when {
+                result.isOk ->
                     _status.emit(KeyActionEvent(type, KeyEvent.ADDED, "Successfully added key."))
-                is Err ->
+                result.isErr ->
                     _status.emit(
                         KeyActionEvent(
                             type,
@@ -75,8 +75,10 @@ constructor(
 
     fun createSigningKey(key: SshModel) {
         viewModelScope.launch {
-            when (val result = runCatching { repository.createSshSigningKey(key) }) {
-                is Ok ->
+            val result = runCatching { repository.createSshSigningKey(key) }
+
+            when {
+                result.isOk ->
                     _status.emit(
                         KeyActionEvent(
                             KeyType.SSH_SIGNING,
@@ -84,7 +86,7 @@ constructor(
                             "Successfully added key."
                         )
                     )
-                is Err ->
+                result.isErr ->
                     _status.emit(
                         KeyActionEvent(
                             KeyType.SSH_SIGNING,

@@ -10,7 +10,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import dev.yash.keymanager.data.models.NavDestinations
+import dev.yash.keymanager.NavDestinations
 import dev.yash.keymanager.ui.auth.AuthScreen
 import dev.yash.keymanager.ui.auth.AuthViewModel
 import dev.yash.keymanager.ui.home.HomeScreen

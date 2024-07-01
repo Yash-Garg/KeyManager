@@ -1,6 +1,6 @@
 package dev.yash.keymanager.data.utils
 
-import dev.yash.keymanager.BuildConfig
+import dev.yash.keymanager.data.BuildConfig
 
 object Secrets {
     const val CLIENT_SECRET = BuildConfig.CLIENT_SECRET

@@ -4,6 +4,7 @@ import android.widget.Toast
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.twotone.ExitToApp
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.twotone.ExitToApp
 import androidx.compose.material.icons.twotone.Warning
@@ -37,12 +38,12 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
+import dev.yash.keymanager.NavDestinations
 import dev.yash.keymanager.R
 import dev.yash.keymanager.data.models.GpgKey
 import dev.yash.keymanager.data.models.GpgModel
 import dev.yash.keymanager.data.models.KeyEvent
 import dev.yash.keymanager.data.models.KeyType
-import dev.yash.keymanager.data.models.NavDestinations
 import dev.yash.keymanager.data.models.SshKey
 import dev.yash.keymanager.data.models.SshModel
 import dev.yash.keymanager.ui.common.KeyDialogWithTextField
@@ -100,7 +101,7 @@ fun HomeScreen(
                 scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(),
                 actions = {
                     IconButton(onClick = { openLogoutDialog.value = true }) {
-                        Icon(Icons.TwoTone.ExitToApp, null)
+                        Icon(Icons.AutoMirrored.TwoTone.ExitToApp, null)
                     }
                 }
             )

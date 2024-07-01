@@ -6,8 +6,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.paging.compose.LazyPagingItems
+import dev.yash.keymanager.NavDestinations
 import dev.yash.keymanager.data.models.GpgKey
-import dev.yash.keymanager.data.models.NavDestinations
 import dev.yash.keymanager.data.models.SshKey
 import dev.yash.keymanager.ui.keys.GpgKeyListScreen
 import dev.yash.keymanager.ui.keys.SshKeyListScreen
