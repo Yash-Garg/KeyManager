@@ -37,7 +37,7 @@ google-accompanist-systemuicontroller = "com.google.accompanist:accompanist-syst
 google-dagger-hilt = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 google-dagger-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
 
-square-leakcanary = "com.squareup.leakcanary:leakcanary-android:2.12"
+square-leakcanary = "com.squareup.leakcanary:leakcanary-android:2.14"
 square-moshi = "com.squareup.moshi:moshi-kotlin:1.15.1"
 square-moshi-converter = "com.squareup.retrofit2:converter-moshi:2.11.0"
 square-moshi-metadata-reflect = "dev.zacsweers.moshix:moshi-metadata-reflect:0.27.2"
