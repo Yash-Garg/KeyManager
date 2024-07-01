@@ -42,7 +42,7 @@ jobs:
         uses: actions/setup-java@v4.2.1
         with:
           distribution: "zulu"
-          java-version: "17"
+          java-version: "21"
           cache: "gradle"
 
       - name: Check codestyle
@@ -67,7 +67,7 @@ jobs:
         uses: actions/setup-java@v4.2.1
         with:
           distribution: "zulu"
-          java-version: "17"
+          java-version: "21"
           cache: "gradle"
 
       - name: Build debug APKs
