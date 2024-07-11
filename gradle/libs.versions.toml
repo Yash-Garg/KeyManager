@@ -1,5 +1,5 @@
 [versions]
-agp = "8.5.0"
+agp = "8.5.1"
 compose = "1.6.8"
 custom = "1.0.0"
 hilt = "2.51.1"
