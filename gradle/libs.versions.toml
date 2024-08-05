@@ -2,7 +2,7 @@
 agp = "8.5.1"
 compose = "1.6.8"
 custom = "1.0.0"
-hilt = "2.51.1"
+hilt = "2.52"
 kotlin = "2.0.0"
 navigation = "2.7.7"
 spotless = "6.25.0"
