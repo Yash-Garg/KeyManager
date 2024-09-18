@@ -10,7 +10,7 @@ spotless = "6.25.0"
 [libraries]
 androidx-core-ktx = "androidx.core:core-ktx:1.13.1"
 androidx-core-splashscreen = "androidx.core:core-splashscreen:1.0.1"
-androidx-lifecycle-ktx = "androidx.lifecycle:lifecycle-runtime-ktx:2.8.3"
+androidx-lifecycle-ktx = "androidx.lifecycle:lifecycle-runtime-ktx:2.8.6"
 androidx-paging = "androidx.paging:paging-runtime:3.3.0"
 androidx-security-crypto = "androidx.security:security-crypto:1.1.0-alpha06"
 androidx-security-identity = "androidx.security:security-identity-credential:1.0.0-alpha03"
